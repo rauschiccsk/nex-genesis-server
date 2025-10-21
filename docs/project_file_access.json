@@ -2,12 +2,12 @@
   "project_name": "nex-genesis-server",
   "github_repository": "https://github.com/rauschiccsk/nex-genesis-server",
   "github_branch": "main",
-  "generated_at": "2025-10-21T11:38:39.159802",
+  "generated_at": "2025-10-21T12:49:46.636552",
   "local_path": "c:\\Development\\nex-genesis-server",
   "statistics": {
-    "total_files": 2478,
+    "total_files": 2481,
     "delphi_files": 2469,
-    "documentation_files": 4,
+    "documentation_files": 7,
     "configuration_files": 2,
     "script_files": 0,
     "other_files": 1
@@ -19802,15 +19802,39 @@
       "path": "docs\\FULL_PROJECT_CONTEXT.md",
       "category": "documentation",
       "description": "Main project documentation - single source of truth",
-      "size": 17259,
+      "size": 20838,
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md"
+    },
+    {
+      "name": "MASTER_CONTEXT.md",
+      "path": "docs\\MASTER_CONTEXT.md",
+      "category": "documentation",
+      "description": "Documentation file",
+      "size": 4839,
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MASTER_CONTEXT.md"
+    },
+    {
+      "name": "QUICK_START.md",
+      "path": "docs\\QUICK_START.md",
+      "category": "documentation",
+      "description": "Documentation file",
+      "size": 4066,
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/QUICK_START.md"
+    },
+    {
+      "name": "SYSTEM_PROMPT.md",
+      "path": "docs\\SYSTEM_PROMPT.md",
+      "category": "documentation",
+      "description": "Documentation file",
+      "size": 6969,
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT.md"
     },
     {
       "name": "project_file_access.json",
       "path": "docs\\project_file_access.json",
       "category": "configuration",
       "description": "This file - manifest of all project files",
-      "size": 2910,
+      "size": 809479,
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access.json"
     },
     {
