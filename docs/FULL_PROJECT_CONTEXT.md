@@ -1,10 +1,10 @@
-0# 🏭 NEX-GENESIS-SERVER - KOMPLETNÝ KONTEXT PROJEKTU
+# 🏭 NEX-GENESIS-SERVER - KOMPLETNÝ KONTEXT PROJEKTU
 
-**Delphi 6 Mikroslužby pre NEX Genesis ERP**
+**Python Btrieve Services pre NEX Genesis ERP**
 
 **Posledná aktualizácia:** 2025-10-21  
-**Verzia:** 0.1.0  
-**Stav:** Počiatočné Plánovanie
+**Verzia:** 0.2.0  
+**Stav:** Počiatočné Plánovanie - Python Stratégia
 
 ---
 
@@ -26,26 +26,26 @@
 ## 📊 AKTUÁLNY STAV PROJEKTU
 
 **Posledná aktualizácia:** 2025-10-21  
-**Aktuálna Fáza:** Počiatočné Plánovanie
+**Aktuálna Fáza:** Phase 1 - Setup & Analýza
 
 ### Prehľad
-- **Aktívna Fáza:** Phase 1 - Setup & Analýza
-- **Progress Phase 1:** 40% (4/10 taskov)
-- **Celkový Progress:** 10% (Phase 1 aktívna)
-- **Aktívny Task:** Task 1.5 - Databázová schéma dokumentácia
-- **Ďalší Milestone:** Phase 1 Complete (2025-10-28)
+- **Aktívna Fáza:** Phase 1 - Setup & Stratégia
+- **Progress Phase 1:** 50% (5/10 taskov)
+- **Celkový Progress:** 12% (Phase 1 aktívna)
+- **Aktívny Task:** Task 1.6 - Cleanup a reorganizácia
+- **Ďalší Milestone:** Python Btrieve Setup (2025-10-28)
 
 ### Phase Progress
 ```
-Phase 1: Setup & Analýza    [████████░░░░░░░░░░░░] 40%
-Phase 2: Core Development   [░░░░░░░░░░░░░░░░░░░░]  0%
-Phase 3: Agent Development  [░░░░░░░░░░░░░░░░░░░░]  0%
-Phase 4: Integration        [░░░░░░░░░░░░░░░░░░░░]  0%
+Phase 1: Setup & Stratégia  [██████████░░░░░░░░░░] 50%
+Phase 2: Python Services    [░░░░░░░░░░░░░░░░░░░░]  0%
+Phase 3: Integration        [░░░░░░░░░░░░░░░░░░░░]  0%
+Phase 4: Testing & Deploy   [░░░░░░░░░░░░░░░░░░░░]  0%
 ```
 
 ### Velocity
-- **Tasks hotové tento týždeň:** 4
-- **Priemerný čas na task:** ~30 minút
+- **Tasks hotové tento týždeň:** 5
+- **Priemerný čas na task:** ~45 minút
 - **Produktivita:** Vysoká 🚀
 - **Odhadované dokončenie Phase 1:** 2025-10-28
 
@@ -56,8 +56,8 @@ Phase 4: Integration        [░░░░░░░░░░░░░░░░░
 ### Základné Informácie
 
 - **Názov projektu:** NEX Genesis Server
-- **Účel:** REST API mikroslužby v Delphi 6 pre NEX Genesis ERP
-- **Čas generovania kódu:** Agent-driven (TBD)
+- **Účel:** Python Btrieve Services pre NEX Genesis ERP
+- **Implementácia:** Pure Python + Btrieve 2 API
 - **Vývojár:** ICC (Innovation & Consulting Center)
 - **Developer:** rauschiccsk
 - **Lokalizácia:** Komárno, SK
@@ -65,11 +65,12 @@ Phase 4: Integration        [░░░░░░░░░░░░░░░░░
 
 ### Vízia Projektu
 
-Vytvoriť **programovacieho agenta**, ktorý vie:
-- ✅ Analyzovať NEX Genesis source kódy (Delphi 6)
-- ✅ Generovať nové mikroslužby v Delphi 6
-- ✅ Dodržiavať NEX Genesis patterns a conventions
-- ✅ Vytvárať REST API endpointy pre import faktúr
+Vytvoriť **Python mikroslužby**, ktoré vie:
+- ✅ Pristupovať k NEX Genesis databáze (Btrieve)
+- ✅ Importovať ISDOC XML faktúry
+- ✅ Vytvárať produkty v katalógu
+- ✅ Vytvárať skladové príjemky
+- ✅ Integrovať sa s supplier_invoice_loader
 
 ### Problém
 - **supplier_invoice_loader** generuje ISDOC XML z PDF faktúr
@@ -77,15 +78,15 @@ Vytvoriť **programovacieho agenta**, ktorý vie:
 - Neexistujú API endpointy pre:
   - Pridanie produktov do katalógu
   - Vytvorenie skladových príjemiek
-- Potrebujeme mikroslužby v **Delphi 6** (jazyk NEX Genesis)
+- NEX Genesis používa **Btrieve file-based databázu**
 
 ### Riešenie
-**NEX Genesis Server** - REST API mikroslužby v Delphi 6, ktoré:
+**NEX Genesis Server** - Python Btrieve Services, ktoré:
 - ✅ Prijímajú ISDOC XML súbory
 - ✅ Kontrolujú/pridávajú produkty do katalógu
 - ✅ Vytvárajú skladové príjemky
 - ✅ Evidujú dodávateľské faktúry
-- ✅ Integrujú sa s NEX Genesis databázou (Pervasive)
+- ✅ Pristupujú priamo k Btrieve databáze
 
 ### Workflow
 ```
@@ -93,18 +94,30 @@ supplier_invoice_loader (Python/FastAPI)
     ↓
 ISDOC XML
     ↓
-REST API (Delphi 6 Server)
+Python Btrieve Services
+    ├─ ProductService.py
+    ├─ WarehouseService.py
+    └─ BtrieveClient.py
     ↓
-1. Check/Add Products
-2. Create Warehouse Receipt
+Btrieve 2 API (btrievePython)
     ↓
-NEX Genesis Database (Pervasive)
+NEX Genesis Database (*.btr files)
 ```
 
-### Inšpirácia
-- **supplier_invoice_loader** - Python FastAPI integrácia
-- **project-generator** - Dokumentačná štruktúra (single-file context)
-- **NEX Genesis** - Existujúce Delphi 6 patterns
+### Strategické Rozhodnutie
+
+**PREČO Pure Python Btrieve:**
+- ✅ Všetko v jednom jazyku (Python)
+- ✅ Perfektná integrácia s supplier_invoice_loader
+- ✅ Moderná architektúra
+- ✅ Oficiálny Actian Btrieve 2 API support
+- ✅ Jednoduchšia údržba long-term
+- ✅ Natívny Btrieve prístup (file-based, bez SQL)
+
+**ODMIETNUTÉ alternatívy:**
+- ❌ Delphi mikroslužba (dva jazyky)
+- ❌ Pervasive SQL + ODBC (NEX Genesis nemá SQL engine)
+- ❌ Hybrid Python/Delphi (zbytočná komplexita)
 
 ---
 
@@ -112,23 +125,24 @@ NEX Genesis Database (Pervasive)
 
 ### Tech Stack
 ```yaml
-Jazyk: Delphi 6 (Object Pascal)
-Databáza: Pervasive SQL
-DB Access: BDE / ODBC / Native
-HTTP Server: Indy / Synapse
-XML Parser: MSXML / OmniXML
-Konfigurácia: INI súbory
-Testovanie: DUnit (optional)
-IDE Delphi: Delphi 6 Professional
-IDE Python: PyCharm
-Git: PyCharm integrated Git
+Jazyk: Python 3.8+
+Btrieve Access: Btrieve 2 API (Actian)
+SWIG: 3.0.12+ (wrapper generator)
+C++ Compiler: Visual Studio 2019+
+Database: Pervasive Btrieve (file-based)
+XML Parser: xml.etree / lxml
+HTTP: FastAPI (rozšírenie supplier_invoice_loader)
+Testing: pytest
 ```
 
-### Závislos ti
-- **Indy Components** - HTTP Server
-- **Synapse** - Alternatívna HTTP knižnica
-- **MSXML** - XML parsing
-- **Database components** - BDE alebo custom Pervasive drivers
+### Závislosti
+- **Btrieve 2 SDK** - Actian/Pervasive
+- **SWIG** - Python wrapper generator
+- **Python packages:**
+  - fastapi
+  - lxml
+  - struct (built-in)
+  - ctypes (built-in)
 
 ### Architektúra
 ```
@@ -138,61 +152,63 @@ Git: PyCharm integrated Git
 │  Generuje ISDOC XML             │
 └────────────┬────────────────────┘
              │
-             │ POST /api/invoice/import
+             │ POST /api/invoice/import-to-nex
              │ Content: ISDOC XML
              ▼
 ┌─────────────────────────────────┐
 │  NEX Genesis Server             │
-│  (Delphi 6 REST API)            │
+│  (Python Btrieve Services)      │
 │                                 │
-│  ├─ XML Parser                  │
-│  ├─ Product Validator           │
-│  ├─ Product Creator             │
-│  ├─ Warehouse Receipt Creator   │
-│  └─ Database Access Layer       │
+│  ├─ BtrieveClient.py            │
+│  ├─ ProductService.py           │
+│  ├─ WarehouseService.py         │
+│  ├─ SupplierService.py          │
+│  └─ ISDOCParser.py              │
 └────────────┬────────────────────┘
              │
-             │ Pervasive SQL
+             │ btrievePython wrapper
+             ▼
+┌─────────────────────────────────┐
+│  Btrieve 2 API                  │
+│  (wbtrv32.dll / w64btrv.dll)    │
+└────────────┬────────────────────┘
+             │
+             │ File I/O
              ▼
 ┌─────────────────────────────────┐
 │  NEX Genesis Database           │
-│  (Pervasive)                    │
+│  (Btrieve *.btr files)          │
 │                                 │
-│  ├─ Produktový Katalóg          │
-│  ├─ Skladové Príjemky           │
-│  ├─ Dodávatelia                 │
-│  └─ Číslovanie Dokladov         │
+│  ├─ GSCAT.btr (Produkty)        │
+│  ├─ ISCAT.btr (Príjemky header) │
+│  ├─ ISDET.btr (Príjemky items)  │
+│  └─ CRDAT.btr (Dodávatelia)     │
 └─────────────────────────────────┘
 ```
 
-### Mikroslužby Architektúra
+### Python Services Architektúra
 
-```
-nex-genesis-server/
+```python
+# services/
+├─ btrieve_client.py
+│  └─ BtrieveClient (wrapper pre Btrieve 2 API)
 │
-├─ ProductService.pas
-│  ├─ CheckProductExists()
-│  ├─ CreateProduct()
-│  └─ UpdateProduct()
+├─ product_service.py
+│  └─ ProductService
+│     ├─ product_exists(bar_code)
+│     ├─ add_product(name, bar_code, vat)
+│     └─ get_next_code()
 │
-├─ WarehouseService.pas
-│  ├─ CreateReceipt()
-│  ├─ AddReceiptItem()
-│  └─ FinalizeReceipt()
+├─ warehouse_service.py
+│  └─ WarehouseReceiptService
+│     ├─ create_receipt(supplier, date)
+│     ├─ add_item(receipt_id, product, qty, price)
+│     └─ finalize_receipt(receipt_id)
 │
-├─ SupplierService.pas
-│  ├─ GetSupplierByICO()
-│  └─ ValidateSupplier()
-│
-├─ ISDOCParser.pas
-│  ├─ ParseXML()
-│  ├─ ExtractInvoiceData()
-│  └─ ValidateXML()
-│
-└─ HTTPServer.pas
-   ├─ POST /api/invoice/import
-   ├─ GET /api/health
-   └─ Error handling
+└─ supplier_service.py
+   └─ SupplierService
+      ├─ get_by_ico(ico)
+      └─ validate_supplier(ico)
 ```
 
 ---
@@ -207,58 +223,70 @@ c:\Development\nex-genesis-server/
 │   ├── MASTER_CONTEXT.md                  # Rýchla referencia
 │   ├── QUICK_START.md                     # Quick start guide
 │   ├── SYSTEM_PROMPT.md                   # Claude inštrukcie
-│   ├── project_file_access.json           # Vygenerovaný manifest
 │   ├── architecture/
-│   │   ├── database-schema.md
-│   │   ├── api-endpoints.md
-│   │   └── isdoc-mapping.md
+│   │   ├── database-schema.md             # Databázová schéma
+│   │   ├── python-btrieve-setup.md        # Setup guide
+│   │   ├── api-endpoints.md               # API dokumentácia
+│   │   └── isdoc-mapping.md               # XML mapping
 │   └── sessions/
 │       └── 2025-10-21-initial-setup.md
 │
-├── delphi-sources/                         # NEX Genesis source kódy
-│   ├── Common/
-│   ├── DataModules/
-│   ├── DataTables/
-│   ├── Libraries/
-│   ├── Packages/
-│   ├── Business/
-│   └── UI/
+├── database-schema/                        # .bdf súbory
+│   ├── GSCAT.bdf                          # Produktový katalóg
+│   ├── ISCAT.bdf                          # Príjemky header
+│   ├── ISDET.bdf                          # Príjemky items
+│   ├── CRDAT.bdf                          # Dodávatelia
+│   └── README.md                          # Dokumentácia schémy
 │
-├── output/                                 # Vygenerované mikroslužby
-│   ├── NEXGenesisServer.dpr
-│   ├── ProductService.pas
-│   ├── WarehouseService.pas
-│   ├── SupplierService.pas
-│   ├── ISDOCParser.pas
-│   ├── HTTPServer.pas
-│   ├── DatabaseAccess.pas
-│   └── Config.pas
+├── delphi-sources/                         # Referencia
+│   └── BtrTable.pas                       # NEX Genesis Btrieve wrapper (vzor)
 │
-├── templates/                              # Code templates pre agenta
-│   ├── service_template.pas
-│   ├── endpoint_template.pas
-│   └── database_access_template.pas
+├── python/                                 # Python services
+│   ├── __init__.py
+│   ├── models/
+│   │   ├── gscat_layout.py                # GSCAT record layout
+│   │   ├── iscat_layout.py                # ISCAT record layout
+│   │   ├── isdet_layout.py                # ISDET record layout
+│   │   └── crdat_layout.py                # CRDAT record layout
+│   ├── services/
+│   │   ├── btrieve_client.py              # Btrieve wrapper
+│   │   ├── product_service.py             # Product operations
+│   │   ├── warehouse_service.py           # Warehouse operations
+│   │   └── supplier_service.py            # Supplier operations
+│   ├── parsers/
+│   │   └── isdoc_parser.py                # ISDOC XML parser
+│   ├── setup.py                           # SWIG build script
+│   └── requirements.txt                   # Python dependencies
 │
-├── tests/                                  # Test data
+├── btrieve-sdk/                            # Btrieve 2 SDK
+│   ├── btrievePython.swig                 # SWIG interface
+│   ├── btrieveC.h                         # C header
+│   ├── btrieveCPP.h                       # C++ header
+│   └── win64/                             # Windows 64-bit libs
+│       ├── btrieveC.lib
+│       └── btrieveCPP.lib
+│
+├── tests/                                  # Test data & scripts
+│   ├── test_product_service.py
+│   ├── test_warehouse_service.py
 │   ├── sample_isdoc.xml
-│   └── test_requests.http
+│   └── test_data.py
 │
 ├── config/                                  
-│   ├── server_config.ini.template
-│   └── database_config.ini.template
+│   └── nex_genesis.ini                    # Database paths
 │
 ├── scripts/                                 
-│   ├── generate_project_access.py         # Generovanie manifestu
-│   └── analyze_delphi_code.py             # Analýza NEX patterns
+│   ├── build_swig_wrapper.py              # Build wrapper
+│   └── analyze_bdf.py                     # Analyze .bdf files
 │
 ├── .gitignore
 ├── README.md
-└── requirements.txt                        # Python tools
+└── requirements.txt                        # Project dependencies
 ```
 
 ---
 
-## 📋 PHASE 1: Setup & Analýza (Aktuálne)
+## 📋 PHASE 1: Setup & Stratégia
 
 ### Hotové Tasky ✅
 
@@ -270,14 +298,14 @@ c:\Development\nex-genesis-server/
 - ✅ GitHub repository: nex-genesis-server
 - ✅ Lokálny projekt: c:\Development\nex-genesis-server
 - ✅ Git inicializovaný
-- ✅ Základné súbory (.gitignore, README.md, requirements.txt)
+- ✅ Základné súbory
 
 #### ✅ Task 1.2 - Dokumentácia setup (2025-10-21)
 **Status:** HOTOVO  
 **Trvanie:** ~1h  
 
 **Vytvorené:**
-- ✅ `docs/FULL_PROJECT_CONTEXT.md` - Tento súbor
+- ✅ `docs/FULL_PROJECT_CONTEXT.md`
 - ✅ Directory štruktúra
 - ✅ Config templates
 
@@ -295,119 +323,137 @@ c:\Development\nex-genesis-server/
 
 **Akcie:**
 - ✅ Initial commit
-- ✅ Force push na GitHub
 - ✅ Repository live
+
+#### ✅ Task 1.5 - Strategické rozhodnutie (2025-10-21)
+**Status:** HOTOVO  
+**Trvanie:** ~2h  
+
+**Rozhodnutie:**
+- ✅ Pure Python Btrieve namiesto Delphi
+- ✅ Analyzovaná NEX Genesis databáza (bGSCAT.pas)
+- ✅ Zvolený Actian Btrieve 2 API
 
 ---
 
 ### Aktívny Task 🔄
 
-#### 🔄 Task 1.5 - Databázová schéma dokumentácia
-**Status:** BLOKOVANÉ  
-**Priority:** CRITICAL  
-**Blocker:** Potrebujeme NEX Genesis source kódy
+#### 🔄 Task 1.6 - Cleanup a reorganizácia
+**Status:** AKTÍVNE  
+**Priority:** HIGH  
+**Estimated:** 30 min
 
 **Plán:**
-- [ ] Upload NEX Genesis source kódov do delphi-sources/
-- [ ] Analyzovať databázové tabuľky
-- [ ] Zdokumentovať schému v docs/architecture/database-schema.md
-- [ ] Identifikovať kľúčové tabuľky pre mikroslužby
+- [ ] Pridať všetky .bdf súbory do `database-schema/`
+- [ ] Vymazať `delphi-sources/*` okrem `BtrTable.pas`
+- [ ] Vymazať/upraviť `project_file_access_delphi.json`
+- [ ] Vytvoriť `database-schema/README.md`
+- [ ] Commit: "Cleanup: Pure Python Btrieve stratégia"
 
-**Dependencies:** NEX Genesis source kódy
+**Súbory na pridanie:**
+```
+database-schema/
+├── GSCAT.bdf
+├── ISCAT.bdf
+├── ISDET.bdf
+├── CRDAT.bdf
+└── README.md
+```
 
 ---
 
 ### Plánované Tasky 📅
 
-#### Task 1.6 - Analýza NEX Genesis patterns
-**Priority:** HIGH | **Dependencies:** Task 1.5 | **Estimated:** 3h
+#### Task 1.7 - Python Btrieve Setup
+**Priority:** CRITICAL | **Dependencies:** Task 1.6 | **Estimated:** 2-3 dni
 
-#### Task 1.7 - ISDOC XML mapping
-**Priority:** HIGH | **Dependencies:** Task 1.5 | **Estimated:** 2h
+**Setup kroky:**
+1. Install SWIG
+2. Download Btrieve 2 SDK
+3. Setup C++ compiler (Visual Studio)
+4. Build SWIG wrapper
+5. Test basic operations
 
-#### Task 1.8 - API endpoints špecifikácia
-**Priority:** MEDIUM | **Dependencies:** Tasks 1.6-1.7 | **Estimated:** 2h
+#### Task 1.8 - Databázová schéma dokumentácia
+**Priority:** HIGH | **Dependencies:** Task 1.6 | **Estimated:** 1 deň
 
-#### Task 1.9 - Vygenerovanie project_file_access.json
-**Priority:** MEDIUM | **Dependencies:** Task 1.5 | **Estimated:** 30min
+**Výstup:**
+- `docs/architecture/database-schema.md`
+- Parsovať .bdf súbory
+- Zdokumentovať field layouts
 
-#### Task 1.10 - Finalizácia Phase 1
-**Priority:** MEDIUM | **Dependencies:** Tasks 1.5-1.9 | **Estimated:** 1h
+#### Task 1.9 - Python Record Layouts
+**Priority:** HIGH | **Dependencies:** Task 1.8 | **Estimated:** 1 deň
+
+**Vytvoriť:**
+- `python/models/gscat_layout.py`
+- `python/models/iscat_layout.py`
+- `python/models/isdet_layout.py`
+
+#### Task 1.10 - ISDOC XML mapping
+**Priority:** MEDIUM | **Dependencies:** Task 1.8 | **Estimated:** 2h
+
+**Výstup:**
+- `docs/architecture/isdoc-mapping.md`
+- XML → Btrieve fields mapping
 
 ---
 
 ## 🎉 NEDÁVNE ÚSPECHY
 
 ### 2025-10-21
-- ✅ **Task 1.1-1.4 COMPLETE** - Projektová infraštruktúra vytvorená! 🎉
-- ✅ **GitHub repository live**
-- ✅ **Dokumentačná štruktúra hotová**
-- ✅ **Scripts pre generovanie manifestu**
-- ✅ **4 tasky dokončené za 2 hodiny!** 🚀
+- ✅ **Task 1.1-1.5 COMPLETE** - Setup & strategické rozhodnutie! 🎉
+- ✅ **Pure Python Btrieve zvolený** - Moderná architektúra
+- ✅ **Analyzovaná NEX Genesis databáza** - bGSCAT.pas načítaný
+- ✅ **Našli sme Actian Btrieve 2 API** - Oficiálny Python wrapper
+- ✅ **5 taskov dokončených za 1 deň!** 🚀
 
 ---
 
 ## 🚧 AKTUÁLNE BLOKERY
 
-### CRITICAL - Potrebujeme NEX Genesis Source Kódy ❗
-**Task:** 1.5 - Databázová schéma dokumentácia
+### Žiadne aktuálne blokery! ✅
 
-**Čo potrebujeme:**
-1. NEX Genesis .pas, .dpr, .dfm súbory
-2. Databázové tabuľky info
-3. Connection settings
-4. Existujúce patterns
-
-**Ako pokračovať:**
-```powershell
-# 1. Skopíruj NEX Genesis source kódy do:
-c:\Development\nex-genesis-server\delphi-sources\
-
-# 2. Spusti analýzu:
-python scripts/analyze_delphi_code.py
-
-# 3. Vygeneruj manifest:
-python scripts/generate_project_access.py
-```
+**Postup je jasný:**
+1. Cleanup projekt (Task 1.6)
+2. Setup Python Btrieve (Task 1.7)
+3. Parsovať databázovú schému (Task 1.8)
 
 ---
 
 ## 📊 PHASE 2-4 (Plánované)
 
-### PHASE 2: Core Development
+### PHASE 2: Python Services Development
 **Status:** Čaká na Phase 1 | **Priority:** HIGH
 
-- [ ] 2.1 - Database access layer
-- [ ] 2.2 - ISDOC XML parser
-- [ ] 2.3 - ProductService implementation
-- [ ] 2.4 - WarehouseService implementation
-- [ ] 2.5 - SupplierService implementation
-- [ ] 2.6 - HTTP Server setup
-- [ ] 2.7 - Configuration management
-- [ ] 2.8 - Error handling & logging
-- [ ] 2.9 - Testing s sample data
-- [ ] 2.10 - Integration testing
+- [ ] 2.1 - BtrieveClient wrapper
+- [ ] 2.2 - ProductService implementation
+- [ ] 2.3 - WarehouseReceiptService
+- [ ] 2.4 - SupplierService
+- [ ] 2.5 - ISDOCParser
+- [ ] 2.6 - Record layout models
+- [ ] 2.7 - Error handling & logging
+- [ ] 2.8 - Unit tests
+- [ ] 2.9 - Integration tests
+- [ ] 2.10 - Documentation
 
-### PHASE 3: Agent Development 🤖
+### PHASE 3: Integration
 **Status:** Čaká na Phase 2 | **Priority:** MEDIUM
 
-- [ ] 3.1 - Agent architektúra design
-- [ ] 3.2 - Code analysis module
-- [ ] 3.3 - Code generation module
-- [ ] 3.4 - Template system
-- [ ] 3.5 - Validácia & testing
-- [ ] 3.6 - Agent CLI/API
-- [ ] 3.7 - Generovanie dokumentácie
+- [ ] 3.1 - Rozšíriť supplier_invoice_loader
+- [ ] 3.2 - REST API endpoint
+- [ ] 3.3 - End-to-end testing
+- [ ] 3.4 - Error handling
+- [ ] 3.5 - Logging & monitoring
 
-### PHASE 4: Integrácia & Deployment
+### PHASE 4: Deployment & Testing
 **Status:** Čaká na Phase 3 | **Priority:** MEDIUM
 
-- [ ] 4.1 - Integrácia so supplier_invoice_loader
-- [ ] 4.2 - End-to-end testing
-- [ ] 4.3 - Performance optimization
-- [ ] 4.4 - Deployment na production server
+- [ ] 4.1 - Production deployment
+- [ ] 4.2 - Performance testing
+- [ ] 4.3 - User dokumentácia
+- [ ] 4.4 - Training materials
 - [ ] 4.5 - Monitoring setup
-- [ ] 4.6 - User dokumentácia
 
 ---
 
@@ -415,7 +461,7 @@ python scripts/generate_project_access.py
 
 ### 1. Import Invoice (Hlavná funkcia)
 ```http
-POST /api/invoice/import
+POST /api/invoice/import-to-nex
 Content-Type: application/xml
 
 <ISDOC XML content>
@@ -437,75 +483,70 @@ GET /api/health
 Response:
 {
   "status": "ok",
-  "database": "connected",
-  "version": "0.1.0"
-}
-```
-
-### 3. Product Check (Pomocná)
-```http
-POST /api/product/check
-Content-Type: application/json
-
-{
-  "code": "PROD-001"
-}
-
-Response:
-{
-  "exists": true,
-  "productId": 12345,
-  "name": "Produkt XYZ"
+  "btrieve": "connected",
+  "database_path": "C:\\NEX\\DATA",
+  "version": "0.2.0"
 }
 ```
 
 ---
 
-## 🗄️ DATABÁZOVÁ SCHÉMA (TBD)
+## 🗄️ DATABÁZOVÁ SCHÉMA
 
 ### Poznámky k databáze
-- **Database:** Pervasive SQL
-- **Access method:** TBD (BDE / ODBC / Native)
-- **Connection string:** TBD
-- **Tables:** **POTREBUJEME OD NEX GENESIS**
+- **Database:** Pervasive Btrieve (file-based)
+- **Access method:** Btrieve 2 API
+- **Files:** *.btr (data) + *.bdf (custom schema definitions)
+- **Location:** TBD (napr. C:\NEX\DATA)
 
-### Kľúčové tabuľky (Očakávané)
+### Kľúčové tabuľky
 
-```sql
--- Products (Produktový katalóg)
-Table: ??? 
-Fields: TBD
-
--- WarehouseReceipts (Header)
-Table: ???
-Fields: TBD
-
--- WarehouseReceiptItems (Items)
-Table: ???
-Fields: TBD
-
--- Suppliers (Dodávatelia)
-Table: ???
-Fields: TBD
+**GSCAT - Produktový katalóg**
+```
+GsCode     : longint (4B)   - Product ID (PK, autoinc)
+GsName     : Str30 (30B)    - Product name
+BarCode    : Str15 (15B)    - Barcode (indexed)
+StkCode    : Str15 (15B)    - Stock code
+VatPrc     : byte (1B)      - VAT %
+MsuName    : Str5 (5B)      - Unit of measure
+Weight     : double (8B)    - Weight
+CrtUser    : Str8 (8B)      - Created by
+CrtDate    : TDateTime (8B) - Created date
+ModUser    : Str8 (8B)      - Modified by
+ModDate    : TDateTime (8B) - Modified date
 ```
 
-**⚠️ Táto sekcia bude doplnená po analýze NEX Genesis kódov**
+**ISCAT - Warehouse Receipts (Header)**
+```
+TBD - čaká na .bdf súbor alebo analýzu
+```
+
+**ISDET - Warehouse Receipt Items**
+```
+TBD - čaká na .bdf súbor alebo analýzu
+```
+
+**CRDAT - Dodávatelia**
+```
+TBD - čaká na .bdf súbor alebo analýzu
+```
+
+**⚠️ Kompletná schéma bude doplnená po analýze .bdf súborov**
 
 ---
 
-## 🔄 ISDOC XML → NEX Genesis Mapping
+## 🔄 ISDOC XML → Btrieve Mapping
 
 ### Invoice Header Mapping
 ```xml
 <Invoice>
-  <ID>                     → SupplierInvoiceNumber
-  <IssueDate>              → ReceiptDate
-  <DocumentCurrencyCode>   → (validácia: musí byť EUR)
+  <ID>                     → Supplier Invoice Number
+  <IssueDate>              → Receipt Date
   
   <AccountingSupplierParty>
     <Party>
       <PartyIdentification>
-        <ID>               → Supplier lookup by ICO
+        <ID>               → Supplier lookup by ICO (CRDAT)
       </PartyIdentification>
       <PartyName>
         <Name>             → Supplier Name
@@ -519,91 +560,103 @@ Fields: TBD
 <InvoiceLine>
   <ID>                     → Line number
   <InvoicedQuantity>       → Quantity
-  <LineExtensionAmount>    → TotalPrice
+  <LineExtensionAmount>    → Total Price
   <Item>
-    <Name>                 → Product Name
+    <Name>                 → Product Name → GSCAT.GsName
     <SellersItemIdentification>
-      <ID>                 → Product Code
+      <ID>                 → Product Code → GSCAT.BarCode
     </SellersItemIdentification>
   </Item>
   <Price>
-    <PriceAmount>          → UnitPrice
+    <PriceAmount>          → Unit Price
   </Price>
 </InvoiceLine>
 ```
 
 ---
 
-## 🤖 PROGRAMOVACÍ AGENT DESIGN
+## 💻 PYTHON IMPLEMENTATION PRÍKLADY
 
-### Agent Úlohy
-1. **Analyzovať NEX Genesis source kódy**
-   - Identifikovať database access patterns
-   - Nájsť existujúce business logic
-   - Extrahovať common units/functions
+### BtrieveClient Wrapper
+```python
+import btrievePython as btrv
 
-2. **Generovať Delphi 6 mikroslužby**
-   - ProductService
-   - WarehouseService
-   - ISDOCParser
-   - HTTPServer
-
-3. **Dodržiavať NEX Genesis patterns**
-   - Naming conventions
-   - Error handling
-   - Database transactions
-   - Logging
-
-### Agent Architektúra (Návrh)
-
+class BtrieveClient:
+    def __init__(self, data_path="C:\\NEX\\DATA"):
+        self.client = btrv.BtrieveClient(0x4232, 0)
+        self.data_path = data_path
+    
+    def open_file(self, filename):
+        file = btrv.BtrieveFile()
+        full_path = f"{self.data_path}\\{filename}"
+        rc = self.client.FileOpen(file, full_path, None,
+                                   btrv.Btrieve.OPEN_MODE_NORMAL)
+        if rc != btrv.Btrieve.STATUS_CODE_NO_ERROR:
+            raise Exception(f"Cannot open {filename}")
+        return file
 ```
-┌─────────────────────────────────┐
-│  Claude API (Reasoning Layer)   │
-│  - Rozumie úlohe                │
-│  - Analyzuje NEX patterns       │
-│  - Navrhne riešenie             │
-│  - Generuje Delphi kód          │
-└──────────────┬──────────────────┘
-               │
-               ▼
-┌─────────────────────────────────┐
-│  Python Wrapper (Execution)     │
-│  - Prístup k GitHub             │
-│  - Code templates               │
-│  - Syntax validácia             │
-│  - Git operácie                 │
-└─────────────────────────────────┘
+
+### ProductService
+```python
+class ProductService:
+    def __init__(self, btrieve_client):
+        self.client = btrieve_client
+        self.gscat_file = None
+    
+    def product_exists(self, bar_code):
+        """Check if product exists by barcode"""
+        key_value = bar_code.ljust(15).encode('cp1250')
+        record = bytearray(250)
+        length = self.gscat_file.RecordRetrieve(
+            btrv.Btrieve.COMPARISON_EQUAL,
+            4,  # BarCode index
+            key_value,
+            record
+        )
+        return length > 0
+```
+
+### Record Layout Model
+```python
+import struct
+
+class GSCATRecord:
+    RECORD_FORMAT = "<i30s15sB..."  # TBD
+    RECORD_LENGTH = 250  # TBD
+    
+    def __init__(self, gs_code=0, gs_name="", bar_code=""):
+        self.gs_code = gs_code
+        self.gs_name = gs_name
+        self.bar_code = bar_code
+    
+    def pack(self):
+        return struct.pack(
+            self.RECORD_FORMAT,
+            self.gs_code,
+            self.gs_name.ljust(30).encode('cp1250'),
+            self.bar_code.ljust(15).encode('cp1250')
+        )
 ```
 
 ---
 
 ## 🔐 KONFIGURÁCIA
 
-### server_config.ini (Template)
+### nex_genesis.ini (Template)
 ```ini
-[Server]
-Port=8080
-Host=localhost
-MaxConnections=100
-
 [Database]
-Type=Pervasive
-Host=localhost
-Database=NEXGenesis
-Username=
-Password=
+DataPath=C:\NEX\DATA
+Encoding=CP1250
 
-[Paths]
-LogPath=c:\Logs\NEXGenesisServer
-TempPath=c:\Temp\NEXGenesisServer
-
-[Security]
-EnableAuth=false
-APIKey=
+[Btrieve]
+ClientVersion=0x4232
 
 [Logging]
 Level=INFO
-MaxFileSize=10MB
+LogPath=C:\Logs\NEXGenesisServer
+
+[API]
+BaseURL=http://localhost:8000
 ```
 
 ---
@@ -620,57 +673,56 @@ MaxFileSize=10MB
 
 ### Git pravidlá:
 - ✅ Commit často, malé zmeny
-- ✅ Opisné commit správy
+- ✅ Opisné commit správy v slovenčine
 - ✅ Test pred commitom
 - ✅ Pull pred push
-- ✅ Feature branches pre nové features
+- ✅ Feature branches nie sú potrebné (small project)
 
 ### Development Environment:
-- **IDE:** PyCharm (pre Python scripty)
-- **Delphi IDE:** Delphi 6 Professional
+- **IDE:** PyCharm (pre Python development)
 - **Git:** Commit a push z PyCharm
-- **Commit messages:** Claude poskytuje len čistý text message (bez `git commit -m`), užívateľ ho skopíruje do PyCharm
+- **Commit messages:** Claude poskytuje len čistý text, užívateľ kopíruje do PyCharm
 
 ### Kódovacie štandardy:
-- ✅ Používaj NEX Genesis naming conventions
+- ✅ PEP 8 pre Python kód
+- ✅ Type hints kde je to možné
+- ✅ Docstrings pre všetky funkcie
 - ✅ Komentáre v slovenčine pre business logiku
-- ✅ Angličtina pre technické komentáre
-- ✅ Proper error handling (try..except..finally)
-- ✅ Memory management (Free objects!)
+- ✅ Proper error handling (try/except)
+- ✅ Logging všetkých operácií
 
-### 🚨 PROJECT_FILE_ACCESS.JSON REFRESH:
-- ✅ **KEĎ VYTVORÍŠ NOVÝ SÚBOR → Vždy pripomeň refresh project_file_access.json**
+### 🚨 DOKUMENTÁCIA REFRESH:
+- ✅ **KEĎ VYTVORÍŠ NOVÝ SÚBOR → Aktualizuj FULL_PROJECT_CONTEXT.md**
 - ✅ Na konci každej session
-- ✅ Po pridaní novej dokumentácie
-- ✅ Po vytvorení nového .pas súboru
-- ✅ Jednoduchá pripomienka: **"⚠️ Nezabudni refreshnúť project_file_access.json"**
+- ✅ Po dokončení Phase
+- ✅ Po strategických rozhodnutiach
 
 ---
 
 ## ✅ KRITÉRIÁ ÚSPECHU
 
 ### Phase 1 Complete:
-- ✅ NEX Genesis source kódy na GitHub
-- ✅ Databázová schéma zdokumentovaná
-- ✅ ISDOC mapping kompletný
-- ✅ API endpoints špecifikované
-- ✅ Development environment ready
+- ✅ Cleanup projekt (Task 1.6)
+- ✅ Python Btrieve setup (Task 1.7)
+- ✅ Databázová schéma zdokumentovaná (Task 1.8)
+- ✅ Python record layouts vytvorené (Task 1.9)
+- ✅ ISDOC mapping kompletný (Task 1.10)
 
 ### MVP (Minimum Viable Product):
-- ✅ Jeden endpoint: POST /api/invoice/import
-- ✅ Parsuje ISDOC XML
-- ✅ Vytvára produkty ak chýbajú
-- ✅ Vytvára skladovú príjemku
-- ✅ Funguje s reálnou NEX databázou
-- ✅ Základný error handling
+- ✅ BtrieveClient wrapper funguje
+- ✅ ProductService - check/add products
+- ✅ WarehouseService - create receipt
+- ✅ Integration s supplier_invoice_loader
+- ✅ End-to-end test s reálnym ISDOC XML
 
 ### V1.0 Production Ready:
-- ✅ Všetky plánované endpointy
+- ✅ Všetky services implementované
 - ✅ Kompletný error handling
 - ✅ Logging a monitoring
-- ✅ Integrácia so supplier_invoice_loader
-- ✅ Agent vie generovať nové služby
-- ✅ Dokumentácia kompletná
+- ✅ Unit tests (>80% coverage)
+- ✅ Integration tests
+- ✅ Production deployment
+- ✅ User dokumentácia
 
 ---
 
@@ -688,11 +740,11 @@ MaxFileSize=10MB
 ### supplier_invoice_loader
 - **URL:** https://github.com/rauschiccsk/supplier_invoice_loader
 - **Účel:** Generuje ISDOC XML z PDF faktúr
-- **Integrácia:** Posiela XML na NEX Genesis Server
+- **Integrácia:** Rozšírenie o NEX Genesis import endpoint
 
 ### NEX Genesis ERP
 - **Jazyk:** Delphi 6
-- **Databáza:** Pervasive SQL
+- **Databáza:** Pervasive Btrieve (file-based)
 - **Lokácia:** Customer server (MAGERSTAV)
 
 ---
@@ -700,21 +752,21 @@ MaxFileSize=10MB
 ## 📝 ĎALŠIE KROKY
 
 ### Ihneď (Tento týždeň):
-1. Upload NEX Genesis source kódov do delphi-sources/
-2. Spustiť `generate_project_access.py`
-3. Zdokumentovať databázovú schému
-4. Vytvoriť ISDOC mapping špecifikáciu
+1. ✅ Cleanup projekt (Task 1.6)
+2. Setup Python Btrieve environment (Task 1.7)
+3. Parsovať .bdf súbory (Task 1.8)
+4. Vytvoriť Python record layouts (Task 1.9)
 
 ### Krátkodoba (Budúci 2 týždne):
-1. Implementovať database access layer
-2. Vytvoriť ISDOC parser
-3. Zostrojiť prvú mikroslužbu (ProductService)
-4. Testovať s sample dátami
+1. Implementovať BtrieveClient wrapper
+2. Vytvoriť ProductService
+3. Vytvoriť WarehouseService
+4. Testovať s sample ISDOC XML
 
 ### Dlhodobé (Budúci mesiac):
-1. Dokončiť všetky mikroslužby
-2. Vyvinúť programovacieho agenta
-3. Integration testing
+1. Dokončiť všetky services
+2. Integrovať so supplier_invoice_loader
+3. End-to-end testing
 4. Production deployment
 
 ---
@@ -726,11 +778,11 @@ MaxFileSize=10MB
 This document contains **EVERYTHING:**
 - ✅ Complete project vision and goals
 - ✅ **Current status, progress, and active tasks** (AKTUÁLNY STAV section)
-- ✅ Full architecture and tech stack
+- ✅ Full Python Btrieve architecture
 - ✅ All 4 phases and development plan
 - ✅ Project structure
 - ✅ Git workflow and commit conventions
-- ✅ Technical decisions
+- ✅ Technical decisions and rationale
 
 **Simply respond:**
 ```
@@ -740,19 +792,19 @@ This document contains **EVERYTHING:**
 **WORKFLOW REMINDER:**
 ```
 After creating ANY new file in the project:
-⚠️ Remind user: "Nezabudni refreshnúť project_file_access.json"
+⚠️ Remind user: "Nezabudni updatnúť FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)"
 
 After completing any task:
-⚠️ Remind user: "Nezabudni updatnúť FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)"
+⚠️ Update task status in this document
 
 This ensures single-file context always stays current.
 ```
 
 ---
 
-**Verzia Dokumentu:** 0.1.0  
+**Verzia Dokumentu:** 0.2.0  
 **Vytvorené:** 2025-10-21  
 **Posledná Aktualizácia:** 2025-10-21  
-**Stav:** Aktívny Vývoj - Phase 1
+**Stav:** Aktívny Vývoj - Phase 1 - Pure Python Btrieve Strategy
 
-🏭 **Vytvárame Delphi mikroslužby! Jeden súbor = kompletný kontext.** ✨
+🐍 **Vytvárame Python Btrieve mikroslužby! Jeden súbor = kompletný kontext.** ✨

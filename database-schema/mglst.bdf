@@ -1,0 +1,63 @@
+MGLST.BTR cPrealloc+cFree10   ;Zoznam tovarových skupín
+
+MgCode     longint      ;Èíselný kód tovarovej skupiny
+MgName     Str30        ;Názov tovarovej skupiny
+_MgName    Str15        ;Vyh¾adávacie pole názvu tovarovej skupiny
+Profit     double       ;Doporuèený zisk predaja
+Parent     longint      ;Kód tovarovej do ktorej patrí daná skupina (0 - hlavná skupina)
+Sended     byte         ;Priznak odoslania zmien (0-zmeneny,1-odoslany)
+ModNum     word         ;Poradove cislo modifikacie zaznamu
+ModUser    Str8         ;Prihlasovacie meno užívate¿a, ktorý naposledy uložil záznam
+ModDate    DateType     ;Dátum posledného ukladania záznamu
+ModTime    TimeType     ;Èas posledného ukldania amu
+PrfPrc1    double       ;Doporuèený zisk pre cenu D1
+PrfPrc2    double       ;Doporuèený zisk pre cenu D2
+PrfPrc3    double       ;Doporuèený zisk pre cenu D3
+DscPrc1    double       ;Percentuálna z¾ava na výpoèet ceny D1
+DscPrc2    double       ;Percentuálna z¾ava na výpoèet ceny D2
+DscPrc3    double       ;Percentuálna z¾ava na výpoèet ceny D3
+Eshop1     byte         ;Internetový obchod è.1.
+Eshop2     byte         ;Internetový obchod è.2.
+Eshop3     byte         ;Internetový obchod è.3.
+Eshop4     byte         ;Internetový obchod è.4.
+Eshop5     byte         ;Internetový obchod è.5.
+
+IND MgCode=MgCode
+GLB cModif+cDuplic
+SEG
+
+IND _MgName=MgName
+GLB cModif+cInsensit+cDuplic
+SEG
+
+IND Profit=Profit
+GLB cModif+cDuplic
+SEG
+
+IND Parent=Parent
+GLB cModif+cDuplic
+SEG
+
+IND Sended=Sended
+GLB cModif+cDuplic
+SEG
+
+IND Eshop1=Eshop1
+GLB cModif+cDuplic
+SEG
+
+IND Eshop2=Eshop2
+GLB cModif+cDuplic
+SEG
+
+IND Eshop3=Eshop3
+GLB cModif+cDuplic
+SEG
+
+IND Eshop4=Eshop4
+GLB cModif+cDuplic
+SEG
+
+IND Eshop5=Eshop5
+GLB cModif+cDuplic
+SEG

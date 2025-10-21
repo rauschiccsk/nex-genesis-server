@@ -1,0 +1,208 @@
+TSHyynnn.BTR cPrealloc+cFree10  ;Hlavicky dodavatelsky dodacich listov
+
+SerNum     longint      ;Poradove cislo zakazky
+DocNum     Str12        ;Interne cislo zakazky
+ExtNum     Str12        ;Externe cislo zakazky - cislo odberatela
+DocDate    DateType     ;Datum vystavenia zakazky
+StkNum     word         ;Cislo priradeneho skladu 
+PaCode     longint      ;Cisleny kod odberatela
+PaName     Str30        ;Pracovny nazov odberatela
+_PaName    Str30        ;Pracovny nazov odberatela - vyhladavanie
+RegName    Str60        ;Registrovany nazov firmy
+RegIno     Str15        ;ICO partnera
+RegTin     Str15        ;DIC partnera
+RegVin     Str15        ;IC pre DPH
+RegAddr    Str30        ;Registrovana adreda firmy
+RegSta     Str2         ;Kod statu registrovanej adresy
+RegCty     Str3         ;Kod obce registrovanej adresy
+RegCtn     Str30        ;Nazov mesta registrovanej adresy
+RegZip     Str15        ;PSC registrovanej adresy 
+PayCode    Str3         ;Skratka formy uhrady dodavky
+PayName    Str20        ;Nazov formy uhrady dodavky
+WpaCode    word         ;Cislo prevadzkovej jednotky partnera 
+WpaName    Str60        ;Nazov prevadzkovej jednotky partnera
+WpaAddr    Str30        ;Adresa prevadzkovej jednotky partnera
+WpaSta     Str2         ;Kod statu prevadzkovej jednotky partnera
+WpaCty     Str3         ;Kod obce prevadzkovej jednotky partnera
+WpaCtn     Str30        ;Nazov mesta prevadzkovej jednotky partnera
+WpaZip     Str15        ;PSC prevadzkovej jednotky partnera
+TrsCode    Str3         ;Kod (skratka) sposobu dopravy 
+TrsName    Str20        ;Nazov sposobu dopravy 
+PlsNum     word         ;Cislo predajneho cennika, ktory je priradeny k dokladu
+DscPrc     double       ;Percentualna hodnota zlavy
+VatPrc1    byte         ;Sadzba DPH daòovej skupiny è.1
+VatPrc2    byte         ;Sadzba DPH daòovej skupiny è.2
+VatPrc3    byte         ;Sadzba DPH daòovej skupiny è.3
+AcDvzName  Str3         ;Nazov uctovnej meny
+AcZValue   double       ;Colne naklady v uctovnej mene
+AcTValue   double       ;Naklady na dopravu v uctvonej mene
+AcOValue   double       ;Ostatne obstaravacie naklady v uctovnej mene
+AcSValue   double       ;Obstaravacia cena (spolu s NSO) v uctovnej mene
+AcDValue   double       ;PC bez DPH pred zlavou v uctovnej mene
+AcDscVal   double       ;Hodnota zlavy z PC bez DPH v uctovnej mene
+AcRndVal   double       ;Hodnota cenoveho zaokruhlenia v uctovnej mene
+AcCValue   double       ;NC tovaru bez DPH (bez NSO) v uctovnej mene
+AcVatVal   double       ;Hodnota DPH z NC
+AcEValue   double       ;NC tovaru s DPH (s NSO) v uctovnej mene 
+AcCValue1  double       ;Hodnota v PC bez DPH v uctovnej mene - DPH 1
+AcCValue2  double       ;Hodnota v PC bez DPH v uctovnej mene - DPH 2
+AcCValue3  double       ;Hodnota v PC bez DPH v uctovnej mene - DPH 3
+AcEValue1  double       ;Hodnota v PC s DPH v uctovnej mene - DPH 1
+AcEValue2  double       ;Hodnota v PC s DPH v uctovnej mene - DPH 2
+AcEValue3  double       ;Hodnota v PC s DPH v uctovnej mene - DPH 3
+AcAValue   double       ;Hodnota v PC bez DPH v uctovnej mene
+AcBValue   double       ;Hodnota v PC s DPH v uctovnej mene
+FgDvzName  Str3         ;Nazov vyuctovacej meny
+FgCourse   double       ;Kurz vyuctovacej meny zo dna vystavenia dokladu
+FgDValue   double       ;PC bez DPH pred zlavou vo vyuctovacej mene
+FgDscVal   double       ;Hodnota zlavy z PC bez DPH vo vyuctovacej mene
+FgRndVal   double       ;Hodnota cenoveho zaokruhlenia vo vyuctovacej mene
+FgCValue   double       ;NC bez DPH vo vyuctovacej mene
+FgVatVal   double       ;Hodnota DPH z NC
+FgEValue   double       ;PC s DPH po zlave vo vyuctovacej mene
+FgCValue1  double       ;Hodnota v PC bez DPH vo vyuctovacej mene - DPH 1
+FgCValue2  double       ;Hodnota v PC bez DPH vo vyuctovacej mene - DPH 2
+FgCValue3  double       ;Hodnota v PC bez DPH vo vyuctovacej mene - DPH 3
+FgEValue1  double       ;Hodnota v PC s DPH vo vyuctovacej mene - DPH 1
+FgEValue2  double       ;Hodnota v PC s DPH vo vyuctovacej mene - DPH 2
+FgEValue3  double       ;Hodnota v PC s DPH vo vyuctovacej mene - DPH 3
+FgCsdVal1  double       ;NC bez DPH uhradena v hotovosti vo vyuctovacej mene - DPH 1
+FgCsdVal2  double       ;NC bez DPH uhradena v hotovosti vo vyuctovacej mene - DPH 2
+FgCsdVal3  double       ;NC bez DPH uhradena v hotovosti vo vyuctovacej mene - DPH 3
+ZIseNum    Str12        ;Variabilny symbol faktury na colne naklady
+TIseNum    Str12        ;Variabilny symbol faktury na dopravne naklady
+OIseNum    Str12        ;Variabilny symbol faktury na ostatne naklady obstarania
+GIseNum    Str12        ;Variabilny symbol faktury za tovar
+ZIsdNum    Str12        ;Interne cislo faktury na colne naklady
+TIsdNum    Str12        ;Interne cislo faktury na dopravne naklady
+OIsdNum    Str12        ;Interne cislo faktury na ostatne naklady obstarania
+GIsdNum    Str12        ;Interne cislo faktury za tovar
+OcdNum     Str12        ;Cislo odberatelskej zakazky
+CsdNum     Str12        ;Cislo pokladnicneho dokladu, s ktorou bol vyparovany  DL
+IsdNum     Str15        ;Cislo dodavatelskej faktury, s ktorou bol vyparovany  DL
+VatDoc     byte         ;Priznak danoveho dokladu (1-danovy doklad, 0-nedanovy doklad)
+PrnCnt     byte         ;Pocet vytlacenych kopii dokladu
+ItmQnt     word         ;Poèet položiek došlej objednávky
+SmCode     word         ;Cislo skladoveho pohybu
+DstStk     Str1         ;Priznak ci su prijate vsetky polozky na sklad (N-nie,S-ano)
+DstPair    Str1         ;Priznak (N-nevyparovane,Q-vyparovane,C-uhr. v hotovosti)
+DstLck     byte         ;Priznak uzatvorenia (1- zakazka je uzatvorena)
+DstCls     byte         ;Priznak ukoncenosti (1-zakazka je ukoncena)
+Sended     byte         ;Priznak odoslania zmien (0-zmeneny,1-odoslany)
+CrtUser    Str8         ;Prihlasovacie meno uzivatela, ktory zalozil zaznam
+CrtDate    DateType     ;Datum vytvorenia zaznam
+CrtTime    TimeType     ;Cas vytvorenia zaznam
+ModNum     word         ;Poradove cislo modifikacie zaznamu
+ModUser    Str8         ;Prihlasovacie meno uzivatela, ktory naposledy zmenil zaznam
+ModDate    DateType     ;Datum poslednej zmeny zaznamu
+ModTime    TimeType     ;Cas poslednej zmeny zaznamu
+DstAcc     Str1         ;Priznak zauctovania (A-zauctovany doklad)
+CAccSnt    Str3         ;Synteticka cast uctu rozuctovania dokladu - MD
+CAccAnl    Str8         ;Analyticka cast uctu rozuctovania dokladu - MD
+DAccSnt    Str3         ;Synteticka cast uctu rozuctovania dokladu - DAL
+DAccAnl    Str8         ;Analyticka cast uctu rozuctovania dokladu - DAL
+SteCode    word         ;Kod skladn¡ka (z evidencii zamestnancov)
+PrfPrc     double       ;Percentualna hodnota obchodnej marze celeho dokladu
+AcPrfVal   double       ;Financna hodnota obchodnej marze celeho dokladu - UM
+SndNum     word         ;Poradove cislo odoslania dokladu
+SndStat    Str1         ;Stav internetoveho prenosu (S-odolany,O-potvrdeny,E-chybny prenos)
+DstCor     Str1         ;Priznak potvrdenia spravnosti dokladu - odfajkanie
+DstLiq     Str1         ;Priznak likvidacie (L-likvidovany doklad)
+TcdNum     Str12        ;Èíslo odberate¾ského dodacieho listu - refakturácia
+IcdNum     Str12        ;Èíslo odberate¾skej faktúry - refakturácia
+PkdNum     Str12        ;Èíslo preba¾ovacieho dokladu - pre automatické prebalenie
+Year       Str2         ;Rok dokladu
+RbaCode    Str30        ;Kód výrobnej šarže
+RbaDate    DateType     ;Datum výrobnej šarže
+VatPrc4    byte         ;Sadzba DPH daòovej skupiny è.4
+AcCValue4  double       ;Hodnota v PC bez DPH v uctovnej mene - DPH 4
+AcEValue4  double       ;Hodnota v PC s DPH v uctovnej mene - DPH 4
+FgCValue4  double       ;Hodnota v PC bez DPH vo vyuctovacej mene - DPH 4
+FgEValue4  double       ;Hodnota v PC s DPH vo vyuctovacej mene - DPH 4
+FgCsdVal4  double       ;NC bez DPH uhradena v hotovosti vo vyuctovacej mene - DPH 4
+VatPrc5    byte         ;Sadzba DPH daòovej skupiny è.5
+AcCValue5  double       ;Hodnota v PC bez DPH v uctovnej mene - DPH 5
+AcEValue5  double       ;Hodnota v PC s DPH v uctovnej mene - DPH 5
+FgCValue5  double       ;Hodnota v PC bez DPH vo vyuctovacej mene - DPH 5
+FgEValue5  double       ;Hodnota v PC s DPH vo vyuctovacej mene - DPH 5
+FgCsdVal5  double       ;NC bez DPH uhradena v hotovosti vo vyuctovacej mene - DPH 5
+
+IND Year,SerNum=YearSerNum
+GLB cModif
+SEG
+
+IND DocNum=DocNum
+GLB cModif+cDuplic
+SEG
+
+IND ExtNum=ExtNum
+GLB cModif+cDuplic
+SEG
+
+IND DocDate=DocDate
+GLB cModif+cDuplic
+SEG
+
+IND StkNum=StkNum
+GLB cModif+cDuplic
+SEG
+
+IND PaCode=PaCode
+GLB cModif+cDuplic
+SEG
+
+IND _PaName=PaName
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND AcDvzName=AcDvzName
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND FgDvzName=FgDvzName
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND AcEValue=AcEValue
+GLB cModif+cDuplic
+SEG
+
+IND FgEValue=FgEValue
+GLB cModif+cDuplic
+SEG
+
+IND OcdNum=OcdNum
+GLB cModif+cDuplic
+SEG
+
+IND CsdNum=CsdNum
+GLB cModif+cDuplic
+SEG
+
+IND Sended=Sended
+GLB cModif+cDuplic
+SEG
+
+IND DstAcc=DstAcc
+GLB cModif+cDuplic
+SEG
+
+IND SndStat=SndStat
+GLB cModif+cDuplic
+SEG
+
+IND DstCor=DstCor
+GLB cModif+cDuplic
+SEG
+
+IND PaCode,DstPair=PcDp
+GLB cModif+cDuplic
+SEG
+
+IND DstLiq=DstLiq
+GLB cModif+cDuplic
+SEG
+
+IND RbaCode=RbaCode
+GLB cModif+cDuplic
+SEG

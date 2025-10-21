@@ -1,13 +1,13 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Documentation files - optimized for Claude",
-  "generated_at": "2025-10-21T17:29:33.521382",
+  "generated_at": "2025-10-21T21:05:01.230293",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "files": [
     {
       "path": "docs/FULL_PROJECT_CONTEXT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md",
-      "size": 21259,
+      "size": 23971,
       "extension": ".md",
       "name": "FULL_PROJECT_CONTEXT.md"
     },
@@ -52,7 +52,14 @@
       "size": 19475,
       "extension": ".md",
       "name": "database-access-pattern.md"
+    },
+    {
+      "path": "docs/project_file_access_INDEX.json",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_INDEX.json",
+      "size": 1514,
+      "extension": ".json",
+      "name": "project_file_access_INDEX.json"
     }
   ],
-  "total_files": 7
+  "total_files": 8
 }

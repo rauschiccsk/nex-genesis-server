@@ -1,32 +1,86 @@
 # 🏭 NEX Genesis Server
 
-**Delphi 6 Mikroslužby pre NEX Genesis ERP**
+**Python Btrieve Services pre NEX Genesis ERP**
 
-REST API mikroslužby napísané v Delphi 6, ktoré umožňujú import dodávateľských faktúr z ISDOC XML do NEX Genesis databázy.
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![Btrieve](https://img.shields.io/badge/Btrieve-2.0-green.svg)](https://www.actian.com/)
+[![Status](https://img.shields.io/badge/Status-In%20Development-yellow.svg)]()
 
 ---
 
-## 🎯 Účel Projektu
+## 📖 O Projekte
 
-**NEX Genesis Server** prijíma ISDOC XML súbory z projektu `supplier_invoice_loader` a automaticky:
+NEX Genesis Server je **Python mikroslužba**, ktorá poskytuje REST API pre import ISDOC XML faktúr do NEX Genesis ERP systému. Používa **Actian Btrieve 2 API** pre priamy prístup k Btrieve file-based databáze.
 
-- ✅ Kontroluje/pridáva produkty do katalógu
-- ✅ Vytvára skladové príjemky
-- ✅ Eviduje dodávateľské faktúry
-- ✅ Integruje sa s NEX Genesis databázou (Pervasive)
+### Hlavné Funkcie
+
+- ✅ Import ISDOC XML faktúr
+- ✅ Automatické pridávanie produktov do katalógu
+- ✅ Vytváranie skladových príjemiek
+- ✅ Evidencia dodávateľských faktúr
+- ✅ Priamy Btrieve databázový prístup
 
 ---
 
 ## 🏗️ Architektúra
 
 ```
-supplier_invoice_loader (Python)
-         ↓
-    ISDOC XML
-         ↓
-NEX Genesis Server (Delphi 6)
-         ↓
-NEX Genesis Database (Pervasive)
+supplier_invoice_loader (Python FastAPI)
+    ↓
+NEX Genesis Server (Python Btrieve Services)
+    ↓
+Btrieve 2 API
+    ↓
+NEX Genesis Database (*.btr files)
+```
+
+---
+
+## 🚀 Quick Start
+
+### Požiadavky
+
+- Python 3.8+
+- SWIG 3.0.12+
+- Visual Studio 2019+ (C++ compiler)
+- Actian Btrieve 2 SDK
+- NEX Genesis ERP database
+
+### Inštalácia
+
+```bash
+# Clone repository
+git clone https://github.com/rauschiccsk/nex-genesis-server.git
+cd nex-genesis-server
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Build Btrieve wrapper (see docs/architecture/python-btrieve-setup.md)
+cd python
+python setup.py build_ext --plat-name="win-amd64"
+```
+
+### Konfigurácia
+
+```ini
+# config/nex_genesis.ini
+[Database]
+DataPath=C:\NEX\DATA
+Encoding=CP1250
+
+[Btrieve]
+ClientVersion=0x4232
+```
+
+### Spustenie
+
+```bash
+# Run tests
+pytest tests/
+
+# Start server (integration with supplier_invoice_loader)
+python -m supplier_invoice_loader
 ```
 
 ---
@@ -35,159 +89,98 @@ NEX Genesis Database (Pervasive)
 
 ```
 nex-genesis-server/
-├── docs/                    # Dokumentácia
-│   ├── FULL_PROJECT_CONTEXT.md    # 👈 Hlavný dokument
-│   └── project_file_access.json
-├── delphi-sources/         # NEX Genesis source kódy
-├── output/                 # Vygenerované mikroslužby
-├── templates/              # Code templates pre agenta
-├── config/                 # Konfiguračné súbory
-├── scripts/                # Python utility skripty
-└── tests/                  # Test data
+├── docs/                      # Dokumentácia
+├── database-schema/           # .bdf súbory (databázová schéma)
+├── python/                    # Python services
+│   ├── models/               # Record layouts
+│   ├── services/             # Btrieve services
+│   └── parsers/              # ISDOC parser
+├── btrieve-sdk/              # Btrieve 2 SDK
+├── tests/                    # Unit & integration tests
+└── config/                   # Konfigurácia
 ```
-
----
-
-## 🚀 Quick Start
-
-### Pre Claude (AI Assistant)
-
-Otvor nový chat a vlož tento raw URL:
-
-```
-https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md
-```
-
-Claude načíta celý projekt a je pripravený pracovať.
-
-### Pre vývojára
-
-1. **Clone repository:**
-   ```bash
-   git clone https://github.com/rauschiccsk/nex-genesis-server.git
-   cd nex-genesis-server
-   ```
-
-2. **Upload NEX Genesis source kódy:**
-   ```bash
-   # Skopíruj NEX Genesis source kódy do:
-   delphi-sources/
-   ```
-
-3. **Vygeneruj file manifest:**
-   ```bash
-   python scripts/generate_project_access.py
-   ```
-
-4. **Commit a push:**
-   ```bash
-   git add .
-   git commit -m "docs: Add NEX Genesis sources and manifest"
-   git push
-   ```
-
----
-
-## 📚 Dokumentácia
-
-Kompletná dokumentácia je v jednom súbore:
-
-📄 **[FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md)**
-
-Tento súbor obsahuje:
-- Project overview a workflow
-- Architektúru systému
-- Tech stack
-- API endpoints špecifikáciu
-- Database schému
-- ISDOC XML mapping
-- Development roadmap
-- Programming agent design
 
 ---
 
 ## 🔌 API Endpoints
 
-### Import Invoice (Hlavná funkcia)
+### Import Invoice
+
 ```http
-POST /api/invoice/import
+POST /api/invoice/import-to-nex
 Content-Type: application/xml
 
 <ISDOC XML content>
 ```
 
-### Health Check
-```http
-GET /api/health
+**Response:**
+```json
+{
+  "success": true,
+  "receiptId": "PR-2025-0001",
+  "productsAdded": 3,
+  "itemsCreated": 5
+}
 ```
 
-Detailná špecifikácia: [docs/FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md)
+---
+
+## 📚 Dokumentácia
+
+- **[FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md)** - Kompletný kontext projektu
+- **[Python Btrieve Setup](docs/architecture/python-btrieve-setup.md)** - Setup guide
+- **[Database Schema](docs/architecture/database-schema.md)** - Databázová schéma
+- **[ISDOC Mapping](docs/architecture/isdoc-mapping.md)** - XML → DB mapping
 
 ---
 
-## 💾 Tech Stack
+## 🛠️ Tech Stack
 
-- **Jazyk:** Delphi 6 (Object Pascal)
-- **Databáza:** Pervasive SQL
-- **HTTP Server:** Indy / Synapse
-- **XML Parser:** MSXML / OmniXML
-- **Config:** INI files
-
----
-
-## 🤖 Programming Agent
-
-Tento projekt obsahuje AI programming agenta, ktorý vie:
-- Analyzovať NEX Genesis source kódy
-- Generovať nové Delphi 6 mikroslužby
-- Dodržiavať NEX Genesis patterns a conventions
-- Vytvárať dokumentáciu
-
-Viac info: [docs/FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md#-programming-agent-design)
+- **Python 3.8+** - Programming language
+- **Btrieve 2 API** - Database access (Actian)
+- **SWIG** - Python wrapper generator
+- **FastAPI** - REST API framework
+- **pytest** - Testing framework
 
 ---
 
-## 🔗 Related Projects
+## 📊 Status
 
-### supplier_invoice_loader
-- **URL:** https://github.com/rauschiccsk/supplier_invoice_loader
-- **Purpose:** Generuje ISDOC XML z PDF faktúr
-- **Integration:** Posiela XML na NEX Genesis Server
-
----
-
-## 📊 Development Status
-
-**Current Phase:** Initial Planning
-
-Aktuálny stav vývoja: [docs/FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md#-development-roadmap)
+**Current Phase:** Phase 1 - Setup & Stratégia  
+**Progress:** 50%  
+**Next Milestone:** Python Btrieve Setup (2025-10-28)
 
 ---
 
-## 👨‍💻 Developer
+## 🤝 Súvisiace Projekty
 
-**ICC (rausch@icc.sk)**
-
-- 📂 Local: `c:\Development\nex-genesis-server`
-- 🔗 GitHub: https://github.com/rauschiccsk/nex-genesis-server
-- 🌐 Company: isnex.ai
+- **[supplier_invoice_loader](https://github.com/rauschiccsk/supplier_invoice_loader)** - ISDOC XML generator z PDF faktúr
+- **NEX Genesis ERP** - Cieľový ERP systém (Delphi 6, Btrieve)
 
 ---
 
-## 📝 License
+## 📞 Kontakt
 
-Proprietárny software pre zákazníka MAGERSTAV spol. s r.o.
-
----
-
-## 🆘 Support
-
-Pre technické otázky a support:
-- 📧 Email: rausch@icc.sk
-- 📄 Documentation: [FULL_PROJECT_CONTEXT.md](docs/FULL_PROJECT_CONTEXT.md)
+**Developer:** rauschiccsk  
+**Organization:** ICC (Innovation & Consulting Center)  
+**Email:** rausch@icc.sk  
+**Location:** Komárno, SK
 
 ---
 
-**Status:** 🚧 In Development  
-**Version:** 0.1.0  
-**Last Updated:** 2025-10-21
+## 📄 Licencia
+
+Proprietary - ICC Internal Project
+
+---
+
+## 🙏 Poďakovanie
+
+- **Actian Corporation** - Btrieve 2 API
+- **NEX Genesis** - Databázová štruktúra a patterns
+
+---
+
+**Version:** 0.2.0  
+**Last Updated:** 2025-10-21  
+**Status:** 🚧 In Active Development

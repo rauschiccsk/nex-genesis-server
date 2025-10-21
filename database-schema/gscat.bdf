@@ -1,0 +1,140 @@
+GSCAT.BTR cPrealloc+cFree10   ;Evidencia tovaru
+
+GsCode     longint      ;Tovarové èíslo (PLU)
+GsName     Str30        ;Názov tovaru
+_GsName    Str15        ;Vyh¾adávacie pole názvu tovaru
+MgCode     longint      ;Èíslo tovarovej skupiny
+FgCode     longint      ;Èíslo financnej skupiny
+BarCode    Str15        ;Prvotnı identifikaènı kód tovaru
+StkCode    Str15        ;Skladovı kód tovaru
+MsName     Str10        ;Názov mernej jednotky
+PackGs     longint      ;Tovarové èíslo pripojeného obalu
+GsType     Str1         ;Typ poloky (T-riadny tovar,W-vahovy tovar,O-obal)
+DrbMust    byte         ;Povinné zadávanie trvanlivosti tovaru (0-nesledova,1-sledova)
+PdnMust    byte         ;Povinné sledovanie vırobnıch èísiel (0-nesledova,1-sledova)
+GrcMth     word         ;Záruèná doba (poèet mesiacov)
+VatPrc     byte         ;Percentuálna sadba DPH
+Volume     double       ;Objem tovaru (mnostvo MJ na 1 m3)
+Weight     double       ;Váha tovaru (váha jednej MJ)
+MsuQnt     double       ;Mnozstvo tovaru v zakladnej jednotke
+MsuName    Str5         ;N zov zakladnej jednoty (kg,m,l,m2,m3)
+SbcCnt     word         ;Poèet propojenıch druhotnıch identifikaènıch kódov
+DisFlag    byte         ;Vyradenie z evidencie (1-vyradenı z evidencie) 
+LinPrice   double       ;Posledna nakupna cena tovaru
+LinDate    DateType     ;Datum posledneho prijmu
+LinStk     word         ;Cislo skladu posledneho prijmu
+Sended     byte         ;Priznak odoslania zmien (0-zmeneny,1-odoslany)
+ModNum     word         ;Poradove cislo modifikacie zaznamu
+ModUser    Str8         ;Prihlasovacie meno uívate¿a, ktorı naposledy uloil záznam
+ModDate    DateType     ;Dátum posledného ukladania záznamu
+ModTime    TimeType     ;Èas posledného ukldania záznamu
+LinPac     longint      ;Kod posledneho dodavatela
+SecNum     word         ;Cislo vahovej sekcie
+WgCode     word         ;Vahove tovarove cislo (vahove PLU)
+CrtUser    Str8         ;Prihlasovacie meno uzivatela, ktory zalozil zaznam
+CrtDate    DateType     ;Datum vytvorenia zaznam
+CrtTime    TimeType     ;Cas vytvorenia zaznam
+BasGsc     longint      ;Odkaz na základnı tovar
+GscKfc     word         ;Poèet kusov v kartónovom balení
+GspKfc     word         ;Poèet kartónov v paletovom balení
+QliKfc     double       ;Hmotnos kartónu
+DrbDay     word         ;Poèet dni trvanlivosti
+OsdCode    Str15        ;Objednávaci kód tovaru
+MinOsq     double       ;Minimálne objednávacie mnostvo
+SpcCode    Str30        ;Špecifikaènı kód poloky
+PrdPac     longint      ;Kód vırobcu
+SupPac     longint      ;Kód dodávate¾a
+SpirGs     byte         ;Priznak liehoveho vırobu (1-liehovı vırobok)
+GaName     Str60        ;Doplnkovı názov tovaru
+_GaName    Str60        ;Doplnkovı názov tovaru - vyh¾adávacie pole
+DivSet     byte         ;Priznak delitelnosti tovaru(0-volne delitelny;1-nedelitelny;2-1/2;...)
+SgCode     longint      ;Èíslo špecifikaènej skupiny
+Notice     Str240       ;Poznámkovı riadok
+NewVatPrc  Str2         ;Nová pripravená sadzba na zmeny DPH
+Reserve    Str4         ;-
+ShpNum     byte         ;Èíslo elektronického obchodu kam patrí daná poloka
+SndShp     byte         ;Príznnak, e karta bola uloená do internetového obchodu
+PlsNum1    word         ;Cislo predajneho cennika odkial sa nacitavaju cennikove ceny
+PlsNum2    word         ;Cislo predajneho cennika odkial sa nacitavaju cennikove ceny
+PlsNum3    word         ;Cislo predajneho cennika odkial sa nacitavaju cennikove ceny
+PlsNum4    word         ;Cislo predajneho cennika odkial sa nacitavaju cennikove ceny
+PlsNum5    word         ;Cislo predajneho cennika odkial sa nacitavaju cennikove ceny
+RbaTrc     byte         ;Povinné sledovanie vırobnej šare (0-nesledova,1-sledova)
+CctCod     Str10        ;Kód jednotnej tarify colného sadzobníka
+IsiSnt     Str3         ;Syntetická èas úètu prerozúètovanie poloky DF
+IsiAnl     Str6         ;Analytická èas úètu prerozúètovanie poloky DF
+IciSnt     Str3         ;Syntetická èas úètu prerozúètovanie poloky OF
+IciAnl     Str6         ;Analytická èas úètu prerozúètovanie poloky OF
+ProTyp     Str1         ;Typ prduktu (M-materiál;T-tovar;S-sluba)
+
+IND GsCode=GsCode
+GLB cModif
+SEG
+
+IND MgCode,GsCode=MgGs
+GLB cModif+cDuplic
+SEG
+
+IND FgCode=FgCode
+GLB cModif+cDuplic
+SEG
+
+IND _GsName=GsName
+GLB cModif+cInsensit+cDuplic
+SEG
+
+IND BarCode=BarCode
+GLB cModif+cDuplic
+SEG
+
+IND StkCode=StkCode
+GLB cModif+cDuplic
+SEG
+
+IND SpcCode=SpcCode
+GLB cModif+cDuplic
+SEG
+
+IND OsdCode=OsdCode
+GLB cModif+cDuplic
+SEG
+
+IND GsType=GsType
+GLB cModif+cDuplic
+SEG
+
+IND PackGs=PackGs
+GLB cModif+cDuplic
+SEG
+
+IND DisFlag=DisFlag
+GLB cModif+cDuplic
+SEG
+
+IND SecNum,WgCode=SnWc
+GLB cModif+cDuplic
+SEG
+
+IND Sended=Sended
+GLB cModif+cDuplic
+SEG
+
+IND _GaName=GaName
+GLB cModif+cInsensit+cDuplic
+SEG
+
+IND MgCode,StkCode=MgSc
+GLB cModif+cDuplic
+SEG
+
+IND MsName=MsName
+GLB cModif+cInsensit+cDuplic
+SEG
+
+IND CctCod=CctCod
+GLB cModif+cDuplic
+SEG
+
+IND ProTyp=ProTyp
+GLB cModif+cInsensit+cDuplic
+SEG

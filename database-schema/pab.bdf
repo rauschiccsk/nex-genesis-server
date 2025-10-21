@@ -1,0 +1,153 @@
+PABxxxxx.BTR cPrealloc+cFree10    ;Kniha partnerov (x-èíslo knihy)
+
+PaCode      longint     ;Cisleny kod firmy
+PaName      Str30       ;Pracovny nazov firmy
+_PaName     Str30       ;Pracovny nazov firmy - vyhladavanie
+RegName     Str60       ;Registrovany nazov firmy
+SmlName     Str10       ;Skrateny nazov firmy (pre rýchle vyhladavanie)
+OldTin      Str15       ;Stare DIC
+RegIno      Str15       ;ICO partnera
+RegTin      Str15       ;DIC partnera
+RegVin      Str15       ;IC pre DPH
+RegAddr     Str30       ;Registrovana adreda firmy
+RegSta      Str2        ;Kod statu registrovanej adresy
+RegCty      Str3        ;Kod obce registrovanej adresy
+RegCtn      Str30       ;Nazov mesta registrovanej adresy
+RegZip      Str15       ;PSC registrovanej adresy 
+RegTel      Str20       ;Telefonne cislo pre registrovanu adresu
+RegFax      Str20       ;Faxove cislo pre registrovanu adresu
+RegEml      Str30       ;Elektronicka adresa pre registrovanu adresu
+CrpAddr     Str30       ;Korespondencna adresa
+CrpSta      Str2        ;Kod statu korespondencnej adresy
+CrpCty      Str3        ;Kod mesta korespondencnej adresy
+CrpCtn      Str30       ;Nazov mesta korespondencnej adresy
+CrpZip      Str15       ;PSC korespondencnej adresy 
+CrpTel      Str20       ;Telefonne cislo pre korespondencnu adresu
+CrpFax      Str20       ;Faxove cislo pre korespondencnu adresu
+CrpEml      Str30       ;Elektronicka adresa pre korespondencnu adresu
+IvcAddr     Str30       ;Fakturacna adresa
+IvcSta      Str2        ;Kod statu fakturacna adresy
+IvcCty      Str3        ;Kod mesta fakturacna adresy
+IvcCtn      Str30       ;Nazov mesta fakturacna adresy
+IvcZip      Str15       ;PSC fakturacna adresy 
+IvcTel      Str20       ;Telefonne cislo pre fakturacnu adresu
+IvcFax      Str20       ;Faxove cislo pre fakturacnu adresu
+IvcEml      Str30       ;Elektronicka adresa pre fakturacnu adresu
+WebSite     Str30       ;Internetova stranka partnera
+ContoNum    Str30       ;Hlavny bankovy ucet partnera
+BankCode    Str15       ;Numericky smerovací kód banky
+BankSeat    Str30       ;Sidlo banky
+IbanCode    Str34       ;IBAN kod banky
+SwftCode    Str20       ;SWIFT kod banky
+ContoQnt    byte        ;Poèet bankových úètov partnera
+IsDscPrc    double      ;Percentualna hodnota poskytnutej zlavy
+IsExpDay    word        ;Splatnos došlých faktúr - poèet dní
+IsPenPrc    double      ;Penále percentách pre došlé faktury
+IsPayCode   Str3        ;Kod (skratka) formy uhrady daneho dodavatela
+IsPayName   Str20       ;Nazov formy uhrady daneho dodavate¾a
+IsTrsCode   Str3        ;Kod (skratka) sposobu dopravy od daného dodávate¾a
+IsTrsName   Str20       ;Kod (skratka) sposobu dopravy od daného dodávate¾a
+IcDscPrc    double      ;Trvalá z¾ava v % pre odoslané faktúry
+IcExpDay    word        ;Splatnos odoslaných faktur - poèet dní
+IcPenPrc    double      ;Penále percentách pre odoslané faktúry
+IcPlsNum    word        ;Èislo predajného cenníka pre daného partnera
+IcPayCode   Str3        ;Kod (skratka) formy úhrady pre daného odberate¾a
+IcPayName   Str18       ;Kod (skratka) formy úhrady pre daného odberate¾a
+IcPayMode   byte        ;Predvolena forma uhrady OF
+IcPayBrm    byte        ;Bezhotovostny styk (0-zakazany;1-povoleny)
+IcTrsCode   Str3        ;Kod (skratka) spôsobu dopravy pre daného odberate¾a
+IcTrsName   Str20       ;Kod (skratka) spôsobu dopravy pre daného odberate¾a
+IcSalLim    double      ;Nákupný limit odberatela v SK
+BuDisStat   byte        ;Blokovanie nakupu (1-blokovany)
+BuDisDate   DateType    ;Datum zablokovania nakupu od danej firmy
+BuDisUser   Str8        ;Uzivatel, ktory zablokoval nakup od danej firmy
+BuDisDesc   Str30       ;Dovod blokovania nakupu
+SaDisStat   byte        ;Blokovanie predaja (1-blokovany)
+SaDisDate   DateType    ;Datum zablokovania predaja pre danu firmu
+SaDisUser   Str8        ;Uzivatel, ktory zablokoval predaj pre danu firmy
+SaDisDesc   Str20       ;Dovod blokovania predaja
+IcFacDay    word        ;Fatctoringova splatnost - pocet dn¡
+IcFacPrc    double      ;Percentualne zvysenie cien v pripade Factoringu
+PagCode     word        ;Kod skupiny dodavatelov
+IdCode      Str20       ;Identifikaèný kod firmy (zakaznicka identifikacna karta)
+VatPay      byte        ;Príznak platite¾a DPH (1-platite¾)
+SapType     byte        ;Partner je dodávate¾ (1-zapnutý)
+CusType     byte        ;Partner je odberate¾ (1-zapnutý)
+OrgType     byte        ;Typ partnera (1-fyzická osba,0-právnická osoba)
+PasQnt      word        ;Pocet prevadzkovych jednotiek daneho partnera
+BonClc      byte        ;Poèítanie bónusov (1-zapnutý)
+CrtUser     Str8        ;Prihlasovacie meno uzivatela, ktory vystavil doklad
+CrtDate     DateType    ;Datum vytvorenia dokladu
+CrtTime     TimeType    ;Cas vytvorenia dokladu
+ModNum      word        ;Poradove cislo modifikacie zaznamu
+ModUser     Str8        ;Prihlasovacie meno užívate¿a, ktory naposledy ulozil zaznam
+ModDate     DateType    ;Datum posledneho ukladania zaznamu
+ModTime     TimeType    ;Cas posledneho ukldania zaznamu
+IcAplNum    word        ;Cislo akcioveho cennika pre daneho odberatela
+PgcCode     word        ;Kod skupiny odberatelov
+SrCode      Str15       ;Cislo povolenia na predaj liehovych vyrobkov
+TrdType     byte        ;Forma obchodovania (1-maloobchod,2-velkoochdod,3-obidve)
+PrnLng      Str2        ;Jazyk tlacovej zostavy - pre daneho partnera
+DlrCode     word        ;Kod obchodoeho zastupcu 
+HedName     Str30       ;Meno a prizevisko majitela alebo konatela firmy
+RegRec      Str60       ;Zaznam v obchodnom registry
+IcExpPrm    word        ;Pocet povolenych dni omeskania platbou priuhradach OF
+OwnPac      longint     ;Kod vlastnickej firmy
+SpeLev      byte        ;Cenova hladina pre daneho odberatela
+AdvPay      double      ;Preèerpanie záloh (0 = nedovoli precerpat) (-1 = ako 0 a pri Sally ani pokracovat) (>0 = dovoli preceprat do zadanej hodnoty)
+
+IND PaCode=PaCode
+GLB cModif+cDuplic
+SEG 
+
+IND RegIno=RegIno
+GLB cModif+cDuplic
+SEG
+
+IND RegTin=RegTin
+GLB cModif+cDuplic
+SEG
+
+IND _PaName=PaName
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND SmlName=SmlName
+GLB cModif+cDuplic
+SEG
+
+IND ContoNum=ContoNum
+GLB cModif+cDuplic
+SEG
+
+IND IdCode=IdCode
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND RegSta=RegSta
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND RegCty=RegCty
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND PagCode=PagCode
+GLB cModif+cDuplic
+SEG
+
+IND PgcCode=PgcCode
+GLB cModif+cDuplic
+SEG
+
+IND DlrCode=DlrCode
+GLB cModif+cDuplic
+SEG
+
+IND OwnPac=OwnPac
+GLB cModif+cDuplic
+SEG
+
+IND BonClc=BonClc
+GLB cModif+cDuplic
+SEG

@@ -1,0 +1,100 @@
+TSIyynnn.BTR cPrealloc+cFree10  ;Polozky dodavatelskuch dodacich listov
+
+DocNum     Str12        ;Interne cislo dokladu
+ItmNum     word         ;Poradove cislo polozky dokladu
+MgCode     word         ;Cislo tovarovej skupiny
+GsCode     longint      ;Tovarove cislo - PLU
+GsName     Str30        ;Nazov tovru
+BarCode    Str15        ;Identifikacny kod tovaru
+StkCode    Str15        ;Skladovy kod tovaru
+Notice     Str30        ;Poznamka k tovarovej polozke
+PackGs     longint      ;Tovarove cislo priradeneho vratneho obalu
+GsType     Str1         ;Typ položky (T-riadny tovar,W-vahovy tovar,O-obal)
+StkNum     word         ;Cislo skladu, kam sa prijima tovar
+MsName     Str10        ;Merna jednotka tovru
+GsQnt      double       ;Prijate mnozstvo
+VatPrc     double       ;Sadzba DPH v %
+DscPrc     double       ;Zlava v %
+AcSPrice   double       ;NC/MJ bez DPH (s NSO) v uctovnej mene - sklad
+AcDValue   double       ;NC bez DPH pred zlavou v uctovnej mene
+AcDscVal   double       ;Hodnota zlavy z PC bez DPH v uctovnej mene
+AcCValue   double       ;NC tovaru bez DPH (bez NSO) v uctovnej mene - FA
+AcEValue   double       ;NC tovaru s DPH (s NSO) v uctovnej mene - FA
+AcZValue   double       ;Colne naklady v uctovnej mene
+AcTValue   double       ;Naklady na dopravu v uctvonej mene
+AcOValue   double       ;Ostatne obstaravacie naklady v uctovnej mene
+AcSValue   double       ;Obstaravacia cena (spolu s NSO) v uctovnej mene - sklad
+AcRndVal   double       ;Hodnota cenoveho zaokruhlenia v uctovnej mene
+AcAValue   double       ;PC bez DPH v uctovnej mene
+AcBValue   double       ;PC s DPH v uctovnej mene
+FgDPrice   double       ;NC/MJ bez DPH pred zlavou vo vyuctovacej mene
+FgCPrice   double       ;NC/MJ bez DPH (bez NSO) vo vyuctovacej mene
+FgEPrice   double       ;NC/MJ a DPH (bez NSO) vo vyuctovacej mene
+FgDValue   double       ;NC bez DPH pred zlavou vo vyuctovacej mene
+FgDscVal   double       ;Hodnota zlavy z PC bez DPH vo vyuctovacej mene
+FgRndVal   double       ;Hodnota cenoveho zaokruhlenia vo vyuctovacej mene
+FgCValue   double       ;NC bez DPH vo vyuctovacej mene
+FgEValue   double       ;PC s DPH po zlave vo vyuctovacej mene
+DocDate    DateType     ;Datum  vystavenia dokladu
+DrbDate    DateType     ;Datum expiracii tovaru - trvanlivost
+PaCode     longint      ;Ciselny kod dodavetela
+OsdNum     Str12        ;Interne cislo dodavetelskej objednavky
+OsdItm     word         ;Pordove cislo polozky dodavetelskej objednavky
+IsdNum     Str12        ;Interne cislo dodavetelske faktury
+IsdItm     word         ;Poradove cislo polozky dodavetelske faktury
+IsdDate    DateType     ;Datum vyhotovenia dodavatelskej faktury
+StkStat    Str1         ;Stav polozky (N-zaevidovane,S-naskladnene)
+FinStat    Str1         ;Stav polozky (F-vyfakturovane,C-vyuctovane cez HP)
+AcqStat    Str1         ;Priznak obstarania (R-riadny, K-komisionalny)
+CrtUser    Str8         ;Prihlasovacie meno uzivatela, ktory zalozil zaznam
+CrtDate    DateType     ;Datum vytvorenia zaznam
+CrtTime    TimeType     ;Cas vytvorenia zaznam
+ModNum     word         ;Poradove cislo modifikacie zaznamu
+ModUser    Str8         ;Prihlasovacie meno uzivatela, ktory naposledy zmenil zaznam
+ModDate    DateType     ;Datum poslednej zmeny zaznamu
+ModTime    TimeType     ;Cas poslednej zmeny zaznamu
+OcdNum     Str12        ;Cislo zakazkoveho dokladu
+OcdItm     longint      ;Cislo riadku zakazky
+SteCode    word         ;Kod skladn¡ka (z evidencii zamestnancov)
+OmdNum     Str12        ;Èíslo internej skladove vídajky - hromadny presun tovaru
+PkdNum     Str12        ;Èíslo preba¾oacieho dokladu - pre automatické prebalenie
+PkdItm     word         ;Riadok preba¾oacieho dokladu - pre automatické prebalenie
+RbaCode    Str30        ;Kód výrobnej šarže
+RbaDate    DateType     ;Datum výrobnej šarže
+Cctvat     byte         ;Prevod daòovej povinnosti DPH pod¾a colného sadzobníka
+
+IND DocNum,ItmNum=DoIt
+GLB cModif+cDuplic
+SEG
+
+IND DocNum=DocNum
+GLB cModif+cDuplic
+SEG
+
+IND GsCode=GsCode
+GLB cModif+cDuplic
+SEG
+
+IND BarCode=BarCode
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND StkCode=StkCode
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND StkStat=StkStat
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND FinStat=FinStat
+GLB cModif+cDuplic+cInsensit
+SEG
+
+IND PaCode=PaCode
+GLB cModif+cDuplic
+SEG
+
+IND RbaCode=RbaCode
+GLB cModif+cDuplic
+SEG

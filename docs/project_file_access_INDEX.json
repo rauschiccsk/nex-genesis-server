@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Main index - references to all manifest files",
-  "generated_at": "2025-10-21T17:29:34.102759",
+  "generated_at": "2025-10-21T21:05:01.252641",
   "manifests": {
     "context": {
       "file": "project_file_access_CONTEXT.json",
