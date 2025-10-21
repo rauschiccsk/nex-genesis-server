@@ -1,0 +1,123 @@
+package IcStandard;
+
+{$R *.res}
+{$R 'BtrTable.dcr'}
+{$R 'NexBtrTable.dcr'}
+{$R 'NexTmpTable.dcr'}
+{$R 'MarkGrid.dcr'}
+{$R 'SrchGrid.dcr'}
+{$R 'IniHandle.dcr'}
+{$R 'IcButtons.dcr'}
+{$R 'IcEditors.dcr'}
+{$R 'TableView.dcr'}
+{$R 'BookList.dcr'}
+{$R 'IcLabels.dcr'}
+{$R 'IcStand.dcr'}
+{$R 'ViewForm.dcr'}
+{$R 'IcInfoFields.dcr'}
+{$R 'ApplicView.dcr'}
+{$R 'PxTable.dcr'}
+{$R 'PxTmpTable.dcr'}
+{$R 'DbfTable.dcr'}
+{$R 'IcProgressBar.dcr'}
+{$R 'Zipdir.dcr'}
+{$R 'Zipmstr.dcr'}
+{$R 'HdsBtrTable.dcr'}
+{$R 'NexEditors.dcr'}
+{$R 'XPMenu.dcr'}
+{$R 'xpComp.dcr'}
+{$R 'NwEditors.dcr'}
+{$R 'NwSelectEdit.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Standardné komponenty firmy IdentCode Consulting Ltd.'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vcldb,
+  bdertl,
+  vclx,
+  qrpt,
+  vclsmp,
+  nmfast,
+  ibxpress,
+  rtl,
+  visualclx,
+  teedb,
+  tee,
+  teeqr,
+  vcljpg,
+  designide,
+  dclstd,
+  dss,
+  inet,
+  dclIndyCore60,
+  IndyCore60,
+  IndySystem60,
+  IndyProtocols60,
+  xmlrtl,
+  soaprtl;
+
+contains
+  BtrTable,
+  NexBtrTable,
+  NexTmpTable,
+  MarkGrid,
+  SrchGrid,
+  IniHandle in 'IniHandle.pas',
+  IcButtons in 'IcButtons.pas',
+  IcEditors in 'IcEditors.pas',
+  TableView,
+  BookList,
+  IcLabels in 'IcLabels.pas',
+  IcStand in 'IcStand.pas',
+  ViewForm,
+  IcInfoFields in 'IcInfoFields.pas',
+  DBSrGrid,
+  ApplicView in 'ApplicView.pas',
+  PxTmpTable,
+  AdvGrid,
+  DbfTable,
+  IcProgressBar in 'IcProgressBar.pas',
+  ZipDir in 'ZipDir.pas',
+  ZipMstr in 'ZipMstr.pas',
+  IcActionList in 'IcActionList.pas',
+  NexPxTable,
+  HdsBtrTable in 'HdsBtrTable.pas',
+  HmaRas in 'HmaRas.pas',
+  IcProc in 'IcProc.pas',
+  ScrollPanel,
+  USB,
+  NwInfoFields,
+  NexEditors,
+  DelphiTwainUtils,
+  DelphiTwain,
+  Twain,
+  XPMenu in 'XPMenu.pas',
+  xpComp in 'xpComp.pas',
+  NxbLst,
+  NwEditors,
+  NwSelectEdit,
+  BokLst;
+
+end.

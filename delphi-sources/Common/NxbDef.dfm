@@ -1,0 +1,59 @@
+object Nxb: TNxb
+  Left = 231
+  Top = 173
+  Width = 696
+  Height = 79
+  Caption = 'Nxb'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btNXBDEF: TNexBtrTable
+    ShowErrMsg = True
+    OpenMode = 0
+    RecNo = 0
+    FixedName = 'NXBDEF'
+    DOSStrings = True
+    AutoCreate = True
+    CrtDat = True
+    Modify = True
+    Sended = True
+    Archive = True
+    FieldDefs = <>
+    Left = 8
+    Top = 8
+  end
+  object ptNXBDEF: TNexPxTable
+    Active = False
+    TableName = 'NXBDEF'
+    FixName = 'NXBDEF'
+    DefName = 'NXBDEF.TDF'
+    AutoCreate = True
+    AutoDelete = True
+    AutoTableName = True
+    Left = 40
+    Top = 8
+  end
+  object btMCBLST: TNexBtrTable
+    ShowErrMsg = True
+    OpenMode = 0
+    RecNo = 0
+    FixedName = 'MCBLST'
+    DOSStrings = True
+    AutoCreate = True
+    CrtDat = True
+    Modify = True
+    Sended = True
+    Archive = True
+    FieldDefs = <>
+    Left = 88
+    Top = 8
+  end
+end

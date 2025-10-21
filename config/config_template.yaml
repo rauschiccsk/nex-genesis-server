@@ -1,0 +1,221 @@
+# ===================================
+# NEX Genesis Server - Configuration Template
+# ===================================
+#
+# Copy this file and customize for your environment:
+#   cp config_template.yaml server_config.yaml
+#
+# Then edit server_config.yaml with your actual values
+#
+
+# ===================================
+# PROJECT INFO
+# ===================================
+project:
+  name: "NEX Genesis Server"
+  version: "0.1.0"
+  environment: "development"  # development | staging | production
+
+# ===================================
+# SERVER CONFIGURATION
+# ===================================
+server:
+  host: "localhost"
+  port: 8080
+  max_connections: 100
+  timeout_seconds: 30
+
+  # Threading
+  thread_pool_size: 10
+
+  # CORS (if needed)
+  enable_cors: false
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8000"
+
+# ===================================
+# DATABASE CONFIGURATION
+# ===================================
+database:
+  type: "pervasive"  # Pervasive SQL
+
+  # Connection settings
+  host: "localhost"
+  port: 1583  # Default Pervasive port
+  database_name: "NEXGenesis"
+
+  # Authentication
+  username: ""
+  password: ""
+
+  # Connection method
+  connection_type: "bde"  # bde | odbc | native
+
+  # Connection string (if using ODBC)
+  odbc_driver: "Pervasive ODBC Client Interface"
+  connection_string: ""
+
+  # Connection pool
+  pool_size: 5
+  pool_timeout: 30
+
+# ===================================
+# NEX GENESIS SPECIFIC
+# ===================================
+nex_genesis:
+  # Tables (to be filled after database analysis)
+  tables:
+    products: ""
+    warehouse_receipts: ""
+    warehouse_receipt_items: ""
+    suppliers: ""
+    document_numbering: ""
+
+  # Numbering format
+  receipt_number_format: "PR-{YEAR}-{NUMBER:04d}"
+  receipt_number_counter: "warehouse_receipt"
+
+  # Default values
+  defaults:
+    warehouse_id: 1
+    currency: "EUR"
+    vat_rate: 20.0
+
+# ===================================
+# ISDOC PROCESSING
+# ===================================
+isdoc:
+  # Validation
+  validate_xml: true
+  strict_mode: false
+
+  # Mappings (to be refined)
+  mappings:
+    invoice_number: "ID"
+    invoice_date: "IssueDate"
+    supplier_ico: "AccountingSupplierParty/Party/PartyIdentification/ID"
+    supplier_name: "AccountingSupplierParty/Party/PartyName/Name"
+
+  # Product creation
+  auto_create_products: true
+  product_code_prefix: "AUTO-"
+
+# ===================================
+# LOGGING
+# ===================================
+logging:
+  # Log level: DEBUG | INFO | WARNING | ERROR | CRITICAL
+  level: "INFO"
+
+  # Log to file
+  log_to_file: true
+  log_file_path: "c:\\Logs\\NEXGenesisServer\\server.log"
+
+  # Log rotation
+  max_file_size_mb: 10
+  backup_count: 5
+
+  # Log format
+  include_timestamp: true
+  include_thread_id: true
+
+# ===================================
+# SECURITY
+# ===================================
+security:
+  # API Authentication
+  enable_auth: false
+  api_key: ""
+
+  # Rate limiting
+  enable_rate_limit: false
+  max_requests_per_minute: 60
+
+  # IP whitelist
+  enable_ip_whitelist: false
+  allowed_ips:
+    - "127.0.0.1"
+    - "192.168.1.0/24"
+
+# ===================================
+# PATHS
+# ===================================
+paths:
+  # Working directories
+  temp_path: "c:\\Temp\\NEXGenesisServer"
+  log_path: "c:\\Logs\\NEXGenesisServer"
+  backup_path: "c:\\Backup\\NEXGenesisServer"
+
+  # Input/Output
+  xml_input_path: "c:\\Input\\ISDOC"
+  xml_processed_path: "c:\\Processed\\ISDOC"
+  xml_error_path: "c:\\Error\\ISDOC"
+
+# ===================================
+# INTEGRATION
+# ===================================
+integration:
+  # supplier_invoice_loader
+  supplier_loader_api: "http://localhost:8000"
+
+  # Callbacks
+  enable_callbacks: false
+  callback_url: ""
+
+  # Webhooks
+  enable_webhooks: false
+  webhook_url: ""
+
+# ===================================
+# NOTIFICATIONS
+# ===================================
+notifications:
+  # Email notifications
+  enable_email: false
+
+  smtp:
+    host: "smtp.gmail.com"
+    port: 587
+    use_tls: true
+    username: ""
+    password: ""
+    from_address: ""
+
+  # Recipients
+  notify_on_success: false
+  notify_on_error: true
+  error_recipients:
+    - "admin@example.com"
+
+# ===================================
+# PERFORMANCE
+# ===================================
+performance:
+  # Caching
+  enable_cache: true
+  cache_ttl_seconds: 300
+
+  # Batch processing
+  batch_size: 100
+  batch_timeout_seconds: 60
+
+  # Memory limits
+  max_memory_mb: 512
+
+# ===================================
+# DEVELOPMENT & DEBUGGING
+# ===================================
+development:
+  # Debug mode
+  debug_mode: false
+
+  # Verbose logging
+  verbose: false
+
+  # Test mode (use test database)
+  test_mode: false
+  test_database: "NEXGenesisTest"
+
+  # Mock external services
+  mock_services: false

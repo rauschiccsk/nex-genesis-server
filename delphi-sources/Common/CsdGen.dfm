@@ -1,0 +1,71 @@
+object CsdGenF: TCsdGenF
+  Left = 319
+  Top = 260
+  Width = 453
+  Height = 82
+  Hint = 'SMB'
+  Caption = 'Hotovostn'#225' '#250'hrada fakt'#250'ry'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Times New Roman'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Scaled = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 15
+  object btPMI: TNexBtrTable
+    DelToTXT = True
+    BtrErrorLogfile = 0
+    ShowErrMsg = True
+    OpenMode = 0
+    RecNo = 0
+    FixedName = 'PMI'
+    DOSStrings = True
+    AutoCreate = True
+    CrtDat = True
+    Modify = True
+    Sended = True
+    Archive = True
+    FieldDefs = <>
+    Left = 106
+    Top = 8
+  end
+  object btCSH: TNexBtrTable
+    DelToTXT = True
+    BtrErrorLogfile = 0
+    ShowErrMsg = True
+    OpenMode = 0
+    RecNo = 0
+    FixedName = 'CSH'
+    DOSStrings = True
+    AutoCreate = True
+    CrtDat = True
+    Modify = True
+    Sended = True
+    Archive = True
+    FieldDefs = <>
+    Left = 41
+    Top = 8
+  end
+  object btCSI: TNexBtrTable
+    DelToTXT = True
+    BtrErrorLogfile = 0
+    ShowErrMsg = True
+    OpenMode = 0
+    RecNo = 0
+    FixedName = 'CSI'
+    DOSStrings = True
+    AutoCreate = True
+    CrtDat = True
+    Modify = True
+    Sended = True
+    Archive = True
+    FieldDefs = <>
+    Left = 74
+    Top = 8
+  end
+end
