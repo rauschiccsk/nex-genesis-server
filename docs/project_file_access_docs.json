@@ -1,13 +1,13 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Project documentation files",
-  "generated_at": "2025-10-21T21:42:17.991546",
+  "generated_at": "2025-10-21T23:30:09.086180",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "files": [
     {
       "path": "docs/FULL_PROJECT_CONTEXT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md",
-      "size": 23971,
+      "size": 34441,
       "extension": ".md",
       "name": "FULL_PROJECT_CONTEXT.md"
     },
@@ -59,6 +59,13 @@
       "size": 19475,
       "extension": ".md",
       "name": "database-access-pattern.md"
+    },
+    {
+      "path": "docs/sessions/2025-10-21_session.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-21_session.md",
+      "size": 11855,
+      "extension": ".md",
+      "name": "2025-10-21_session.md"
     }
   ]
 }
