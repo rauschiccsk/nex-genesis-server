@@ -1,0 +1,58 @@
+{
+  "project_name": "nex-genesis-server",
+  "description": "Documentation files - optimized for Claude",
+  "generated_at": "2025-10-21T17:29:33.521382",
+  "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
+  "files": [
+    {
+      "path": "docs/FULL_PROJECT_CONTEXT.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md",
+      "size": 21259,
+      "extension": ".md",
+      "name": "FULL_PROJECT_CONTEXT.md"
+    },
+    {
+      "path": "docs/MASTER_CONTEXT.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MASTER_CONTEXT.md",
+      "size": 4912,
+      "extension": ".md",
+      "name": "MASTER_CONTEXT.md"
+    },
+    {
+      "path": "docs/PROJECT_MANIFESTS_README.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PROJECT_MANIFESTS_README.md",
+      "size": 10258,
+      "extension": ".md",
+      "name": "PROJECT_MANIFESTS_README.md"
+    },
+    {
+      "path": "docs/QUICK_START.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/QUICK_START.md",
+      "size": 4810,
+      "extension": ".md",
+      "name": "QUICK_START.md"
+    },
+    {
+      "path": "docs/SYSTEM_PROMPT.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT.md",
+      "size": 7116,
+      "extension": ".md",
+      "name": "SYSTEM_PROMPT.md"
+    },
+    {
+      "path": "docs/SYSTEM_PROMPT_DATABASE.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT_DATABASE.md",
+      "size": 7447,
+      "extension": ".md",
+      "name": "SYSTEM_PROMPT_DATABASE.md"
+    },
+    {
+      "path": "docs/architecture/database-access-pattern.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/architecture/database-access-pattern.md",
+      "size": 19475,
+      "extension": ".md",
+      "name": "database-access-pattern.md"
+    }
+  ],
+  "total_files": 7
+}
