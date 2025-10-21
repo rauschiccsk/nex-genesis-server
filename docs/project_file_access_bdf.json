@@ -1,0 +1,50 @@
+{
+  "project_name": "nex-genesis-server",
+  "description": "Btrieve Data Definition Files (.bdf) - NEX Genesis database schema",
+  "generated_at": "2025-10-21T21:42:17.987577",
+  "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
+  "files": [
+    {
+      "path": "database-schema/barcode.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/barcode.bdf",
+      "size": 532,
+      "extension": ".bdf",
+      "name": "barcode.bdf"
+    },
+    {
+      "path": "database-schema/gscat.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/gscat.bdf",
+      "size": 5068,
+      "extension": ".bdf",
+      "name": "gscat.bdf"
+    },
+    {
+      "path": "database-schema/mglst.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/mglst.bdf",
+      "size": 1783,
+      "extension": ".bdf",
+      "name": "mglst.bdf"
+    },
+    {
+      "path": "database-schema/pab.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/pab.bdf",
+      "size": 6644,
+      "extension": ".bdf",
+      "name": "pab.bdf"
+    },
+    {
+      "path": "database-schema/tsh.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsh.bdf",
+      "size": 9303,
+      "extension": ".bdf",
+      "name": "tsh.bdf"
+    },
+    {
+      "path": "database-schema/tsi.bdf",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsi.bdf",
+      "size": 4394,
+      "extension": ".bdf",
+      "name": "tsi.bdf"
+    }
+  ]
+}

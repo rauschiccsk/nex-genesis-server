@@ -1,203 +1,84 @@
-# ===================================
-# NEX Genesis Server - .gitignore
-# ===================================
-
-# Delphi 6 specific
-# ===================================
-
-# Compiled files
-*.dcu
-*.exe
-*.dll
-*.bpl
-*.dcp
-*.so
-*.apk
-*.drc
-*.map
-*.dres
-*.rsm
-*.tds
-*.dsk
-*.~*
-
-# Project specific
-__history/
-__recovery/
-*.local
-*.identcache
-*.stat
-*.tvsconfig
-*.dsk
-
-# Backup files
-*.bak
-*.ddp
-*.~*
-*~
-
-# Binary files
-*.res
-*.obj
-*.o
-*.lib
-*.a
-
-# IDE files
-*.cbproj.local
-*.groupproj.local
-*.cfg
-*.dproj.local
-*.dproj.user
-*.bdsproj.local
-
-# Debug/Release folders
-Win32/
-Win64/
-Debug/
-Release/
-__history/
-
-# ===================================
-# Python (for scripts)
-# ===================================
-
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Virtual environments
+# Virtual Environment
 venv/
 env/
 ENV/
-.venv
 
-# Python IDE
-.vscode/
+# PyCharm
 .idea/
-*.pyc
 
-# ===================================
-# Configuration & Secrets
-# ===================================
+# VS Code
+.vscode/
 
-# Config files with sensitive data
-config/*.ini
-!config/*.ini.template
+# Btrieve SDK (large binaries)
+btrieve-sdk/win64/*.dll
+btrieve-sdk/win32/*.dll
 
-config/github_credentials.yaml
-!config/github_credentials.yaml.template
+# External DLLs (Pervasive - tracked in repo)
+# external-dlls/*.dll are tracked intentionally
 
-# Environment variables
-.env
-*.env
-!.env.template
-
-# Database connection strings
-database_config.ini
-connection_strings.txt
-
-# ===================================
-# Generated Files
-# ===================================
-
-# Auto-generated documentation
-docs/generated/
-
-# Compiled output (will be in output/ folder)
-output/*.exe
-output/*.dll
-output/*.dcu
-
-# Log files
-*.log
-logs/
-*.lof
-
-# Test output
-tests/output/
-tests/results/
-
-# ===================================
-# OS specific
-# ===================================
-
-# Windows
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Linux
-*~
-.directory
-
-# ===================================
-# Temporary files
-# ===================================
-
-# Temp folders
-temp/
-tmp/
-*.tmp
-*.temp
-
-# ===================================
-# Third-party components
-# ===================================
-
-# Component packages (if not needed in repo)
-components/compiled/
-components/packages/*.dcu
-
-# ===================================
-# Project specific
-# ===================================
+# SWIG Generated Files
+python/*_wrap.cxx
+python/*_wrap.c
+python/*.pyd
+python/*.so
 
 # Build artifacts
-build/
-dist/
+*.lib
+*.obj
+*.o
 
-# Queue files (for n8n integration)
-configs/queue/
-!configs/queue/.gitkeep
+# Test outputs
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
 
-# Processed configs
-configs/processed/
-!configs/processed/.gitkeep
+# Logs
+*.log
+logs/
 
-# Examples output
-examples/output/
+# Config (local overrides)
+config/nex_genesis.local.ini
 
-# ===================================
-# Git specific
-# ===================================
+# NEX Genesis Database (if testing locally)
+*.btr
+*.dat
 
-*.orig
-*.rej
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# ===================================
-# Documentation build
-# ===================================
+# Backup files
+*~
+*.bak
+*.swp
+*.tmp
 
-# Sphinx
+# Documentation builds
 docs/_build/
-docs/_static/
-docs/_templates/
 
-# ===================================
-# Keep these folders
-# ===================================
-
-!docs/
-!delphi-sources/
-!output/.gitkeep
-!templates/
-!config/
-!scripts/
-!tests/
+# Project specific
+project_file_access_delphi.json

@@ -21,49 +21,140 @@ NEX Genesis vznikol v čase keď:
 
 ## 📁 Súbory v tomto adresári
 
-### GSCAT.bdf - Produktový katalóg
+### gscat.bdf - Produktový katalóg ⭐
 **Tabuľka:** GSCAT.btr  
 **Účel:** Evidencia produktov a tovaru
 
 **Kľúčové polia:**
 - `GsCode` - Kód tovaru (PK, autoinc)
 - `GsName` - Názov tovaru
-- `BarCode` - Čiarový kód (indexed)
 - `StkCode` - Skladový kód
+- `MgCode` - Kód tovarovej skupiny → MGLST
 - `VatPrc` - DPH %
 - `MsuName` - Merná jednotka
+- `Weight` - Hmotnosť
+- `CrtUser`, `CrtDate` - Audit info
 
 **Indexy:**
 - Index 0: GsCode (primary key)
-- Index 4: BarCode (unique)
-- Index ?: MgGs, FgCode, GsName, etc.
+- Index ?: MgCode (link na skupiny)
+- Index ?: StkCode
+
+**Poznámka:** Čiarové kódy sú v samostatnej tabuľke BARCODE
 
 ---
 
-### ISCAT.bdf - Skladové príjemky (Header)
-**Tabuľka:** ISCAT.btr  
-**Účel:** Hlavička skladových príjemiek
+### barcode.bdf - Čiarové kódy ⭐
+**Tabuľka:** BARCODE.btr  
+**Účel:** Čiarové kódy priradené k produktom
 
-**Kľúčové polia:** TBD  
-**Indexy:** TBD
+**Kľúčové polia:**
+- `GsCode` - Kód tovaru → GSCAT.GsCode
+- `BarCode` - Čiarový kód (PK, unique)
+- `CrtUser`, `CrtDate` - Audit info
+
+**Indexy:**
+- Index 0: BarCode (primary key, unique)
+- Index 1: GsCode (foreign key)
+
+**Vzťah:** Jeden produkt môže mať viacero čiarových kódov
 
 ---
 
-### ISDET.bdf - Položky skladových príjemiek
-**Tabuľka:** ISDET.btr  
-**Účel:** Položky skladových príjemiek
+### mglst.bdf - Tovarové skupiny
+**Tabuľka:** MGLST.btr  
+**Účel:** Evidencia tovarových skupín (Material Group List)
 
-**Kľúčové polia:** TBD  
-**Indexy:** TBD
+**Kľúčové polia:**
+- `MgCode` - Kód skupiny (PK)
+- `MgName` - Názov skupiny
+- `MgParent` - Nadradená skupina (hierarchia)
+
+**Indexy:**
+- Index 0: MgCode (primary key)
+
+**Použitie:** GSCAT.MgCode → MGLST.MgCode
 
 ---
 
-### CRDAT.bdf - Dodávatelia
-**Tabuľka:** CRDAT.btr  
-**Účel:** Evidencia dodávateľov
+### pab.bdf - Obchodní partneri
+**Tabuľka:** PAB.btr  
+**Účel:** Evidencia obchodných partnerov (dodávatelia, odberatelia)
 
-**Kľúčové polia:** TBD  
-**Indexy:** TBD
+**Kľúčové polia:**
+- `PaCode` - Kód partnera (PK)
+- `PaName` - Názov partnera
+- `PaICO` - IČO (indexed, unique)
+- `PaType` - Typ (1=dodávateľ, 2=odberateľ, 3=oboje)
+- `PaAddress` - Adresa
+- `PaCity` - Mesto
+
+**Indexy:**
+- Index 0: PaCode (primary key)
+- Index ?: PaICO (unique, pre vyhľadávanie)
+
+**Použitie:** Import ISDOC → vyhľadaj dodávateľa podľa IČO
+
+---
+
+### tsh.bdf - Dodacie listy (Header)
+**Tabuľka:** TSH.btr  
+**Účel:** Hlavičky dodávateľských dodacích listov
+
+**Kľúčové polia:**
+- `TshCode` - Kód dodacieho listu (PK, autoinc)
+- `TshNum` - Číslo dodacieho listu
+- `TshDate` - Dátum dodacieho listu
+- `PaCode` - Kód dodávateľa → PAB.PaCode
+- `TshState` - Stav (0=rozpracovaný, 1=dokončený)
+- `CrtUser`, `CrtDate` - Audit info
+
+**Indexy:**
+- Index 0: TshCode (primary key)
+- Index ?: TshNum (unique)
+- Index ?: PaCode (foreign key)
+- Index ?: TshDate (pre vyhľadávanie)
+
+---
+
+### tsi.bdf - Dodacie listy (Items)
+**Tabuľka:** TSI.btr  
+**Účel:** Položky dodávateľských dodacích listov
+
+**Kľúčové polia:**
+- `TshCode` - Kód dodacieho listu → TSH.TshCode
+- `TsiLine` - Číslo riadku
+- `GsCode` - Kód tovaru → GSCAT.GsCode
+- `Quantity` - Množstvo
+- `Price` - Jednotková cena
+- `TotalPrice` - Celková cena
+- `VatPrc` - DPH %
+
+**Indexy:**
+- Index 0: TshCode + TsiLine (composite PK)
+- Index ?: GsCode (foreign key)
+
+**Vzťah:** TSH (1) → TSI (N)
+
+---
+
+## 🔄 Vzťahy medzi tabuľkami
+
+```
+MGLST (Tovarové skupiny)
+  ↓
+GSCAT (Produkty) ← BARCODE (Čiarové kódy)
+  ↓                    ↓
+TSI (Položky) ← TSH (Hlavička) ← PAB (Partneri)
+```
+
+**Import workflow:**
+1. Nájdi dodávateľa v **PAB** podľa IČO
+2. Pre každú položku:
+   - Nájdi produkt v **BARCODE** podľa čiarového kódu
+   - Ak neexistuje: vytvor **GSCAT** + **BARCODE**
+3. Vytvor **TSH** (header)
+4. Vytvor **TSI** (items)
 
 ---
 
@@ -75,7 +166,10 @@ NEX Genesis vznikol v čase keď:
 # scripts/analyze_bdf.py
 def parse_bdf(filename):
     """Parse .bdf file and extract field definitions"""
-    # TBD - implementovať parser
+    with open(filename, 'r', encoding='cp1250') as f:
+        # Parse field definitions
+        # Parse indexes
+        # Parse table info
     pass
 ```
 
@@ -85,9 +179,9 @@ def parse_bdf(filename):
 # python/models/gscat_layout.py
 import struct
 
-# Z GSCAT.bdf
-GSCAT_RECORD_FORMAT = "<i30s15s15sB..."
-GSCAT_RECORD_LENGTH = 250
+# Z gscat.bdf
+GSCAT_RECORD_FORMAT = "<i30s15s..."  # TBD
+GSCAT_RECORD_LENGTH = 250  # TBD
 
 class GSCATRecord:
     def pack(self):
@@ -128,10 +222,10 @@ RecordLength=...
 ## 🎯 Použitie v projekte
 
 ### Phase 1: Setup (Aktuálne)
-- ✅ Pridať všetky .bdf súbory do tohto adresára
-- 🔄 Analyzovať .bdf formát
-- 🔄 Parsovať field definitions
-- 🔄 Zdokumentovať schému
+- [x] Pridať všetky .bdf súbory do tohto adresára
+- [ ] Analyzovať .bdf formát
+- [ ] Parsovať field definitions
+- [ ] Zdokumentovať schému
 
 ### Phase 2: Development
 - Generovať Python record layouts z .bdf
@@ -161,6 +255,49 @@ struct.pack("<i", value)  # Little-endian integer
 - **Index 0** - vždy primary key
 - **Indexy 1-N** - secondary indexes
 
+### Btrieve API
+Pre prístup k týmto tabuľkám použijeme:
+- **Btrieve 2 API** (Python wrapper)
+- **NEX Genesis wrappery** (referencia v delphi-sources/)
+
+---
+
+## 🔗 Project Manifest
+
+Všetky .bdf súbory sú zahrnuté v JSON manifeste:
+
+**Manifest URL:**
+```
+https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_bdf.json
+```
+
+**Použitie:**
+```python
+import requests
+
+# Načítaj manifest
+manifest_url = "https://raw.githubusercontent.com/.../project_file_access_bdf.json"
+manifest = requests.get(manifest_url).json()
+
+# Zobraz všetky .bdf súbory
+for file in manifest['files']:
+    print(f"{file['name']}: {file['raw_url']}")
+```
+
+**Regenerovanie manifestu:**
+```bash
+cd scripts
+python generate_project_access.py
+```
+
+---
+
+## 🔗 Súvisiace dokumenty
+
+- **[database-schema.md](../docs/architecture/database-schema.md)** - Kompletná dokumentácia schémy
+- **[FULL_PROJECT_CONTEXT.md](../docs/FULL_PROJECT_CONTEXT.md)** - Kontext projektu
+- **[Delphi Sources](../delphi-sources/)** - NEX Genesis Btrieve wrappery (referencia)
+
 ---
 
 ## 📝 TODOs
@@ -173,14 +310,6 @@ struct.pack("<i", value)  # Little-endian integer
 
 ---
 
-## 🔗 Súvisiace dokumenty
-
-- **[database-schema.md](../docs/architecture/database-schema.md)** - Kompletná dokumentácia schémy
-- **[FULL_PROJECT_CONTEXT.md](../docs/FULL_PROJECT_CONTEXT.md)** - Kontext projektu
-- **[BtrTable.pas](../delphi-sources/BtrTable.pas)** - NEX Genesis Btrieve wrapper (referencia)
-
----
-
 **Last Updated:** 2025-10-21  
-**Version:** 0.1.0  
-**Status:** 🚧 Initial Setup
+**Version:** 0.2.0  
+**Status:** 🚧 Initial Setup - Real NEX Genesis Schema
