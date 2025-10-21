@@ -705,7 +705,7 @@ nex-genesis-server/
 Vytvoriť Python wrapper pre prístup k Btrieve databázam.
 
 **Kroky:**
-- [ ] Install SWIG (Simplified Wrapper and Interface Generator)
+- [✅] Install SWIG (Simplified Wrapper and Interface Generator)
 - [ ] Download Pervasive PSQL v11 SDK
 - [ ] Setup C++ compiler (Visual Studio Build Tools)
 - [ ] Build Python Btrieve wrapper (ctypes/SWIG)
