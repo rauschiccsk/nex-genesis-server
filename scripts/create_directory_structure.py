@@ -27,7 +27,10 @@ DIRECTORIES = [
     # Source codes
     "delphi-sources",
     "delphi-sources/Common",
-    "delphi-sources/Database",
+    "delphi-sources/DataModules",
+    "delphi-sources/DataTables",
+    "delphi-sources/Libraries",
+    "delphi-sources/Packages",
     "delphi-sources/Business",
     "delphi-sources/UI",
 

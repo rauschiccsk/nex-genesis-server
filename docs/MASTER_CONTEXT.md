@@ -59,6 +59,8 @@ HTTP Server: Indy / Synapse
 XML Parser: MSXML / OmniXML
 Konfigurácia: INI files
 Python Tools: Scripts pre analýzu
+IDE Delphi: Delphi 6 Professional
+IDE Python: PyCharm (Git integrated)
 ```
 
 ---

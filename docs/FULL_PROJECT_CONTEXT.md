@@ -119,7 +119,9 @@ HTTP Server: Indy / Synapse
 XML Parser: MSXML / OmniXML
 Konfigurácia: INI súbory
 Testovanie: DUnit (optional)
-IDE: Delphi 6 Professional
+IDE Delphi: Delphi 6 Professional
+IDE Python: PyCharm
+Git: PyCharm integrated Git
 ```
 
 ### Závislos ti
@@ -215,7 +217,10 @@ c:\Development\nex-genesis-server/
 │
 ├── delphi-sources/                         # NEX Genesis source kódy
 │   ├── Common/
-│   ├── Database/
+│   ├── DataModules/
+│   ├── DataTables/
+│   ├── Libraries/
+│   ├── Packages/
 │   ├── Business/
 │   └── UI/
 │
@@ -619,6 +624,12 @@ MaxFileSize=10MB
 - ✅ Test pred commitom
 - ✅ Pull pred push
 - ✅ Feature branches pre nové features
+
+### Development Environment:
+- **IDE:** PyCharm (pre Python scripty)
+- **Delphi IDE:** Delphi 6 Professional
+- **Git:** Commit a push z PyCharm
+- **Commit messages:** Claude poskytuje len čistý text message (bez `git commit -m`), užívateľ ho skopíruje do PyCharm
 
 ### Kódovacie štandardy:
 - ✅ Používaj NEX Genesis naming conventions

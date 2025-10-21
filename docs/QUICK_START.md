@@ -93,8 +93,10 @@ cd nex-genesis-server
 
 ### 2. Setup Python environment
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+# V PyCharm:
+# 1. Otvor projekt: c:\Development\nex-genesis-server
+# 2. Vytvor virtual environment (Python 3.11+)
+# 3. Install dependencies:
 pip install -r requirements.txt
 ```
 
@@ -111,10 +113,32 @@ python scripts\generate_project_access.py
 
 ### 5. Commit & Push
 ```bash
-git add .
-git commit -m "docs: Add NEX Genesis sources and manifest"
-git push
+# V PyCharm Git window:
+# 1. Stage files (Ctrl+K)
+# 2. Skopíruj commit message od Claude
+# 3. Commit & Push
 ```
+
+---
+
+## 💻 PyCharm Workflow
+
+### Commit & Push v PyCharm
+1. **Ctrl+K** - Otvor Commit window
+2. **Stage files** - Vyber zmenené súbory
+3. **Skopíruj commit message** od Claude (len čistý text)
+4. **Commit & Push** - Jedno tlačidlo
+
+### Git Operations
+- **Pull:** Ctrl+T
+- **Push:** Ctrl+Shift+K  
+- **History:** Alt+9
+- **Branches:** V pravom dolnom rohu
+
+### Python Scripts
+- **Run script:** Shift+F10
+- **Debug:** Shift+F9
+- **Terminal:** Alt+F12
 
 ---
 
@@ -171,14 +195,20 @@ Skontroluj vygenerovaný HTTPServer.pas súbor
 
 ## 📝 Po dokončení práce
 
-**Vždy:**
-1. ✅ Commit zmeny
-2. ✅ Update FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)
-3. ✅ Refresh project_file_access.json (ak vznikli nové súbory)
-4. ✅ Push na GitHub
+**V PyCharm:**
+1. ✅ Stage zmenené súbory (Ctrl+K)
+2. ✅ Skopíruj commit message od Claude
+3. ✅ Commit & Push (jedna akcia)
+
+**Manuálne:**
+1. ✅ Update FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)
+2. ✅ Refresh project_file_access.json (ak vznikli nové súbory)
 
 **Pripomienka od Claude:**
 ```
+Commit message:
+<text od Claude>
+
 ⚠️ Nezabudni refreshnúť project_file_access.json
 ⚠️ Nezabudni updatnúť FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)
 ```

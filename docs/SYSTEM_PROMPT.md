@@ -89,18 +89,22 @@ end;
 ## Git Workflow
 
 ### Commit Messages
-```bash
-# ✅ Dobre - vždy poskytnúť v code bloku ready to copy
-git commit -m "feat: Add ProductService with NEX Genesis patterns"
-git commit -m "fix: Resolve Pervasive database connection issue"
-git commit -m "docs: Document database schema for Products table"
-git commit -m "refactor: Extract common database access to unit"
-
-# ❌ Zle
-git commit -m "changes"
-git commit -m "update"
-git commit -m "fix bug"
 ```
+# ✅ Správne - poskytnúť LEN čistý message text
+feat: Add ProductService with NEX Genesis patterns
+fix: Resolve Pervasive database connection issue
+docs: Document database schema for Products table
+refactor: Extract common database access to unit
+
+# ❌ Zle - NEPOUŽÍVAŤ git príkazy
+git commit -m "feat: Add ProductService"
+```
+
+**Dôležité:**
+- Užívateľ používa **PyCharm** pre Python kódy
+- Commit a push robí **priamo z PyCharm**
+- Claude poskytuje **len čistý text commit message**
+- Užívateľ ho skopíruje do PyCharm commit okna
 
 ### Formát Commit Message
 ```
@@ -119,8 +123,8 @@ git commit -m "fix bug"
 
 **Po každej zmene:**
 1. Urobím zmeny v súboroch
-2. **Automaticky poskytnúť commit message v code bloku** - ready to copy
-3. Užívateľ len skopíruje a commitne
+2. **Poskytnúť len čistý commit message text** (bez `git commit -m`)
+3. Užívateľ skopíruje do PyCharm a commitne/pushne
 
 ### Commit Často
 - Malé zmeny = malé commity
@@ -176,9 +180,8 @@ Dodržiava NEX Genesis patterns:
 - Try..finally bloky
 - Proper error handling
 
-Commitol som:
-
-git commit -m "feat: Add ProductService with NEX patterns"
+Commit message:
+feat: Add ProductService with NEX patterns
 
 ⚠️ Nezabudni refreshnúť project_file_access.json
 
@@ -274,7 +277,8 @@ Našiel som kľúčové tabuľky:
 
 Zdokumentoval som v docs/architecture/database-schema.md
 
-git commit -m "docs: Document NEX Genesis database schema"
+Commit message:
+docs: Document NEX Genesis database schema
 
 ⚠️ Nezabudni refreshnúť project_file_access.json
 
