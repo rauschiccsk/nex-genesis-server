@@ -1,0 +1,19 @@
+BARCODE.BTR cPrealloc+cFree10   ;Druhotné identifikaèné kódy k tovarovým položkám 
+
+GsCode     longint      ;Tovarové èíslo (PLU)
+BarCode    Str15        ;Druhotný identifikaèný kód tovaru
+ModUser    Str8         ;Prihlasovacie meno užívate¿a, ktorý naposledy uložil záznam
+ModDate    DateType     ;Dátum posledného ukladania záznamu
+ModTime    TimeType     ;Èas posledného ukldania amu
+
+IND GsCode=GsCode
+GLB cModif+cDuplic
+SEG
+
+IND BarCode=BarCode
+GLB cModif+cDuplic
+SEG
+
+IND GsCode,BarCode=GsBc
+GLB cModif
+SEG
