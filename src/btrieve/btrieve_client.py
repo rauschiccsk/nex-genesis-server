@@ -1,4 +1,8 @@
 # src/btrieve/btrieve_client.py
+"""
+Python wrapper pre Pervasive Btrieve API (32-bit)
+FIXED: Correct BTRCALL signature based on Delphi btrapi32.pas
+"""
 import ctypes
 import os
 import struct
@@ -64,7 +68,7 @@ class BtrieveClient:
         self._load_dll()
 
     def _load_dll(self) -> None:
-        """Načítaj Btrieve DLL a nastav BTRCALL funkciu"""
+        """Načítaj Btrieve DLL a nastav BTRCALL funkciu - FIXED SIGNATURE"""
 
         # DLL priority list
         dll_names = [
@@ -112,17 +116,17 @@ class BtrieveClient:
                         except AttributeError:
                             continue
 
-                    # Configure BTRCALL signature
+                    # Configure BTRCALL signature - FIXED according to btrapi32.pas!
                     self.btrcall.argtypes = [
-                        ctypes.c_uint16,  # operation
-                        ctypes.POINTER(ctypes.c_char),  # posBlock
-                        ctypes.POINTER(ctypes.c_char),  # dataBuffer
-                        ctypes.POINTER(ctypes.c_uint16),  # dataLen
-                        ctypes.POINTER(ctypes.c_char),  # keyBuffer
-                        ctypes.c_uint8,  # keyLen
-                        ctypes.c_int8  # keyNum
+                        ctypes.c_uint16,  # operation (WORD)
+                        ctypes.POINTER(ctypes.c_char),  # posBlock (VAR)
+                        ctypes.POINTER(ctypes.c_char),  # dataBuffer (VAR)
+                        ctypes.POINTER(ctypes.c_uint32),  # dataLen (longInt = 4 bytes!) ← FIXED!
+                        ctypes.POINTER(ctypes.c_char),  # keyBuffer (VAR)
+                        ctypes.c_uint8,  # keyLen (BYTE)
+                        ctypes.c_uint8  # keyNum (BYTE, unsigned!) ← FIXED!
                     ]
-                    self.btrcall.restype = ctypes.c_int16  # Status code
+                    self.btrcall.restype = ctypes.c_int16  # Status code (SMALLINT)
 
                     print(f"✅ Loaded Btrieve DLL: {dll_name} from {search_path}")
                     return
@@ -139,11 +143,16 @@ class BtrieveClient:
 
     def open_file(self, filename: str, owner_name: str = "", mode: int = -2) -> Tuple[int, bytes]:
         """
-        Otvor Btrieve súbor
+        Otvor Btrieve súbor - FIXED syntax podľa Delphi BtrOpen
+
+        IMPORTANT: Based on Delphi BtrOpen (BtrHand.pas):
+        - Filename goes in KEY_BUFFER (not data_buffer!)
+        - Data_buffer is EMPTY (dataLen = 0!)
+        - keyLen = 255 (max key length)
 
         Args:
             filename: Cesta k .dat/.BTR súboru
-            owner_name: Owner name (optional)
+            owner_name: Owner name (optional, not used)
             mode: Open mode
                   0 = Normal
                  -1 = Accelerated
@@ -156,27 +165,26 @@ class BtrieveClient:
         # Position block (128 bytes)
         pos_block = ctypes.create_string_buffer(128)
 
-        # Data buffer (filename + null terminator)
+        # Data buffer is EMPTY for OPEN! (according to Delphi BtrOpen)
+        data_buffer = ctypes.create_string_buffer(256)
+        data_len = ctypes.c_uint32(0)  # ZERO! (and longInt = 4 bytes)
+
+        # FILENAME goes into KEY_BUFFER! (not data_buffer!)
         filename_bytes = filename.encode('ascii') + b'\x00'
-        data_buffer = ctypes.create_string_buffer(filename_bytes)
-        data_len = ctypes.c_uint16(len(filename_bytes))
+        key_buffer = ctypes.create_string_buffer(filename_bytes)
 
-        # Key buffer (owner name or empty)
-        if owner_name:
-            key_buffer = ctypes.create_string_buffer(owner_name.encode('ascii') + b'\x00')
-        else:
-            key_buffer = ctypes.create_string_buffer(1)
+        # keyLen = 255 (max key length, as in BTRV wrapper)
+        key_len = 255
 
-        # Call BTRCALL
-        # NOTE: keyNum is used as open mode for B_OPEN operation!
+        # Call BTRCALL with CORRECT parameters
         status = self.btrcall(
             self.B_OPEN,
             pos_block,
-            data_buffer,
-            ctypes.byref(data_len),
-            key_buffer,
-            0,  # keyLen (not used for OPEN)
-            mode  # keyNum = open mode (-2 = read-only)
+            data_buffer,  # EMPTY!
+            ctypes.byref(data_len),  # 0!
+            key_buffer,  # FILENAME!
+            key_len,  # 255!
+            mode & 0xFF  # mode as unsigned BYTE
         )
 
         return status, pos_block.raw
@@ -193,7 +201,7 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(1)
-        data_len = ctypes.c_uint16(0)
+        data_len = ctypes.c_uint32(0)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(1)
 
         status = self.btrcall(
@@ -202,8 +210,8 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
-            0
+            0,  # keyLen
+            0  # keyNum
         )
 
         return status
@@ -221,7 +229,7 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(4096)  # Max record size
-        data_len = ctypes.c_uint16(4096)
+        data_len = ctypes.c_uint32(4096)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(255)
 
         status = self.btrcall(
@@ -230,8 +238,8 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
-            key_num
+            255,  # keyLen
+            key_num & 0xFF
         )
 
         if status == self.STATUS_SUCCESS:
@@ -251,7 +259,7 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(4096)
-        data_len = ctypes.c_uint16(4096)
+        data_len = ctypes.c_uint32(4096)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(255)
 
         status = self.btrcall(
@@ -260,7 +268,7 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
+            255,  # keyLen
             0
         )
 
@@ -289,6 +297,8 @@ class BtrieveClient:
             6: "INVALID_KEY_NUMBER",
             7: "DIFFERENT_KEY_NUMBER",
             8: "INVALID_POSITIONING",
+            11: "INVALID_FILENAME",
+            12: "FILE_NOT_OPEN",
         }
         return messages.get(status_code, f"UNKNOWN_ERROR_{status_code}")
 
@@ -299,7 +309,7 @@ def open_btrieve_file(filename: str, config_path: Optional[str] = None) -> Tuple
     Helper funkcia na otvorenie Btrieve súboru
 
     Args:
-        filename: Cesta k .dat súboru
+        filename: Cesta k .BTR súboru
         config_path: Cesta ku config súboru
 
     Returns:

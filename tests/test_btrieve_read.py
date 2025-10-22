@@ -1,7 +1,6 @@
 """
-Test 3: Btrieve Data Reading
+Test 3: Btrieve Data Reading - FIXED VERSION
 Tests reading actual data from Btrieve tables
-REQUIRES DATABASE ACCESS WITH DATA
 """
 
 import sys
@@ -10,60 +9,78 @@ import os
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.btrieve.btrieve_client import BtrieveClient, BtrStatus
-from src.utils.config import get_config
+from src.btrieve.btrieve_client import BtrieveClient
+from src.utils.config import load_config
 
 
 def test_gscat_read_first():
     """Test 3.1: Read first GSCAT record"""
-    print("\n🧪 TEST 3.1: Read First GSCAT Record")
+    print("\n" + "=" * 60)
+    print("🧪 TEST 3.1: Read First GSCAT Record")
     print("=" * 60)
 
     try:
-        config = get_config()
-        gscat_path = config.get_table_path('gscat')
+        # Load config
+        config = load_config('config/database.yaml')
+        gscat_path = config['nex_genesis']['tables']['gscat']
 
         if not os.path.exists(gscat_path):
             print(f"⚠️  File not found: {gscat_path}")
             return False
 
+        print(f"📁 File: {gscat_path}")
+
+        # Initialize client
         client = BtrieveClient()
 
         # Open file
-        status = client.open_table('gscat')
-        if status != BtrStatus.SUCCESS:
-            print(f"❌ Failed to open GSCAT: status={status}")
+        print("🔓 Opening file...")
+        status, pos_block = client.open_file(gscat_path, mode=-2)
+
+        if status != 0:
+            print(f"❌ Failed to open GSCAT: status={status} ({client.get_status_message(status)})")
             return False
 
-        print("✅ File opened")
+        print("✅ File opened successfully!")
 
         # Read first record
-        status, data = client.get_first()
+        print("📖 Reading first record...")
+        status, data = client.get_first(pos_block, key_num=0)
 
-        if status == BtrStatus.SUCCESS:
+        if status == 0:
             print(f"✅ First record read successfully!")
             print(f"   Record size: {len(data)} bytes")
-            print(f"   First 100 bytes: {data[:100]}")
-            print(f"   Hex: {data[:100].hex()}")
+            print(f"   First 100 bytes (hex): {data[:100].hex()}")
 
-            # Try to decode some fields (approximate)
+            # Try to decode some fields based on gscat.bdf
             try:
-                # First 4 bytes might be GsCode (int)
-                gs_code = int.from_bytes(data[0:4], byteorder='little')
-                print(f"\n   Possible GsCode: {gs_code}")
-            except:
-                pass
+                # GsCode (position 1, UNSIGNED 4 bytes)
+                gs_code = int.from_bytes(data[0:4], byteorder='little', signed=False)
+                print(f"\n📊 Decoded fields:")
+                print(f"   GsCode: {gs_code}")
+
+                # Try to find text fields (look for printable characters)
+                print(f"\n   Raw data sample:")
+                print(f"   Bytes 0-50:  {data[0:50]}")
+                print(f"   Bytes 50-100: {data[50:100]}")
+
+            except Exception as e:
+                print(f"   (Could not decode fields: {e})")
 
             result = True
-        elif status == BtrStatus.END_OF_FILE:
+        elif status == 9:  # End of file
             print("⚠️  Table is empty (no records)")
-            result = True  # OK, just empty
+            result = True
         else:
-            print(f"❌ Failed to read: status={status}")
+            print(f"❌ Failed to read: status={status} ({client.get_status_message(status)})")
             result = False
 
         # Close
-        client.close_file()
+        print("🔒 Closing file...")
+        close_status = client.close_file(pos_block)
+        if close_status == 0:
+            print("✅ File closed successfully")
+
         return result
 
     except Exception as e:
@@ -75,12 +92,13 @@ def test_gscat_read_first():
 
 def test_gscat_read_multiple():
     """Test 3.2: Read multiple GSCAT records"""
-    print("\n🧪 TEST 3.2: Read Multiple GSCAT Records")
+    print("\n" + "=" * 60)
+    print("🧪 TEST 3.2: Read Multiple GSCAT Records")
     print("=" * 60)
 
     try:
-        config = get_config()
-        gscat_path = config.get_table_path('gscat')
+        config = load_config('config/database.yaml')
+        gscat_path = config['nex_genesis']['tables']['gscat']
 
         if not os.path.exists(gscat_path):
             print(f"⚠️  File not found: {gscat_path}")
@@ -89,36 +107,36 @@ def test_gscat_read_multiple():
         client = BtrieveClient()
 
         # Open file
-        status = client.open_table('gscat')
-        if status != BtrStatus.SUCCESS:
+        status, pos_block = client.open_file(gscat_path, mode=-2)
+        if status != 0:
             print(f"❌ Failed to open GSCAT: status={status}")
             return False
 
         print("✅ File opened")
 
         # Read first record
-        status, data = client.get_first()
-        if status != BtrStatus.SUCCESS:
-            if status == BtrStatus.END_OF_FILE:
+        status, data = client.get_first(pos_block)
+        if status != 0:
+            if status == 9:
                 print("⚠️  Table is empty")
-                client.close_file()
+                client.close_file(pos_block)
                 return True
             else:
                 print(f"❌ Failed to read first: status={status}")
-                client.close_file()
+                client.close_file(pos_block)
                 return False
 
         record_count = 1
         print(f"✅ Record 1: {len(data)} bytes")
 
         # Try to read next few records
-        max_records = 5
+        max_records = 10
         while record_count < max_records:
-            status, data = client.get_next()
-            if status == BtrStatus.SUCCESS:
+            status, data = client.get_next(pos_block)
+            if status == 0:
                 record_count += 1
                 print(f"✅ Record {record_count}: {len(data)} bytes")
-            elif status == BtrStatus.END_OF_FILE:
+            elif status == 9:  # End of file
                 print(f"\n✅ Reached end of file after {record_count} records")
                 break
             else:
@@ -128,7 +146,7 @@ def test_gscat_read_multiple():
         print(f"\n📊 Total records read: {record_count}")
 
         # Close
-        client.close_file()
+        client.close_file(pos_block)
         return record_count > 0
 
     except Exception as e:
@@ -140,12 +158,13 @@ def test_gscat_read_multiple():
 
 def test_barcode_read():
     """Test 3.3: Read BARCODE records"""
-    print("\n🧪 TEST 3.3: Read BARCODE Records")
+    print("\n" + "=" * 60)
+    print("🧪 TEST 3.3: Read BARCODE Records")
     print("=" * 60)
 
     try:
-        config = get_config()
-        barcode_path = config.get_table_path('barcode')
+        config = load_config('config/database.yaml')
+        barcode_path = config['nex_genesis']['tables']['barcode']
 
         if not os.path.exists(barcode_path):
             print(f"⚠️  File not found: {barcode_path}")
@@ -154,22 +173,22 @@ def test_barcode_read():
         client = BtrieveClient()
 
         # Open file
-        status = client.open_table('barcode')
-        if status != BtrStatus.SUCCESS:
+        status, pos_block = client.open_file(barcode_path, mode=-2)
+        if status != 0:
             print(f"❌ Failed to open BARCODE: status={status}")
             return False
 
         print("✅ File opened")
 
         # Read first record
-        status, data = client.get_first()
+        status, data = client.get_first(pos_block)
 
-        if status == BtrStatus.SUCCESS:
+        if status == 0:
             print(f"✅ First record read!")
             print(f"   Record size: {len(data)} bytes")
-            print(f"   First 50 bytes: {data[:50]}")
+            print(f"   First 50 bytes: {data[:50].hex()}")
             result = True
-        elif status == BtrStatus.END_OF_FILE:
+        elif status == 9:
             print("⚠️  Table is empty")
             result = True
         else:
@@ -177,7 +196,7 @@ def test_barcode_read():
             result = False
 
         # Close
-        client.close_file()
+        client.close_file(pos_block)
         return result
 
     except Exception as e:
@@ -189,12 +208,13 @@ def test_barcode_read():
 
 def test_pab_read():
     """Test 3.4: Read PAB records"""
-    print("\n🧪 TEST 3.4: Read PAB Records")
+    print("\n" + "=" * 60)
+    print("🧪 TEST 3.4: Read PAB Records")
     print("=" * 60)
 
     try:
-        config = get_config()
-        pab_path = config.get_table_path('pab')
+        config = load_config('config/database.yaml')
+        pab_path = config['nex_genesis']['tables']['pab']
 
         if not os.path.exists(pab_path):
             print(f"⚠️  File not found: {pab_path}")
@@ -203,22 +223,22 @@ def test_pab_read():
         client = BtrieveClient()
 
         # Open file
-        status = client.open_table('pab')
-        if status != BtrStatus.SUCCESS:
+        status, pos_block = client.open_file(pab_path, mode=-2)
+        if status != 0:
             print(f"❌ Failed to open PAB: status={status}")
             return False
 
         print("✅ File opened")
 
         # Read first record
-        status, data = client.get_first()
+        status, data = client.get_first(pos_block)
 
-        if status == BtrStatus.SUCCESS:
+        if status == 0:
             print(f"✅ First record read!")
             print(f"   Record size: {len(data)} bytes")
-            print(f"   First 50 bytes: {data[:50]}")
+            print(f"   First 50 bytes: {data[:50].hex()}")
             result = True
-        elif status == BtrStatus.END_OF_FILE:
+        elif status == 9:
             print("⚠️  Table is empty")
             result = True
         else:
@@ -226,7 +246,7 @@ def test_pab_read():
             result = False
 
         # Close
-        client.close_file()
+        client.close_file(pos_block)
         return result
 
     except Exception as e:

@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Unified project file access manifest - all categories in one file",
-  "generated_at": "2025-10-22T21:59:35.630199",
+  "generated_at": "2025-10-22T23:09:59.666345",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "categories": [
     "documentation",
@@ -18,13 +18,13 @@
     "python_sources": "Python source code"
   },
   "statistics": {
-    "total_files": 47,
+    "total_files": 49,
     "by_category": {
-      "documentation": 21,
+      "documentation": 22,
       "database_schemas": 6,
       "delphi_sources": 7,
       "configuration": 2,
-      "python_sources": 11
+      "python_sources": 12
     }
   },
   "files": [
@@ -159,7 +159,7 @@
     {
       "path": "docs/CHANGELOG.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/CHANGELOG.md",
-      "size": 6314,
+      "size": 8757,
       "extension": ".md",
       "name": "CHANGELOG.md",
       "category": "documentation"
@@ -178,6 +178,14 @@
       "size": 34443,
       "extension": ".md",
       "name": "FULL_PROJECT_CONTEXT.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/INIT_CONTEXT.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md",
+      "size": 6256,
+      "extension": ".md",
+      "name": "INIT_CONTEXT.md",
       "category": "documentation"
     },
     {
@@ -303,7 +311,7 @@
     {
       "path": "docs/sessions/2025-10-22_session.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-22_session.md",
-      "size": 12938,
+      "size": 10222,
       "extension": ".md",
       "name": "2025-10-22_session.md",
       "category": "documentation"
@@ -359,7 +367,7 @@
     {
       "path": "src/btrieve/btrieve_client.py",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/btrieve/btrieve_client.py",
-      "size": 9669,
+      "size": 10358,
       "extension": ".py",
       "name": "btrieve_client.py",
       "category": "python_sources"
@@ -399,9 +407,17 @@
     {
       "path": "tests/test_btrieve_read.py",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_read.py",
-      "size": 8149,
+      "size": 9066,
       "extension": ".py",
       "name": "test_btrieve_read.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "tests/test_file_opening_variants.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_file_opening_variants.py",
+      "size": 9064,
+      "extension": ".py",
+      "name": "test_file_opening_variants.py",
       "category": "python_sources"
     }
   ]
