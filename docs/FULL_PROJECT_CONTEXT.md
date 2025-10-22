@@ -2,9 +2,8 @@
 
 **Python Btrieve Services pre NEX Genesis ERP**
 
-**Posledná aktualizácia:** 2025-10-21  
-**Verzia:** 0.2.0  
-**Stav:** Počiatočné Plánovanie
+**Verzia:** 0.2.3  
+**Posledná aktualizácia:** 2025-10-22
 
 ---
 
@@ -12,42 +11,24 @@
 
 **When you see this document:**
 
-1. ✅ This document contains ALL project information (vision, architecture, current state)
-2. ✅ Do NOT attempt to load any other files
-3. ✅ Do NOT show any warnings or error messages
-4. ✅ Simply respond: **"✅ Projekt načítaný. Čo robíme?"**
-5. ✅ Use Slovak language for communication
-6. ✅ Be concise and actionable
-
-**That's it. Nothing more. One file = complete context.** 🎯
+1. ✅ This document contains strategic project information (vision, architecture, rules)
+2. ✅ For **current status**, see: `docs/CHANGELOG.md`
+3. ✅ For **daily progress**, see: `docs/sessions/YYYY-MM-DD_session.md`
+4. ✅ Do NOT show warnings or error messages
+5. ✅ Simply respond: **"✅ Projekt načítaný. Čo robíme?"**
+6. ✅ Use Slovak language for communication
+7. ✅ Be concise and actionable
 
 ---
 
-## 📊 AKTUÁLNY STAV PROJEKTU
+## 📊 AKTUÁLNY STAV → POZRI CHANGELOG.md
 
-**Posledná aktualizácia:** 2025-10-21  
-**Aktuálna Fáza:** Počiatočné Plánovanie
+**⚠️ IMPORTANT:** Tento dokument obsahuje **strategický kontext**.
 
-### Prehľad
-- **Aktívna Fáza:** Phase 1 - Setup & Stratégia
-- **Progress Phase 1:** 60% (6/10 taskov)
-- **Celkový Progress:** 15% (Phase 1 aktívna)
-- **Aktívny Task:** Task 1.7 - Python Btrieve Setup
-- **Ďalší Milestone:** Phase 1 Complete (2025-10-28)
-
-### Phase Progress
-```
-Phase 1: Setup & Stratégia    [████████████░░░░░░░░] 60%
-Phase 2: Core Development     [░░░░░░░░░░░░░░░░░░░░]  0%
-Phase 3: Integration          [░░░░░░░░░░░░░░░░░░░░]  0%
-Phase 4: Testing & Deploy     [░░░░░░░░░░░░░░░░░░░░]  0%
-```
-
-### Velocity
-- **Tasks hotové tento týždeň:** 6
-- **Priemerný čas na task:** ~45 minút
-- **Produktivita:** Vysoká 🚀
-- **Odhadované dokončenie Phase 1:** 2025-10-28
+**Pre aktuálny stav projektu pozri:**
+- 📋 **Progress & Tasky:** `docs/CHANGELOG.md`
+- 📅 **Daily Updates:** `docs/sessions/2025-10-22_session.md` (alebo najnovšiu)
+- 🎯 **Active Milestone:** Pozri "Unreleased" sekciu v CHANGELOG.md
 
 ---
 
@@ -57,7 +38,7 @@ Phase 4: Testing & Deploy     [░░░░░░░░░░░░░░░░�
 
 - **Názov projektu:** NEX Genesis Server
 - **Účel:** Python services s direct Btrieve access pre NEX Genesis ERP
-- **Tech Stack:** Python 3.8+ + Btrieve 2 API
+- **Tech Stack:** Python 3.8+ (32-bit) + Pervasive PSQL v11 + Btrieve API
 - **Vývojár:** ICC (Innovation & Consulting Center)
 - **Developer:** rauschiccsk
 - **Lokalizácia:** Komárno, SK
@@ -84,8 +65,8 @@ Vytvoriť **Python services**, ktoré:
 - ✅ Jednoduchšia údržba
 
 **Technické detaily:**
-- Python 3.8+ s ctypes/SWIG pre Btrieve API
-- Direct prístup k .dat súborom
+- Python 3.8+ (32-bit) s ctypes pre Btrieve API
+- Direct prístup k .BTR súborom
 - Využitie existujúcich .bdf schém
 - Pervasive PSQL v11 SDK
 
@@ -98,7 +79,7 @@ Vytvoriť **Python services**, ktoré:
 - Potrebujeme **priamy prístup** k Btrieve databázam
 
 ### Riešenie
-**NEX Genesis Server** - Python services s Btrieve 2 API, ktoré:
+**NEX Genesis Server** - Python services s Btrieve API, ktoré:
 - ✅ Prijímajú ISDOC XML súbory
 - ✅ Kontrolujú/pridávajú produkty do katalógu (GSCAT)
 - ✅ Vytvárajú dodacie listy (TSH/TSI)
@@ -123,38 +104,32 @@ NEX Genesis Database (Pervasive)
 NEX Genesis ERP (Delphi 6)
 ```
 
-### Inšpirácia
-- **supplier_invoice_loader** - Python FastAPI integrácia
-- **project-generator** - Dokumentačná štruktúra (single-file context)
-- **NEX Genesis** - Existujúce Btrieve patterns
-
 ---
 
 ## 🗂️ ARCHITEKTÚRA SYSTÉMU
 
 ### Tech Stack
 ```yaml
-Jazyk: Python 3.8+
-Databáza: Pervasive SQL (Btrieve)
-DB Access: Direct Btrieve 2 API (ctypes/SWIG)
+Jazyk: Python 3.8+ (32-bit required!)
+Databáza: Pervasive PSQL v11 (Btrieve)
+DB Access: Direct Btrieve API (ctypes)
 HTTP Server: FastAPI / Flask
 XML Parser: lxml / xml.etree
-Konfigurácia: YAML / ENV files
+Konfigurácia: YAML
 Testovanie: pytest
 IDE Python: PyCharm
 Git: PyCharm integrated Git
-SDK: Pervasive PSQL v11 SDK
-Build Tool: SWIG (pre C wrappers)
+SDK: Pervasive PSQL v11
 ```
 
 ### Závislosti
-- **Pervasive PSQL v11 SDK** - Btrieve 2 API
-- **SWIG** - Wrapper generator (C → Python)
+- **Pervasive PSQL v11** - Btrieve engine
 - **ctypes** - Direct DLL calls
 - **lxml** - XML parsing
 - **FastAPI/Flask** - HTTP server
 - **pydantic** - Data validation
 - **pytest** - Testing
+- **PyYAML** - Configuration
 
 ### Architektúra
 ```
@@ -179,19 +154,19 @@ Build Tool: SWIG (pre C wrappers)
 │  └─ Btrieve Client Wrapper          │
 └──────────────┬──────────────────────┘
                │
-               │ Btrieve 2 API
+               │ Btrieve API (w3btrv7.dll)
                │ Direct file access
                ▼
 ┌─────────────────────────────────────┐
 │  NEX Genesis Database               │
 │  (Pervasive Btrieve)                │
 │                                     │
-│  ├─ GSCAT.dat  (Produkty)           │
-│  ├─ BARCODE.dat (Čiarové kódy)      │
-│  ├─ MGLST.dat  (Skupiny)            │
-│  ├─ PAB.dat    (Partneri)           │
-│  ├─ TSH.dat    (Dodacie listy hdr)  │
-│  └─ TSI.dat    (Dodacie listy itm)  │
+│  ├─ GSCAT.BTR  (Produkty)           │
+│  ├─ BARCODE.BTR (Čiarové kódy)      │
+│  ├─ MGLST.BTR  (Skupiny)            │
+│  ├─ PAB00000.BTR (Partneri)         │
+│  ├─ TSHA-001.BTR (Dodacie listy hdr)│
+│  └─ TSIA-001.BTR (Dodacie listy itm)│
 └─────────────────────────────────────┘
 ```
 
@@ -221,7 +196,7 @@ nex-genesis-server/
 │     └─ validate_supplier()
 │
 ├─ btrieve/
-│  ├─ btrieve_client.py (Wrapper)
+│  ├─ btrieve_client.py (Wrapper) ✅
 │  ├─ record_layouts.py (Python structs)
 │  └─ operations.py (CRUD)
 │
@@ -269,111 +244,24 @@ PAB (Dodávatelia)
 TSH (Dodacie listy - header)
   ↓ 1:N
 TSI (Dodacie listy - items)
-  ↑ N:1
+  → N:1
 GSCAT (Produkty)
 ```
 
-### Tabuľka: GSCAT (Produktový katalóg)
-
-```python
-# Z gscat.bdf
-class GSCATRecord:
-    GsCode: int          # PRIMARY KEY - Tovarové číslo
-    Name: str(50)        # Názov produktu
-    MglstCode: int       # FK → MGLST (skupina)
-    Unit: str(10)        # Merná jednotka
-    Price: Decimal       # Predajná cena
-    PurchasePrice: Decimal  # Nákupná cena
-    VatRate: Decimal     # Sadzba DPH
-    Active: bool         # Aktívny produkt
-    ModUser: str(8)      # Audit - používateľ
-    ModDate: date        # Audit - dátum
-    ModTime: time        # Audit - čas
+### Database Location
+```
+C:\NEX\YEARACT\
+├─ STORES\              # Skladové hospodárstvo
+│  ├─ GSCAT.BTR         # Produktový katalóg
+│  ├─ BARCODE.BTR       # Čiarové kódy
+│  ├─ MGLST.BTR         # Tovarové skupiny
+│  ├─ TSHA-001.BTR      # Dodacie listy header
+│  └─ TSIA-001.BTR      # Dodacie listy items
+└─ DIALS\               # Číselníky
+   └─ PAB00000.BTR      # Obchodní partneri
 ```
 
-### Tabuľka: BARCODE (Čiarové kódy)
-
-```python
-# Z barcode.bdf
-class BARCODERecord:
-    GsCode: int          # FK → GSCAT
-    BarCode: str(15)     # PRIMARY KEY - EAN/Code128/QR
-    ModUser: str(8)      # Audit
-    ModDate: date        # Audit
-    ModTime: time        # Audit
-```
-
-**Indexy:**
-- `ixGsCode`: GsCode (vyhľadávanie podľa produktu)
-- `ixBarCode`: BarCode (vyhľadávanie podľa čiarového kódu)
-- `ixGsBc`: GsCode + BarCode (unique constraint)
-
-### Tabuľka: TSH (Dodacie listy - header)
-
-```python
-# Z tsh.bdf
-class TSHRecord:
-    DocNumber: str(20)   # PRIMARY KEY - Číslo dokladu
-    DocDate: date        # Dátum dokladu
-    PabCode: int         # FK → PAB (dodávateľ)
-    TotalAmount: Decimal # Celková suma
-    VatAmount: Decimal   # Suma DPH
-    Currency: str(3)     # Mena (EUR)
-    Note: str(255)       # Poznámka
-    ModUser: str(8)      # Audit
-    ModDate: date        # Audit
-    ModTime: time        # Audit
-```
-
-### Tabuľka: TSI (Dodacie listy - items)
-
-```python
-# Z tsi.bdf
-class TSIRecord:
-    DocNumber: str(20)   # FK → TSH
-    LineNumber: int      # Poradové číslo riadku
-    GsCode: int          # FK → GSCAT
-    Quantity: Decimal    # Množstvo
-    Price: Decimal       # Jednotková cena
-    VatRate: Decimal     # Sadzba DPH
-    Amount: Decimal      # Suma bez DPH
-    VatAmount: Decimal   # Suma DPH
-    TotalAmount: Decimal # Suma s DPH
-```
-
-**Composite PK:** DocNumber + LineNumber
-
-### Tabuľka: PAB (Obchodní partneri)
-
-```python
-# Z pab.bdf
-class PABRecord:
-    PabCode: int         # PRIMARY KEY - Kód partnera
-    Name: str(100)       # Názov firmy
-    ICO: str(12)         # IČO
-    DIC: str(12)         # DIČ
-    Street: str(100)     # Ulica
-    City: str(50)        # Mesto
-    PostalCode: str(10)  # PSČ
-    Country: str(3)      # Krajina (SK)
-    IsSupplier: bool     # Je dodávateľ
-    IsCustomer: bool     # Je odberateľ
-    ModUser: str(8)      # Audit
-    ModDate: date        # Audit
-    ModTime: time        # Audit
-```
-
-### Tabuľka: MGLST (Tovarové skupiny)
-
-```python
-# Z mglst.bdf
-class MGLSTRecord:
-    MglstCode: int       # PRIMARY KEY - Kód skupiny
-    Name: str(50)        # Názov skupiny
-    ParentCode: int      # FK → MGLST (hierarchia)
-    Level: int           # Úroveň v hierarchii
-    Active: bool         # Aktívna skupina
-```
+**Pre detailné schémy pozri:** `docs/NEX_DATABASE_STRUCTURE.md`
 
 ---
 
@@ -384,441 +272,98 @@ c:\Development\nex-genesis-server/
 │
 ├─ docs/                                    
 │  ├─ FULL_PROJECT_CONTEXT.md            # Tento súbor
-│  ├─ CHANGELOG.md                        # Version history
-│  ├─ README.md                           # Manifest dokumentácia
+│  ├─ CHANGELOG.md                        ⭐ Aktuálny stav!
+│  ├─ INIT_CONTEXT.md                     # Quick start
+│  ├─ NEX_DATABASE_STRUCTURE.md          # DB schéma
+│  ├─ TESTING_GUIDE.md                    # Testing procedures
+│  ├─ sessions/
+│  │  └─ 2025-10-22_session.md           ⭐ Daily progress!
 │  └─ architecture/
-│     ├─ btrieve-access.md               # Btrieve API usage
-│     ├─ database-schema.md              # TBD
-│     └─ isdoc-mapping.md                # TBD
+│     └─ database-access-pattern.md       # Btrieve patterns
 │
-├─ database-schema/                       # ⭐ NEW
-│  ├─ barcode.bdf                        # Čiarové kódy
-│  ├─ gscat.bdf                          # Produktový katalóg
-│  ├─ mglst.bdf                          # Tovarové skupiny
-│  ├─ pab.bdf                            # Obchodní partneri
-│  ├─ tsh.bdf                            # Dodacie listy header
-│  ├─ tsi.bdf                            # Dodacie listy items
-│  └─ README.md                          # Dokumentácia
+├─ database-schema/                       
+│  ├─ *.bdf                               # 6 real schema files
+│  └─ README.md                           
 │
-├─ delphi-sources/                        # Reference ⭐ NEW
-│  ├─ BtrApi32.pas                       # Btrieve API
-│  ├─ BtrConst.pas                       # Constants
-│  ├─ BtrHand.pas                        # Handler
-│  ├─ BtrStruct.pas                      # Structures
-│  ├─ BtrTable.pas                       # Table wrapper
-│  ├─ BtrTools.pas                       # Utilities
-│  ├─ SqlApi32.pas                       # SQL API
-│  └─ README.md                          # Dokumentácia
+├─ delphi-sources/                        # Reference
+│  ├─ *.pas                               # 7 Delphi Btrieve wrappers
+│  └─ README.md                           
 │
-├─ external-dlls/                         # ⭐ NEW
-│  ├─ wdbnames.dll                       # Pervasive
-│  ├─ wdbnm32.dll                        # Pervasive
-│  ├─ wssql32.dll                        # Pervasive
-│  ├─ wxqlcall.dll                       # Pervasive
-│  └─ README.md                          # Dokumentácia
+├─ external-dlls/                         # Pervasive DLLs
+│  └─ README.md                           
 │
 ├─ src/
-│  ├─ btrieve/                           # Btrieve wrapper
+│  ├─ btrieve/                            ✅ WORKING!
 │  │  ├─ __init__.py
-│  │  ├─ btrieve_client.py               # Main wrapper
-│  │  ├─ record_layouts.py               # Python structs
-│  │  └─ operations.py                   # CRUD operations
+│  │  └─ btrieve_client.py                # Main wrapper
 │  │
-│  ├─ services/                          # Business logic
-│  │  ├─ __init__.py
-│  │  ├─ product_service.py              # GSCAT operations
-│  │  ├─ barcode_service.py              # BARCODE operations
-│  │  ├─ delivery_note_service.py        # TSH/TSI operations
-│  │  └─ supplier_service.py             # PAB operations
-│  │
-│  ├─ parsers/                           # XML/ISDOC
-│  │  ├─ __init__.py
-│  │  ├─ isdoc_parser.py
-│  │  └─ xml_validator.py
-│  │
-│  ├─ api/                               # FastAPI/Flask
-│  │  ├─ __init__.py
-│  │  ├─ main.py
-│  │  └─ endpoints.py
-│  │
+│  ├─ services/                           # Business logic (TBD)
+│  ├─ parsers/                            # XML/ISDOC (TBD)
+│  ├─ api/                                # FastAPI (TBD)
 │  └─ utils/
 │     ├─ __init__.py
-│     ├─ config.py
-│     └─ logger.py
+│     └─ config.py                        ✅ WORKING!
 │
-├─ tests/                                # Test data
-│  ├─ test_btrieve_client.py
-│  ├─ test_product_service.py
-│  ├─ test_isdoc_parser.py
-│  ├─ fixtures/
-│  │  └─ sample_isdoc.xml
-│  └─ data/
-│     └─ test_records.json
+├─ tests/                                 ✅ ALL PASSING!
+│  ├─ test_btrieve_basic.py
+│  ├─ test_btrieve_file.py
+│  ├─ test_btrieve_read.py
+│  └─ test_file_opening_variants.py
 │
-├─ config/                                  
-│  ├─ config.yaml.template
-│  └─ database.yaml.template
+├─ config/
+│  └─ database.yaml                       ✅ CONFIGURED!
 │
 ├─ scripts/                                 
-│  ├─ generate_project_access.py         # Manifest generator
-│  ├─ generate_bdf_manifest.py           # BDF helper
+│  ├─ generate_project_access.py         
 │  └─ create_directory_structure.py
 │
 ├─ .gitignore
 ├─ README.md
-├─ CHANGELOG.md
-├─ requirements.txt                      # Python deps
-└─ setup.py                              # Package setup
+├─ requirements.txt
+└─ requirements-minimal.txt
 ```
 
 ---
 
 ## 📋 PROJECT FILE ACCESS MANIFESTS
 
-**Problém:** Jeden veľký JSON súbor (20k+ riadkov) spôsobuje token limit problémy.  
+**Problém:** Jeden veľký JSON súbor spôsobuje token limit problémy.  
 **Riešenie:** Rozdelené manifesty na špecifické účely.
 
 ### Štruktúra Manifestov
 
 ```
 docs/
-├─ project_file_access_docs.json      # 📚 Documentation
-├─ project_file_access_bdf.json       # 🗄️ Database schemas
-└─ project_file_access_delphi.json    # 🔧 Delphi reference
+├─ project_file_access.json              # ⭐ Unified manifest (všetko)
+├─ project_file_access_docs.json         # 📚 Documentation only
+├─ project_file_access_bdf.json          # 🗄️ Database schemas
+└─ project_file_access_delphi.json       # 🔧 Delphi reference
 ```
 
 ### Použitie
 
-#### 1️⃣ Pre Claude (Dokumentácia) - DEFAULT
+**Pre nový chat s Claude:**
 ```
-URL: https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_docs.json
+1. Pošli URL:
+   https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md
 
-Obsahuje:
-- docs/ (všetka dokumentácia)
-- FULL_PROJECT_CONTEXT.md
-- CHANGELOG.md
-- architecture/ dokumenty
-
-Veľkosť: ~100 riadkov
-Use case: Default pre prácu s Claude na projektovej dokumentácii
-```
-
-#### 2️⃣ Pre Database Schema (BDF súbory)
-```
-URL: https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_bdf.json
-
-Obsahuje:
-- database-schema/ (všetky .bdf súbory)
-- Databázové schémy
-- README s dokumentáciou
-
-Veľkosť: ~50 riadkov
-Use case: Keď Claude potrebuje analyzovať databázovú schému
-```
-
-#### 3️⃣ Pre Delphi Reference
-```
-URL: https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_delphi.json
-
-Obsahuje:
-- delphi-sources/ (Btrieve wrappery)
-- BtrTable.pas, BtrApi32.pas, atď.
-
-Veľkosť: ~70 riadkov
-Use case: Keď Claude potrebuje referenciu Delphi Btrieve patterns
-```
-
-### Generovanie Manifestov
-
-```powershell
-# Generuj všetky manifesty naraz
-python scripts/generate_project_access.py
-
-# Output:
-# ✅ project_file_access_docs.json    (~100 riadkov)
-# ✅ project_file_access_bdf.json     (~50 riadkov)
-# ✅ project_file_access_delphi.json  (~70 riadkov)
-```
-
-### Workflow Pre Nový Chat s Claude
-
-#### Variant A: Len Dokumentácia (Odporúčané) ⭐
-```
-1. Pošli Claude URL:
+2. Alebo pošli:
    https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md
 
-2. Ak potrebuje konkrétne súbory, pošli aj:
-   https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/project_file_access_docs.json
+3. Claude automaticky načíta CHANGELOG.md a sessions/ pre aktuálny stav
 ```
-
-#### Variant B: + Database Schema
-```
-1. FULL_PROJECT_CONTEXT.md (ako vyššie)
-2. project_file_access_docs.json (dokumentácia)
-3. project_file_access_bdf.json (len keď analyzuješ schému)
-```
-
-#### Variant C: + Delphi Reference
-```
-1. FULL_PROJECT_CONTEXT.md
-2. project_file_access_docs.json
-3. project_file_access_delphi.json (len keď potrebuješ Btrieve patterns)
-```
-
-### Výhody Rozdeleného Prístupu
-
-✅ **Menšie súbory** - Každý manifest má < 500 riadkov  
-✅ **Rýchlejšie načítanie** - Claude načíta len potrebné súbory  
-✅ **Nižšia spotreba tokenov** - Nemusíš načítať celý projekt  
-✅ **Lepšia organizácia** - Jasné rozdelenie podľa účelu  
-✅ **Škálovateľné** - Pridaj nové manifesty podľa potreby  
 
 ### Kedy Refresh Manifesty
 
 ⚠️ **VŽDY po:**
-- Pridaní nového dokumentu do docs/
-- Pridaní novej .bdf schémy do database-schema/
-- Pridaní Delphi reference do delphi-sources/
+- Pridaní nového súboru do projektu
 - Na konci každej session
 
 ```powershell
 python scripts/generate_project_access.py
-git add docs/project_file_access_*.json
-git commit -m "chore: refresh project file access manifests"
+git add docs/project_file_access*.json
+git commit -m "chore: refresh project manifests"
 ```
-
----
-
-**Kompletná príručka:** `docs/README.md`
-
----
-
-## 📋 PHASE 1: Setup & Stratégia
-
-### Hotové Tasky ✅
-
-#### ✅ Task 1.1 - Projektová štruktúra (2025-10-21)
-**Status:** HOTOVO  
-**Trvanie:** ~30 min  
-
-**Vytvorené:**
-- ✅ GitHub repository: nex-genesis-server
-- ✅ Lokálny projekt: c:\Development\nex-genesis-server
-- ✅ Git inicializovaný
-- ✅ Základné súbory (.gitignore, README.md, requirements.txt)
-
-#### ✅ Task 1.2 - Dokumentácia setup (2025-10-21)
-**Status:** HOTOVO  
-**Trvanie:** ~1h  
-
-**Vytvorené:**
-- ✅ `docs/FULL_PROJECT_CONTEXT.md` - Tento súbor
-- ✅ Directory štruktúra
-- ✅ Config templates
-
-#### ✅ Task 1.3 - Generovanie manifestu (2025-10-21)
-**Status:** HOTOVO  
-**Trvanie:** ~30 min  
-
-**Vytvorené:**
-- ✅ `scripts/generate_project_access.py`
-- ✅ `scripts/create_directory_structure.py`
-
-#### ✅ Task 1.4 - GitHub push (2025-10-21)
-**Status:** HOTOVO  
-**Trvanie:** ~5 min  
-
-**Akcie:**
-- ✅ Initial commit
-- ✅ Force push na GitHub
-- ✅ Repository live
-
-#### ✅ Task 1.5 - Databázový prístup dokumentácia (2025-10-21)
-**Status:** HOTOVO  
-**Trvanie:** ~2h  
-
-**Vytvorené:**
-- ✅ Komplexná analýza NEX Genesis Btrieve patterns
-- ✅ 5-vrstvová architektúra zdokumentovaná
-- ✅ Design patterns identifikované
-- ✅ Best practices definované
-- ✅ Split manifests implementované
-
-**Kľúčové Poznatky:**
-- NEX Genesis používa vlastný wrapper pattern pre Pervasive SQL
-- Type-safe properties namiesto FieldByName()
-- Automatické prepínanie indexov cez Locate methods
-- Rozdelené manifesty riešia token limit problémy
-
-#### ✅ Task 1.6 - Cleanup a reorganizácia (2025-10-21)
-**Status:** HOTOVO  
-**Completed:** 2025-10-21  
-**Time spent:** 3 hodiny
-
-**Dokončené:**
-- ✅ Pridané **reálne .bdf súbory** z NEX Genesis
-  - barcode.bdf, gscat.bdf, mglst.bdf, pab.bdf, tsh.bdf, tsi.bdf
-- ✅ Pridané **NEX Genesis Btrieve wrappery**
-  - BtrApi32.pas, BtrConst.pas, BtrHand.pas, BtrStruct.pas, BtrTable.pas, BtrTools.pas, SqlApi32.pas
-- ✅ Pridané **Pervasive DLLs**
-  - wdbnames.dll, wdbnm32.dll, wssql32.dll, wxqlcall.dll
-- ✅ Vytvorené **README súbory**
-  - database-schema/README.md
-  - delphi-sources/README.md
-  - external-dlls/README.md
-  - docs/README.md
-- ✅ Vytvorený **CHANGELOG.md** (version tracking)
-- ✅ Nové **JSON manifesty**
-  - project_file_access_delphi.json
-  - project_file_access_bdf.json
-  - project_file_access_docs.json
-- ✅ Aktualizovaný **generate_project_access.py** (multi-extension support)
-- ✅ Pridaný **generate_bdf_manifest.py** (helper script)
-- ✅ Aktualizovaný **FULL_PROJECT_CONTEXT.md** na v0.2.0
-- ✅ Aktualizovaný **README.md** (Python focus)
-- ✅ Aktualizovaný **.gitignore** (Python specific)
-
-**Strategické rozhodnutie:**
-- 🎯 Pivot na **Pure Python Btrieve** prístup namiesto Delphi mikroslužby
-
-**Nová štruktúra:**
-```
-nex-genesis-server/
-├─ database-schema/     # 6 .bdf súborov
-├─ delphi-sources/      # 7 Btrieve wrapperov
-├─ external-dlls/       # 4 Pervasive DLLs
-└─ docs/               # Aktualizovaná dokumentácia
-```
-
----
-
-### Aktívny Task 🔄
-
-#### 🔄 Task 1.7 - Python Btrieve Setup
-**Status:** IN PROGRESS  
-**Started:** 2025-10-21  
-**Priority:** HIGH  
-**Estimate:** 4 hodiny  
-**Dependencies:** Task 1.6 ✅
-
-**Cieľ:**
-Vytvoriť Python wrapper pre prístup k Btrieve databázam.
-
-**Kroky:**
-- [✅] Install SWIG (Simplified Wrapper and Interface Generator)
-- [ ] Download Pervasive PSQL v11 SDK
-- [ ] Setup C++ compiler (Visual Studio Build Tools)
-- [ ] Build Python Btrieve wrapper (ctypes/SWIG)
-- [ ] Test basic operations (Open, Read, Close)
-- [ ] Create test script pre GSCAT.bdf
-- [ ] Document setup process
-
-**Deliverables:**
-- `src/btrieve/btrieve_client.py` - Python wrapper
-- `tests/test_btrieve_client.py` - Basic tests
-- `docs/architecture/btrieve-access.md` - Setup guide
-
-**Technical notes:**
-- Pervasive PSQL v11 (existujúca verzia na serveri)
-- SWIG pre C → Python binding
-- ctypes pre direct DLL calls
-- Visual Studio Build Tools 2019+
-- Test na GSCAT.dat (produktový katalóg)
-
----
-
-### Plánované Tasky 📅
-
-#### Task 1.8 - Databázová schéma dokumentácia
-**Priority:** HIGH | **Dependencies:** Task 1.7 | **Estimated:** 4h
-
-**Plán:**
-- Analyzovať všetkých 6 .bdf súborov
-- Vytvoriť Python record layouts
-- Zdokumentovať fieldy a indexy
-- Vytvoriť ER diagram
-- Dokumentovať relationships
-
-#### Task 1.9 - Python record layouts
-**Priority:** HIGH | **Dependencies:** Task 1.8 | **Estimated:** 3h
-
-**Plán:**
-- Vytvoriť Python dataclasses pre každú tabuľku
-- Implementovať serialization/deserialization
-- Validácia dát
-- Type hints
-
-#### Task 1.10 - ISDOC XML mapping
-**Priority:** MEDIUM | **Dependencies:** Tasks 1.8-1.9 | **Estimated:** 2h
-
-**Plán:**
-- Mapovať ISDOC → GSCAT
-- Mapovať ISDOC → BARCODE
-- Mapovať ISDOC → TSH/TSI
-- Mapovať ISDOC → PAB
-
----
-
-## 🎉 NEDÁVNE ÚSPECHY
-
-### 2025-10-21
-- ✅ **Task 1.1-1.6 COMPLETE** - Projektová infraštruktúra a databázová schéma! 🎉
-- ✅ **GitHub repository live**
-- ✅ **Strategický pivot na Python Btrieve**
-- ✅ **Reálne .bdf súbory** z NEX Genesis
-- ✅ **Btrieve wrappery** (Delphi reference)
-- ✅ **Pervasive DLLs** pripravené
-- ✅ **Split manifests** implementované
-- ✅ **CHANGELOG** tracking zavedený
-- ✅ **6 taskov dokončených za 1 deň!** 🚀
-
----
-
-## 🚧 AKTUÁLNE BLOKERY
-
-**Žiadne aktuálne blokery!** ✅
-
-Všetky závislosti pre Task 1.7 sú splnené.  
-Môžeme pokračovať s Python Btrieve Setup.
-
----
-
-## 📊 PHASE 2-4 (Plánované)
-
-### PHASE 2: Core Development
-**Status:** Čaká na Phase 1 | **Priority:** HIGH
-
-- [ ] 2.1 - BtrieveClient wrapper implementation
-- [ ] 2.2 - Python record layouts (dataclasses)
-- [ ] 2.3 - ISDOC XML parser
-- [ ] 2.4 - ProductService implementation (GSCAT)
-- [ ] 2.5 - BarcodeService implementation (BARCODE)
-- [ ] 2.6 - DeliveryNoteService implementation (TSH/TSI)
-- [ ] 2.7 - SupplierService implementation (PAB)
-- [ ] 2.8 - FastAPI/Flask setup
-- [ ] 2.9 - Configuration management
-- [ ] 2.10 - Error handling & logging
-
-### PHASE 3: Integration & Testing
-**Status:** Čaká na Phase 2 | **Priority:** MEDIUM
-
-- [ ] 3.1 - Unit tests (pytest)
-- [ ] 3.2 - Integration tests
-- [ ] 3.3 - Testing s sample data
-- [ ] 3.4 - Testing na NEX Genesis test database
-- [ ] 3.5 - Performance testing
-- [ ] 3.6 - Integrácia so supplier_invoice_loader
-- [ ] 3.7 - End-to-end testing
-
-### PHASE 4: Deployment
-**Status:** Čaká na Phase 3 | **Priority:** MEDIUM
-
-- [ ] 4.1 - Deployment na production server
-- [ ] 4.2 - Monitoring setup
-- [ ] 4.3 - Backup stratégia
-- [ ] 4.4 - User dokumentácia
-- [ ] 4.5 - Production testing
-- [ ] 4.6 - Go-live
 
 ---
 
@@ -849,7 +394,7 @@ Response:
 {
   "status": "ok",
   "database": "connected",
-  "version": "0.2.0"
+  "version": "0.2.3"
 }
 ```
 
@@ -913,33 +458,33 @@ Response:
 
 ---
 
-## 📝 KONFIGURÁCIA
+## 🔧 KONFIGURÁCIA
 
-### config.yaml (Template)
+### database.yaml (Current)
 ```yaml
-server:
-  port: 8000
-  host: localhost
-  workers: 4
+nex_genesis:
+  root_path: "C:\\NEX"
+  yearact_path: "C:\\NEX\\YEARACT"
+  
+  database:
+    stores_path: "C:\\NEX\\YEARACT\\STORES"
+    dials_path: "C:\\NEX\\YEARACT\\DIALS"
+  
+  tables:
+    gscat: "C:\\NEX\\YEARACT\\STORES\\GSCAT.BTR"
+    barcode: "C:\\NEX\\YEARACT\\STORES\\BARCODE.BTR"
+    mglst: "C:\\NEX\\YEARACT\\STORES\\MGLST.BTR"
+    pab: "C:\\NEX\\YEARACT\\DIALS\\PAB00000.BTR"
+    tsh: "C:\\NEX\\YEARACT\\STORES\\TSHA-{book_number}.BTR"
+    tsi: "C:\\NEX\\YEARACT\\STORES\\TSIA-{book_number}.BTR"
 
-database:
-  type: btrieve
-  path: "G:\\NEX\\Data"
-  backup_path: "G:\\NEX\\Backup"
-  
 btrieve:
-  sdk_path: "C:\\Program Files\\Pervasive PSQL v11\\bin"
-  dll_path: ".\\external-dlls"
-  page_size: 4096
-  
-paths:
-  log_path: "C:\\Logs\\NEXGenesisServer"
-  temp_path: "C:\\Temp\\NEXGenesisServer"
+  dll_path: "C:\\Program Files (x86)\\Pervasive Software\\PSQL\\bin"
 
 logging:
-  level: INFO
-  max_file_size: 10MB
-  backup_count: 5
+  enabled: true
+  level: "INFO"
+  path: "C:\\Logs\\NEXGenesisServer"
 ```
 
 ---
@@ -947,11 +492,11 @@ logging:
 ## ⚠️ KRITICKÉ PRIPOMIENKY
 
 ### Pre každý nový chat:
-1. 🔥 Používateľ pošle URL na FULL_PROJECT_CONTEXT.md
-2. 🔥 Claude načíta tento dokument (VŠETKO je tu)
-3. 🔥 Claude odpovie: "✅ Projekt načítaný. Čo robíme?"
-4. 🔥 ŽIADNE ďalšie súbory, ŽIADNE varovania
-5. 🔥 Jednoducho a jasne
+1. 🔥 Používateľ pošle URL na INIT_CONTEXT.md alebo FULL_PROJECT_CONTEXT.md
+2. 🔥 Claude načíta dokument
+3. 🔥 Claude automaticky načíta CHANGELOG.md pre aktuálny stav
+4. 🔥 Claude odpovie: "✅ Projekt načítaný. Čo robíme?"
+5. 🔥 ŽIADNE ďalšie súbory na začiatku
 6. 🔥 KOMUNIKUJ PO SLOVENSKY
 
 ### Git pravidlá:
@@ -959,13 +504,12 @@ logging:
 - ✅ Opisné commit správy
 - ✅ Test pred commitom
 - ✅ Pull pred push
-- ✅ Feature branches pre nové features
 
 ### Development Environment:
 - **IDE:** PyCharm
-- **Python:** 3.8+
+- **Python:** 3.8+ (32-bit required!)
 - **Git:** Commit a push z PyCharm
-- **Commit messages:** Claude poskytuje len čistý text message (bez `git commit -m`), používateľ ho skopíruje do PyCharm
+- **Venv:** venv32 (32-bit Python)
 
 ### Kódovacie štandardy:
 - ✅ PEP 8 (Python style guide)
@@ -977,37 +521,61 @@ logging:
 - ✅ Unit tests pre všetky funkcie
 - ✅ VŽDY validuj vstupné dáta
 
-### 🚨 PROJECT_FILE_ACCESS MANIFESTS REFRESH:
-- ✅ **KEĎ VYTVORÍŠ NOVÝ SÚBOR → Vždy pripomeň refresh manifestov**
-- ✅ Na konci každej session
-- ✅ Po pridaní novej dokumentácie
-- ✅ Po pridaní novej .bdf schémy
-- ✅ Po pridaní Python súboru
-- ✅ Jednoduchá pripomienka: **"⚠️ Nezabudni refreshnúť project manifests: `python scripts/generate_project_access.py`"**
+### 🚨 BTRIEVE ACCESS PRAVIDLÁ:
 
-### 🗄️ BTRIEVE ACCESS PRAVIDLÁ:
+**CRITICAL - Based on Delphi btrapi32.pas Analysis:**
+
+#### BTRCALL Signature (FIXED v0.2.3):
+```python
+btrcall.argtypes = [
+    ctypes.c_uint16,                 # operation (WORD)
+    ctypes.POINTER(ctypes.c_char),   # posBlock
+    ctypes.POINTER(ctypes.c_char),   # dataBuffer
+    ctypes.POINTER(ctypes.c_uint32), # dataLen (longInt = 4 bytes!) ⚠️
+    ctypes.POINTER(ctypes.c_char),   # keyBuffer
+    ctypes.c_uint8,                  # keyLen (BYTE)
+    ctypes.c_uint8                   # keyNum (BYTE, unsigned!) ⚠️
+]
+```
+
+#### Open File Logic (FIXED v0.2.3):
+```python
+# FILENAME goes in KEY_BUFFER! (not data_buffer!)
+data_buffer = ctypes.create_string_buffer(256)  # EMPTY!
+data_len = ctypes.c_uint32(0)                   # ZERO!
+filename_bytes = filename.encode('ascii') + b'\x00'
+key_buffer = ctypes.create_string_buffer(filename_bytes)  # FILENAME HERE!
+key_len = 255                                   # Always 255!
+```
+
+#### Best Practices:
 - ✅ **VŽDY používaj BtrieveClient wrapper**
 - ✅ **VŽDY validuj record layout pred write**
 - ✅ **VŽDY používaj index pre search**
 - ✅ **VŽDY close file po operácii**
 - ✅ **VŽDY handle Btrieve errors gracefully**
 - ✅ **VŽDY log všetky DB operácie**
-- ✅ **VŽDY backup pred write operáciami**
-- ❌ **NIKDY nepristupuj k .dat súborom priamo** - používaj wrapper!
+- ❌ **NIKDY nepristupuj k .BTR súborom priamo** - používaj wrapper!
+
+### 🗄️ PROJECT_FILE_ACCESS MANIFESTS REFRESH:
+- ✅ **KEĎ VYTVORÍŠ NOVÝ SÚBOR → Vždy pripomeň refresh manifestov**
+- ✅ Na konci každej session
+- ✅ Jednoduchá pripomienka: **"⚠️ Nezabudni refreshnúť project manifests: `python scripts/generate_project_access.py`"**
 
 ---
 
 ## ✅ KRITÉRIÁ ÚSPECHU
 
-### Phase 1 Complete:
-- ✅ NEX Genesis .bdf schémy na GitHub ✅
-- ✅ Btrieve wrappery (reference) ✅
-- ✅ Pervasive DLLs pripravené ✅
-- 🔄 Python Btrieve wrapper funkčný (In Progress - Task 1.7)
-- 📋 Databázová schéma zdokumentovaná (Planned - Task 1.8)
-- 📋 Python record layouts vytvorené (Planned - Task 1.9)
-- 📋 ISDOC mapping špecifikované (Planned - Task 1.10)
-- ✅ Development environment ready ✅
+### Phase 1 Complete (Current):
+- ✅ NEX Genesis .bdf schémy na GitHub
+- ✅ Btrieve wrappery (reference)
+- ✅ Pervasive DLLs pripravené
+- ✅ Python Btrieve wrapper funkčný ⭐
+- ✅ File operations working (open, read, close) ⭐
+- ✅ Data reading verified ⭐
+- 📋 Databázová schéma zdokumentovaná (Next - Task 1.8)
+- 📋 Python record layouts vytvorené (Next - Task 1.9)
+- 📋 ISDOC mapping špecifikované (Next - Task 1.10)
 
 ### MVP (Minimum Viable Product):
 - ✅ Jeden endpoint: POST /api/invoice/import
@@ -1045,31 +613,8 @@ logging:
 
 ### NEX Genesis ERP
 - **Jazyk:** Delphi 6
-- **Databáza:** Pervasive SQL (Btrieve)
+- **Databáza:** Pervasive PSQL v11 (Btrieve)
 - **Lokácia:** Customer server (MAGERSTAV)
-
----
-
-## 🔜 ĎALŠIE KROKY
-
-### Ihneď (Tento týždeň):
-1. 🔄 Dokončiť Task 1.7 - Python Btrieve Setup
-2. 📋 Task 1.8 - Databázová schéma dokumentácia
-3. 📋 Task 1.9 - Python record layouts
-4. 📋 Task 1.10 - ISDOC XML mapping
-
-### Krátkodobé (Budúci 2 týždne):
-1. Dokončiť Phase 1
-2. Implementovať BtrieveClient wrapper
-3. Vytvoriť ProductService
-4. Zostaviť prvú mikroslužbu
-5. Testovať s sample dátami
-
-### Dlhodobé (Budúci mesiac):
-1. Dokončiť všetky services
-2. Integration testing
-3. Integrácia so supplier_invoice_loader
-4. Production deployment
 
 ---
 
@@ -1077,17 +622,17 @@ logging:
 
 **You have loaded FULL_PROJECT_CONTEXT.md**
 
-This document contains **EVERYTHING:**
+This document contains **STRATEGIC INFORMATION:**
 - ✅ Complete project vision and goals
-- ✅ **Current status, progress, and active tasks** (AKTUÁLNY STAV section)
 - ✅ Full architecture and tech stack
-- ✅ **NEX Genesis database schema** (6 real .bdf files)
-- ✅ **Split manifests structure** (optimized for token usage)
-- ✅ All 4 phases and development plan
+- ✅ NEX Genesis database schema (basic info)
+- ✅ Btrieve access rules and patterns (CRITICAL!)
 - ✅ Project structure
-- ✅ Git workflow and commit conventions
-- ✅ Technical decisions
-- ✅ **Btrieve access rules and patterns** (CRITICAL!)
+- ✅ Git workflow and coding standards
+
+**For CURRENT STATUS, see:**
+- 📋 **CHANGELOG.md** - Progress, versions, completed tasks
+- 📅 **docs/sessions/** - Daily progress and notes
 
 **Simply respond:**
 ```
@@ -1096,6 +641,13 @@ This document contains **EVERYTHING:**
 
 **BTRIEVE ACCESS REMINDER:**
 ```
+Critical fixes in v0.2.3:
+✅ dataLen: c_uint32 (4 bytes, not 2!)
+✅ keyNum: c_uint8 (unsigned, not signed!)
+✅ Filename in KEY_BUFFER (not data_buffer!)
+✅ data_buffer EMPTY for open (dataLen = 0)
+✅ keyLen = 255 always
+
 When working with Btrieve:
 ✅ Use BtrieveClient wrapper
 ✅ Validate record layout
@@ -1103,38 +655,25 @@ When working with Btrieve:
 ✅ Close files after operations
 ✅ Handle errors gracefully
 ✅ Log all DB operations
-✅ Backup before writes
-❌ NO direct .dat file access!
-```
-
-**MANIFEST REMINDER:**
-```
-For new chats:
-1. Load FULL_PROJECT_CONTEXT.md (this file)
-2. Load project_file_access_docs.json (documentation only)
-3. Load other manifests ONLY when needed:
-   - bdf.json - when analyzing database schema
-   - delphi.json - when checking Btrieve patterns
-   
-Never load all manifests at once! (token limit)
+❌ NO direct .BTR file access!
 ```
 
 **WORKFLOW REMINDER:**
 ```
-After creating ANY new file in the project:
-⚠️ Remind user: "Nezabudni refreshnúť project manifests: python scripts/generate_project_access.py"
+After creating ANY new file:
+⚠️ "Nezabudni refreshnúť project manifests: python scripts/generate_project_access.py"
 
 After completing any task:
-⚠️ Remind user: "Nezabudni updatnúť FULL_PROJECT_CONTEXT.md (sekcia AKTUÁLNY STAV)"
-
-This ensures single-file context always stays current.
+⚠️ "Nezabudni updatnúť CHANGELOG.md"
+⚠️ "Nezabudni updatnúť session notes"
 ```
 
 ---
 
-**Verzia Dokumentu:** 0.2.0  
+**Verzia Dokumentu:** 0.2.3  
 **Vytvorené:** 2025-10-21  
-**Posledná Aktualizácia:** 2025-10-21 (Python Btrieve pivot + Real database schema)  
-**Stav:** Aktívny Vývoj - Phase 1 (60% complete)
+**Posledná Aktualizácia:** 2025-10-22 (Cleaned - Removed outdated status tracking)  
 
-🏭 **Vytvárame Python Btrieve services! Jeden súbor = kompletný kontext.** ✨
+🏭 **Python Btrieve services - Strategický kontext.** ✨
+
+**Pre aktuálny stav → CHANGELOG.md | Pre daily progress → docs/sessions/**
