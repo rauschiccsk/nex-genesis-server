@@ -1,7 +1,7 @@
 # 🚀 NEX-GENESIS-SERVER - INIT CONTEXT
 
 **Quick Start Initialization File**  
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Date:** 2025-10-22  
 **Language:** 🇸🇰 SLOVENČINA
 
@@ -14,35 +14,55 @@
 - Slovenčina je primárny jazyk projektu
 - Technické termíny môžu byť anglicky
 
-### 2. Initialization Complete
-Po načítaní tohto súboru + `project_file_access.json` odpovedz:
+### 2. Automatic Initialization Sequence
+
+**Po načítaní INIT_CONTEXT.md + project_file_access.json, AUTOMATICKY načítaj:**
 
 ```
-✅ Projekt načítaný. Čo robíme?
+1. docs/CHANGELOG.md           → Aktuálny stav projektu, progress, blockers
+2. docs/sessions/2025-10-22_session.md → Posledná session (alebo najnovšia)
 ```
 
-**NIČ VIAC!** Žiadne vysvetlenia, žiadne otázky.
+**Potom odpovedz:**
+```
+✅ Projekt načítaný. 
 
-### 3. File Access
-S `project_file_access.json` máš prístup k:
-- ✅ Všetkej dokumentácii (21 súborov)
-- ✅ Database schémam (6 .bdf súborov)  
-- ✅ Delphi source kódom (7 súborov)
-- ✅ Config súborom (database.yaml)
-- ✅ Python source kódom (11 súborov)
+📊 Aktuálny stav:
+[Zhrnutie z CHANGELOG.md - verzia, progress, blocker]
+
+📋 Posledná session: 
+[Dátum a kľúčové body z session notes]
+
+🎯 Ďalší krok:
+[Next steps z CHANGELOG.md alebo session]
+
+Čo robíme?
+```
+
+**DÔLEŽITÉ:** 
+- Načítaj CHANGELOG + latest session **AUTOMATICKY** pri inicializácii
+- Nezobrazuj XMLy ani raw content
+- Len čisté zhrnutie v slovenčine
+- Krátko a jasne
+
+### 3. File Access via Manifest
+S `project_file_access.json` máš prístup k 47 súborom:
+- ✅ Documentation (21 súborov)
+- ✅ Database schemas (6 .bdf súborov)  
+- ✅ Delphi sources (7 súborov)
+- ✅ Configuration (2 súbory - database.yaml)
+- ✅ Python sources (11 súborov)
 
 **Keď potrebuješ konkrétny súbor:**
 1. Nájdi ho v `project_file_access.json`
 2. Použiž `raw_url` na načítanie
-3. Nekopíruj celé súbory - odkazuj na ne
+3. Nekopíruj celé súbory - referencuj ich
 
-### 4. Key Documents
-Pri potrebe načítaj:
-- **Kompletný kontext:** `docs/FULL_PROJECT_CONTEXT.md` (34KB - načítaj len ak treba)
+### 4. Key Documents (načítaj len podľa potreby)
+- **Kompletný kontext:** `docs/FULL_PROJECT_CONTEXT.md` (34KB)
 - **Database štruktúra:** `docs/NEX_DATABASE_STRUCTURE.md`
 - **Btrieve patterns:** `docs/architecture/database-access-pattern.md`
 - **Testing guide:** `docs/TESTING_GUIDE.md`
-- **Session notes:** `docs/sessions/2025-10-22_session.md`
 
 ---
 
@@ -56,39 +76,12 @@ Pri potrebe načítaj:
 - **Location:** Komárno, SK
 - **GitHub:** https://github.com/rauschiccsk/nex-genesis-server
 
-### Aktuálny stav
-- **Phase:** 1 - Setup & Stratégia  
-- **Progress:** 70% (7/10 taskov)
-- **Active Task:** Task 1.7 - Python Btrieve Setup (90% complete)
-- **Blocker:** Error 11 - Database name registration issue
-
-### Nedávne úspechy
-- ✅ DLL loading works (Pervasive PSQL v11.30)
-- ✅ Multi-path DLL search implemented
-- ✅ Config loading functional
-- ✅ 32-bit Python setup complete
-
----
-
-## 🎯 WORKFLOW
-
-### Pre nový chat (TENTO PROCES):
-1. Načítaj `INIT_CONTEXT.md` (tento súbor)
-2. Načítaj `project_file_access.json`
-3. Odpovedz: **"✅ Projekt načítaný. Čo robíme?"**
-4. Pokračuj podľa požiadaviek používateľa
-
-### Počas práce:
-- **Komunikuj PO SLOVENSKY** 
-- Buď konkrétny a actionable
-- Používaj emojis (✅ ❌ 🔄 📋)
-- Odkazuj na súbory cez `project_file_access.json`
-- Načítaj detailnú dokumentáciu len keď potrebuješ
-
-### Git workflow:
-- **Commit messages** - Claude poskytuje čistý text (bez `git commit -m`)
-- Používateľ kopíruje do PyCharm Git UI
-- Slovenské commit messages OK
+### Aktuálny stav → Načítaj z CHANGELOG.md!
+```
+⚠️ NEČÍTAJ TENTO HARDCODED STAV!
+⚠️ VŽDY načítaj aktuálny stav z docs/CHANGELOG.md
+⚠️ A najnovšiu session z docs/sessions/
+```
 
 ---
 
@@ -130,7 +123,7 @@ C:\NEX\YEARACT\
 - `config/database.yaml` - Database configuration
 - `tests/test_btrieve_*.py` - Testing suite
 
-### Pervasive DLL Paths
+### Pervasive DLL Paths (Priority Order)
 ```
 1. C:\Program Files (x86)\Pervasive Software\PSQL\bin  ← ACTIVE
 2. C:\PVSW\bin
@@ -144,6 +137,8 @@ C:\NEX\YEARACT\
 
 ### VŽDY:
 - ✅ Komunikuj PO SLOVENSKY
+- ✅ Načítaj CHANGELOG.md pri inicializácii
+- ✅ Načítaj latest session pri inicializácii
 - ✅ Buď konkrétny a actionable  
 - ✅ Používaj emojis pre clarity
 - ✅ Odkazuj na súbory cez manifest
@@ -154,6 +149,8 @@ C:\NEX\YEARACT\
 - ❌ Nemení jazyk na angličtinu
 - ❌ Nepridávaj zbytočné vysvetlenia
 - ❌ Nenavrhuj zmeny bez schválenia
+- ❌ Nepoužívaj hardcoded stav z INIT_CONTEXT.md
+- ❌ VŽDY čítaj CHANGELOG.md + latest session!
 
 ### Pri každom vytvorení súboru:
 ```
@@ -161,21 +158,9 @@ C:\NEX\YEARACT\
 1. Commitnúť zmeny
 2. Pushnúť na GitHub  
 3. Refreshnúť project manifest ak potrebné
+4. Updatnúť CHANGELOG.md
+5. Updatnúť session notes (end of session)
 ```
-
----
-
-## 🎯 NEXT STEPS
-
-### Aktuálne priority:
-1. **Vyriešiť Error 11** - Database registration v Pervasive
-2. Dokončiť Task 1.7 - Python Btrieve Setup
-3. Task 1.8 - Database schema dokumentácia
-4. Task 1.9 - Python record layouts
-
-### Known Issues:
-- **Error 11** - File name invalid (database not registered)
-- Pervasive Engine môže potrebovať database registration
 
 ---
 
@@ -189,14 +174,55 @@ C:\NEX\YEARACT\
 
 ## 🔗 QUICK LINKS
 
+- **Aktuálny stav:** `docs/CHANGELOG.md` ⚠️ VŽDY ČÍTAJ TOTO PRVÉ!
+- **Latest session:** `docs/sessions/` ⚠️ NÁJDI NAJNOVŠIU!
 - **Full Context:** `docs/FULL_PROJECT_CONTEXT.md` (načítaj len ak nutné)
 - **DB Structure:** `docs/NEX_DATABASE_STRUCTURE.md`
 - **Testing:** `docs/TESTING_GUIDE.md`
-- **Latest Session:** `docs/sessions/2025-10-22_session.md`
 - **Manifest:** `docs/project_file_access.json`
 
 ---
 
-**REMEMBER:** Po načítaní odpovedz len: **"✅ Projekt načítaný. Čo robíme?"**
+## 🚀 INITIALIZATION CHECKLIST
 
-**NIČ VIAC!** 🎯
+**Claude musí urobiť pri každom novom chate:**
+
+```
+☐ 1. Načítaj INIT_CONTEXT.md (tento súbor)
+☐ 2. Načítaj project_file_access.json
+☐ 3. Načítaj docs/CHANGELOG.md  ← KRITICKÉ!
+☐ 4. Nájdi najnovšiu session v docs/sessions/
+☐ 5. Načítaj najnovšiu session  ← KRITICKÉ!
+☐ 6. Zhrň aktuálny stav (z CHANGELOG)
+☐ 7. Zhrň poslednú session (kľúčové body)
+☐ 8. Identifikuj ďalší krok (next steps)
+☐ 9. Odpovedz PO SLOVENSKY s prehľadom
+```
+
+**Výstupný formát:**
+```
+✅ Projekt načítaný. 
+
+📊 Aktuálny stav:
+- Verzia: [z CHANGELOG]
+- Progress: [z CHANGELOG]
+- Blocker: [z CHANGELOG]
+
+📋 Posledná session: [dátum]
+- [kľúčové body z session]
+
+🎯 Ďalší krok:
+- [next steps z CHANGELOG alebo session]
+
+Čo robíme?
+```
+
+---
+
+**REMEMBER:** 
+- **AUTOMATICKY načítaj CHANGELOG + latest session**
+- **Nekopíruj XML/JSON** - len zhrnutie
+- **Komunikuj PO SLOVENSKY**
+- **Buď konkrétný**
+
+🎯
