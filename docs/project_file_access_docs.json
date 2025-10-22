@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Project documentation files",
-  "generated_at": "2025-10-22T21:29:48.864714",
+  "generated_at": "2025-10-22T21:38:26.839644",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "files": [
     {
@@ -10,6 +10,13 @@
       "size": 12571,
       "extension": ".md",
       "name": "BTRIEVE_BRIDGE_SERVICE.md"
+    },
+    {
+      "path": "docs/CHANGELOG.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/CHANGELOG.md",
+      "size": 6314,
+      "extension": ".md",
+      "name": "CHANGELOG.md"
     },
     {
       "path": "docs/COMMIT_AND_PUSH.md",
@@ -140,7 +147,7 @@
     {
       "path": "docs/sessions/README.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/README.md",
-      "size": 1406,
+      "size": 1403,
       "extension": ".md",
       "name": "README.md"
     }

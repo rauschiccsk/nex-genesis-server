@@ -65,7 +65,7 @@ Každý session by mal obsahovať:
 ## 🔗 Related Documentation
 
 - [FULL_PROJECT_CONTEXT.md](../FULL_PROJECT_CONTEXT.md) - Kompletný project context
-- [CHANGELOG.md](../../CHANGELOG.md) - Version history
+- [CHANGELOG.md](../CHANGELOG.md) - Version history
 - [TESTING_GUIDE.md](../TESTING_GUIDE.md) - Testing procedures
 
 ---
