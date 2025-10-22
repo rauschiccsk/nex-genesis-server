@@ -1,0 +1,89 @@
+# NEX Genesis Database Configuration
+# C:\NEX system setup
+
+nex_genesis:
+  # Root path
+  root_path: "C:\\NEX"
+
+  # Current year directory
+  yearact_path: "C:\\NEX\\YEARACT"
+
+  # Database paths
+  database:
+    # Dial tables (číselníky)
+    dials_path: "C:\\NEX\\YEARACT\\DIALS"
+
+    # Stock management tables (skladové hospodárstvo)
+    stores_path: "C:\\NEX\\YEARACT\\STORES"
+
+    # Ledger tables (podvojné účtovníctvo - nepoužívame)
+    ledger_path: "C:\\NEX\\YEARACT\\LEDGER"
+
+    # Definition files (.bdf)
+    dbidef_path: "C:\\NEX\\YEARACT\\DBIDEF"
+
+    # System files
+    system_path: "C:\\NEX\\YEARACT\\SYSTEM"
+
+    # Import/Export
+    import_path: "C:\\NEX\\IMPORT"
+    export_path: "C:\\NEX\\EXPORT"
+
+  # Book settings
+  books:
+    # Book number for delivery notes (001, 002, etc.)
+    delivery_notes_book: "001"
+
+    # Book type: A=actual year, P=previous years
+    book_type: "A"
+
+  # Table files (*.BTR extension)
+  tables:
+    # STORES - skladové hospodárstvo
+    gscat: "C:\\NEX\\YEARACT\\STORES\\GSCAT.BTR"
+    barcode: "C:\\NEX\\YEARACT\\STORES\\BARCODE.BTR"
+    mglst: "C:\\NEX\\YEARACT\\STORES\\MGLST.BTR"
+
+    # DIALS - číselníky
+    pab: "C:\\NEX\\YEARACT\\DIALS\\PAB00000.BTR"
+
+    # TSH/TSI - dodacie listy (dynamically constructed)
+    # Format: TSH{book_type}-{book_number}.BTR
+    # Example: TSHA-001.BTR (actual year, book 001)
+    tsh: "C:\\NEX\\YEARACT\\STORES\\TSHA-{book_number}.BTR"
+    tsi: "C:\\NEX\\YEARACT\\STORES\\TSIA-{book_number}.BTR"
+
+  # Definition files (*.bdf)
+  definitions:
+    gscat: "C:\\NEX\\YEARACT\\DBIDEF\\gscat.bdf"
+    barcode: "C:\\NEX\\YEARACT\\DBIDEF\\barcode.bdf"
+    mglst: "C:\\NEX\\YEARACT\\DBIDEF\\mglst.bdf"
+    pab: "C:\\NEX\\YEARACT\\DBIDEF\\pab.bdf"
+    tsh: "C:\\NEX\\YEARACT\\DBIDEF\\tsh.bdf"
+    tsi: "C:\\NEX\\YEARACT\\DBIDEF\\tsi.bdf"
+
+# Btrieve DLL configuration
+btrieve:
+  dll_path: "external-dlls"
+  dll_names:
+    - "w3btrv7.dll"
+    - "wbtrv32.dll"
+    - "btrieve.dll"
+
+# Logging
+logging:
+  enabled: true
+  level: "INFO"
+  path: "C:\\Logs\\NEXGenesisServer"
+
+# Important notes
+notes:
+  - "Database files use .BTR extension (not .DAT)"
+  - "Definition files use .bdf extension"
+  - "YEARACT contains current year data"
+  - "STORES = Stock management database"
+  - "DIALS = Reference tables (číselníky)"
+  - "DBIDEF = Database definitions"
+  - "TSH/TSI naming: TSH{A/P}-{nnn}.BTR"
+  - "A = actual year, P = previous years"
+  - "Default book number: 001"

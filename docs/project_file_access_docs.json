@@ -1,15 +1,36 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Project documentation files",
-  "generated_at": "2025-10-21T23:59:00.918162",
+  "generated_at": "2025-10-22T11:33:28.600660",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "files": [
+    {
+      "path": "docs/BTRIEVE_BRIDGE_SERVICE.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/BTRIEVE_BRIDGE_SERVICE.md",
+      "size": 12571,
+      "extension": ".md",
+      "name": "BTRIEVE_BRIDGE_SERVICE.md"
+    },
+    {
+      "path": "docs/COMMIT_AND_PUSH.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/COMMIT_AND_PUSH.md",
+      "size": 5397,
+      "extension": ".md",
+      "name": "COMMIT_AND_PUSH.md"
+    },
     {
       "path": "docs/FULL_PROJECT_CONTEXT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md",
       "size": 34443,
       "extension": ".md",
       "name": "FULL_PROJECT_CONTEXT.md"
+    },
+    {
+      "path": "docs/INSTALL_32BIT_PYTHON.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INSTALL_32BIT_PYTHON.md",
+      "size": 6664,
+      "extension": ".md",
+      "name": "INSTALL_32BIT_PYTHON.md"
     },
     {
       "path": "docs/MASTER_CONTEXT.md",
@@ -19,11 +40,32 @@
       "name": "MASTER_CONTEXT.md"
     },
     {
+      "path": "docs/NEX_DATABASE_STRUCTURE.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/NEX_DATABASE_STRUCTURE.md",
+      "size": 6960,
+      "extension": ".md",
+      "name": "NEX_DATABASE_STRUCTURE.md"
+    },
+    {
+      "path": "docs/PERVASIVE_DLL_INFO.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PERVASIVE_DLL_INFO.md",
+      "size": 5165,
+      "extension": ".md",
+      "name": "PERVASIVE_DLL_INFO.md"
+    },
+    {
       "path": "docs/PROJECT_MANIFESTS_README.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PROJECT_MANIFESTS_README.md",
       "size": 10258,
       "extension": ".md",
       "name": "PROJECT_MANIFESTS_README.md"
+    },
+    {
+      "path": "docs/PYTHON_VERSION_REQUIREMENTS.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PYTHON_VERSION_REQUIREMENTS.md",
+      "size": 4312,
+      "extension": ".md",
+      "name": "PYTHON_VERSION_REQUIREMENTS.md"
     },
     {
       "path": "docs/QUICK_START.md",
@@ -40,6 +82,13 @@
       "name": "README.md"
     },
     {
+      "path": "docs/README_32BIT_PYTHON.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/README_32BIT_PYTHON.md",
+      "size": 2616,
+      "extension": ".md",
+      "name": "README_32BIT_PYTHON.md"
+    },
+    {
       "path": "docs/SYSTEM_PROMPT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT.md",
       "size": 7116,
@@ -52,6 +101,13 @@
       "size": 7447,
       "extension": ".md",
       "name": "SYSTEM_PROMPT_DATABASE.md"
+    },
+    {
+      "path": "docs/TESTING_GUIDE.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/TESTING_GUIDE.md",
+      "size": 8200,
+      "extension": ".md",
+      "name": "TESTING_GUIDE.md"
     },
     {
       "path": "docs/architecture/database-access-pattern.md",
@@ -73,6 +129,13 @@
       "size": 11855,
       "extension": ".md",
       "name": "2025-10-21_session.md"
+    },
+    {
+      "path": "docs/sessions/2025-10-22_session.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-22_session.md",
+      "size": 8540,
+      "extension": ".md",
+      "name": "2025-10-22_session.md"
     }
   ]
 }

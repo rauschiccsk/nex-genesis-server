@@ -1,0 +1,52 @@
+# ===================================
+# NEX Genesis Server - Minimal Requirements
+# ===================================
+#
+# Minimal dependencies for Btrieve testing and development
+# Use this for initial setup and testing
+#
+# Install:
+#   pip install -r requirements-minimal.txt
+#
+
+# ===================================
+# Core Dependencies (REQUIRED)
+# ===================================
+
+# YAML configuration parsing
+PyYAML>=6.0.1
+
+# ===================================
+# Testing (REQUIRED for tests)
+# ===================================
+
+# Testing framework
+pytest>=7.4.3
+pytest-cov>=4.1.0
+
+# Terminal colors (for test output)
+colorama>=0.4.6
+
+# ===================================
+# Development Tools (Optional but recommended)
+# ===================================
+
+# Code formatting
+black>=23.11.0
+
+# Linting
+flake8>=6.1.0
+
+# ===================================
+# Future Dependencies (NOT needed yet)
+# ===================================
+#
+# These will be installed later when needed:
+# - lxml (XML parsing for ISDOC)
+# - pydantic (data validation)
+# - fastapi (HTTP API)
+# - uvicorn (ASGI server)
+# - requests (HTTP client)
+#
+# For now, focus on Btrieve testing!
+#

@@ -2,59 +2,80 @@
 # NEX Genesis Server - Requirements
 # ===================================
 #
-# Python dependencies for project scripts and tools
-# NOT for Delphi code (Delphi 6 has its own dependencies)
+# Python dependencies for NEX Genesis Server
+# Python Btrieve Services for NEX Genesis ERP
 #
 # Install:
 #   pip install -r requirements.txt
+#
+# Update:
+#   pip install --upgrade -r requirements.txt
 #
 
 # ===================================
 # Core Dependencies
 # ===================================
 
-# HTTP requests (for GitHub API)
+# YAML configuration parsing
+PyYAML>=6.0.1
+
+# XML parsing and validation (for ISDOC)
+lxml>=4.9.3
+
+# Data validation and serialization
+pydantic>=2.4.2
+
+# HTTP requests (for external APIs)
 requests>=2.31.0
 
-# GitHub API client
-PyGithub>=2.1.0
+# ===================================
+# Btrieve / Database Access
+# ===================================
 
-# YAML parsing (for config files)
-PyYAML>=6.0
+# ctypes is built-in Python module
+# No additional dependencies needed for Btrieve DLL access
 
-# JSON schema validation
-jsonschema>=4.19.0
+# ===================================
+# Web Framework (Future)
+# ===================================
 
-# XML parsing (for ISDOC analysis)
-lxml>=4.9.0
+# FastAPI web framework
+fastapi>=0.104.1
+
+# ASGI server
+uvicorn[standard]>=0.24.0
+
+# HTTP client for FastAPI
+httpx>=0.25.0
 
 # ===================================
 # Development Tools
 # ===================================
 
 # Code formatting
-black>=23.0.0
+black>=23.11.0
 
 # Linting
-pylint>=3.0.0
+pylint>=3.0.2
 flake8>=6.1.0
 
 # Type checking
-mypy>=1.5.0
+mypy>=1.7.0
+
+# Import sorting
+isort>=5.12.0
 
 # ===================================
-# Testing (Optional)
+# Testing
 # ===================================
 
-# pytest>=7.4.0
-# pytest-cov>=4.1.0
+# Testing framework
+pytest>=7.4.3
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.1
 
-# ===================================
-# Documentation (Optional)
-# ===================================
-
-# sphinx>=7.2.0
-# sphinx-rtd-theme>=1.3.0
+# Mock objects
+pytest-mock>=3.12.0
 
 # ===================================
 # Utilities
@@ -64,13 +85,53 @@ mypy>=1.5.0
 python-dotenv>=1.0.0
 
 # CLI tools
-click>=8.1.0
+click>=8.1.7
 
 # Progress bars
-tqdm>=4.66.0
+tqdm>=4.66.1
 
 # Terminal colors
 colorama>=0.4.6
 
 # Date/time handling
-python-dateutil>=2.8.0
+python-dateutil>=2.8.2
+
+# Logging
+loguru>=0.7.2
+
+# ===================================
+# Documentation (Optional)
+# ===================================
+
+# sphinx>=7.2.6
+# sphinx-rtd-theme>=1.3.0
+# myst-parser>=2.0.0
+
+# ===================================
+# GitHub Integration (Optional)
+# ===================================
+
+# PyGithub>=2.1.1
+
+# ===================================
+# Notes
+# ===================================
+#
+# CRITICAL: Python must be 32-bit for Btrieve DLL compatibility!
+#   NEX Genesis uses 32-bit Pervasive PSQL v11 (wxqlcall.dll)
+#   64-bit Python cannot load 32-bit DLLs
+#
+#   Verify Python version:
+#   >>> import platform
+#   >>> platform.architecture()
+#   ('32bit', 'WindowsPE')  # ✅ OK
+#   ('64bit', 'WindowsPE')  # ❌ Will not work!
+#
+# - ctypes is used for Btrieve DLL access (built-in, no install needed)
+# - Pervasive PSQL v11 SDK/DLLs must be installed separately
+# - external-dlls/ directory contains required Btrieve DLLs:
+#   - wxqlcall.dll (primary - Pervasive PSQL v11)
+#   - wdbnames.dll, wdbnm32.dll, wssql32.dll (helpers)
+# - FastAPI/uvicorn needed for future HTTP API endpoints
+# - Testing dependencies optional but recommended
+#
