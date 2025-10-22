@@ -1,8 +1,16 @@
+# src/utils/__init__.py
 """
-NEX Genesis Server - Utilities Module
-Configuration and helper utilities
+Utilities Module
+
+Configuration management and helper functions
 """
 
-from .config import Config, get_config
+from .config import load_config, get_database_path, validate_paths
 
-__all__ = ['Config', 'get_config']
+__all__ = [
+    'load_config',
+    'get_database_path', 
+    'validate_paths',
+]
+
+__version__ = '0.2.1'

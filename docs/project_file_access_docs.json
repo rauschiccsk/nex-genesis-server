@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Project documentation files",
-  "generated_at": "2025-10-22T11:33:28.600660",
+  "generated_at": "2025-10-22T21:29:48.864714",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "files": [
     {
@@ -133,9 +133,16 @@
     {
       "path": "docs/sessions/2025-10-22_session.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-22_session.md",
-      "size": 8540,
+      "size": 12938,
       "extension": ".md",
       "name": "2025-10-22_session.md"
+    },
+    {
+      "path": "docs/sessions/README.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/README.md",
+      "size": 1406,
+      "extension": ".md",
+      "name": "README.md"
     }
   ]
 }

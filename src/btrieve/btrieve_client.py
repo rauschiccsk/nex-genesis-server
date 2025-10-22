@@ -1,384 +1,316 @@
-"""
-NEX Genesis Server - Btrieve Client
-Python wrapper pre Pervasive PSQL Btrieve API
-"""
-
+# src/btrieve/btrieve_client.py
 import ctypes
-from ctypes import *
-from enum import IntEnum
-from typing import Optional, Tuple
 import os
-import sys
+import struct
+from pathlib import Path
+from typing import Optional, Tuple
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-
-from src.utils.config import get_config
-
-# =============================================================================
-# BTRIEVE OPERATION CODES
-# =============================================================================
-
-class BtrOp(IntEnum):
-    """Btrieve operation codes"""
-    # Basic operations
-    OPEN = 0
-    CLOSE = 1
-    INSERT = 2
-    UPDATE = 3
-    DELETE = 4
-
-    # Get operations
-    GET_EQUAL = 5
-    GET_NEXT = 6
-    GET_PREVIOUS = 7
-    GET_GREATER = 8
-    GET_GREATER_EQUAL = 9
-    GET_LESS_THAN = 10
-    GET_LESS_EQUAL = 11
-    GET_FIRST = 12
-    GET_LAST = 13
-
-    # Position operations
-    GET_DIRECT = 23
-    STEP_FIRST = 33
-    STEP_LAST = 34
-    STEP_NEXT = 24
-    STEP_PREVIOUS = 36
-
-    # Other operations
-    CREATE = 14
-    STAT = 15
-    EXTEND = 16
-    SET_DIR = 17
-    GET_DIR = 18
-    BEGIN_TRAN = 19
-    END_TRAN = 20
-    ABORT_TRAN = 21
-    GET_POSITION = 22
-    UNLOCK = 27
-    RESET = 28
-    SET_OWNER = 29
-    CLEAR_OWNER = 30
-    CREATE_INDEX = 31
-    DROP_INDEX = 32
-    VERSION = 26
-    STOP = 25
-
-# =============================================================================
-# BTRIEVE STATUS CODES
-# =============================================================================
-
-class BtrStatus(IntEnum):
-    """Btrieve status codes"""
-    SUCCESS = 0
-    INVALID_OPERATION = 1
-    IO_ERROR = 2
-    FILE_NOT_OPEN = 3
-    KEY_NOT_FOUND = 4
-    DUPLICATE_KEY = 5
-    INVALID_KEY_NUMBER = 6
-    DIFFERENT_KEY_NUMBER = 7
-    INVALID_POSITIONING = 8
-    END_OF_FILE = 9
-    MODIFIABLE_KEY_VALUE_ERROR = 10
-    FILE_NAME_BAD = 11
-    FILE_NOT_FOUND = 12
-    EXTENDED_FILE_ERROR = 13
-    PERMISSION_ERROR = 14
-    ALREADY_OPEN = 15
-    CLOSE_ERROR = 16
-    DISK_FULL = 17
-    INCOMPLETE_ACCEL_ACCESS = 18
-    INCOMPLETE_INDEX = 19
-    EXPANSION_ERROR = 20
-    CLOSE_ERROR_20 = 20
-    RECORD_LOCKED = 84
-    FILE_LOCKED = 85
-
-# =============================================================================
-# BTRIEVE CLIENT CLASS
-# =============================================================================
 
 class BtrieveClient:
     """
-    Python wrapper pre Btrieve API
-
-    Usage:
-        client = BtrieveClient()
-        client.open_table('gscat')
-        data = client.get_first()
-        client.close_file()
+    Python wrapper pre Pervasive Btrieve API (32-bit)
+    Používa w3btrv7.dll alebo wbtrv32.dll
     """
 
-    def __init__(self, dll_path: str = None):
+    # Btrieve operation codes
+    B_OPEN = 0
+    B_CLOSE = 1
+    B_INSERT = 2
+    B_UPDATE = 3
+    B_DELETE = 4
+    B_GET_EQUAL = 5
+    B_GET_NEXT = 6
+    B_GET_PREVIOUS = 7
+    B_GET_GREATER = 8
+    B_GET_GREATER_OR_EQUAL = 9
+    B_GET_LESS = 10
+    B_GET_LESS_OR_EQUAL = 11
+    B_GET_FIRST = 12
+    B_GET_LAST = 13
+    B_STEP_NEXT = 24
+    B_STEP_PREVIOUS = 35
+
+    # Btrieve status codes
+    STATUS_SUCCESS = 0
+    STATUS_INVALID_OPERATION = 1
+    STATUS_IO_ERROR = 2
+    STATUS_FILE_NOT_OPEN = 3
+    STATUS_KEY_NOT_FOUND = 4
+    STATUS_DUPLICATE_KEY = 5
+    STATUS_INVALID_KEY_NUMBER = 6
+    STATUS_DIFFERENT_KEY_NUMBER = 7
+    STATUS_INVALID_POSITIONING = 8
+
+    def __init__(self, config_path: Optional[str] = None):
         """
-        Initialize Btrieve client
+        Inicializácia Btrieve klienta
 
         Args:
-            dll_path: Path to DLL directory (default: from config)
+            config_path: Cesta ku config súboru (YAML)
         """
         self.dll = None
-        self.config = get_config()
-        self.dll_path = dll_path or self.config.get_dll_path()
-        self.pos_block = None
-        self.current_table = None
-        self.load_dll()
+        self.btrcall = None
+        self.database_path = None
+        self.config = None
 
-    def load_dll(self):
-        """Load Btrieve DLL and setup function signatures"""
-        # Try different DLL names (Pervasive PSQL and Btrieve)
+        # Load config if provided
+        if config_path:
+            from ..utils.config import load_config
+            self.config = load_config(config_path)
+            if 'nex_genesis' in self.config and 'database' in self.config['nex_genesis']:
+                self.database_path = self.config['nex_genesis']['database'].get('stores_path')
+
+        # Inicializuj DLL
+        self._load_dll()
+
+    def _load_dll(self) -> None:
+        """Načítaj Btrieve DLL a nastav BTRCALL funkciu"""
+
+        # DLL priority list
         dll_names = [
-            "wxqlcall.dll",   # Pervasive PSQL v11 (primary)
-            "wbtrv32.dll",    # Btrieve 32-bit
-            "w3btrv7.dll",    # Btrieve alternative
-            "btrieve.dll"     # Generic Btrieve
+            'w3btrv7.dll',  # Primary - Windows Btrieve API
+            'wbtrv32.dll',  # Fallback - 32-bit Btrieve API
         ]
 
-        errors = []
-        for dll_name in dll_names:
-            dll_file = os.path.join(self.dll_path, dll_name)
+        # Search paths (in priority order)
+        search_paths = [
+            # 1. Pervasive PSQL installation (v11.30)
+            Path(r"C:\Program Files (x86)\Pervasive Software\PSQL\bin"),
 
-            # Check if file exists
-            if not os.path.exists(dll_file):
-                print(f"⚠️  {dll_name} not found")
+            # 2. Old Pervasive installation
+            Path(r"C:\PVSW\bin"),
+
+            # 3. Local external-dlls directory
+            Path(__file__).parent.parent.parent / 'external-dlls',
+
+            # 4. System directory (Windows\SysWOW64)
+            Path(r"C:\Windows\SysWOW64"),
+        ]
+
+        # Try each path and DLL combination
+        for search_path in search_paths:
+            if not search_path.exists():
                 continue
 
-            print(f"🔍 Trying to load: {dll_name}")
-            print(f"   Full path: {os.path.abspath(dll_file)}")
+            for dll_name in dll_names:
+                dll_path = search_path / dll_name
 
-            try:
-                # Try to load DLL
-                self.dll = ctypes.windll.LoadLibrary(dll_file)
-                print(f"✅ DLL loaded successfully: {dll_name}")
+                if not dll_path.exists():
+                    continue
 
-                # Try to setup API
-                self._setup_api()
-                print(f"✅ Btrieve API setup complete")
-                return
+                try:
+                    # Load DLL
+                    self.dll = ctypes.WinDLL(str(dll_path))
 
-            except OSError as e:
-                error_msg = f"OSError loading {dll_name}: {e}"
-                print(f"❌ {error_msg}")
-                errors.append(error_msg)
-                continue
-            except Exception as e:
-                error_msg = f"Error with {dll_name}: {type(e).__name__}: {e}"
-                print(f"❌ {error_msg}")
-                errors.append(error_msg)
-                continue
+                    # Get BTRCALL function
+                    try:
+                        self.btrcall = self.dll.BTRCALL
+                    except AttributeError:
+                        # Try lowercase
+                        try:
+                            self.btrcall = self.dll.btrcall
+                        except AttributeError:
+                            continue
 
-        # If we get here, nothing worked
-        error_summary = "\n".join(errors) if errors else "No compatible DLL found"
-        raise RuntimeError(f"❌ Could not load Btrieve DLL from {self.dll_path}\n\nErrors:\n{error_summary}")
+                    # Configure BTRCALL signature
+                    self.btrcall.argtypes = [
+                        ctypes.c_uint16,  # operation
+                        ctypes.POINTER(ctypes.c_char),  # posBlock
+                        ctypes.POINTER(ctypes.c_char),  # dataBuffer
+                        ctypes.POINTER(ctypes.c_uint16),  # dataLen
+                        ctypes.POINTER(ctypes.c_char),  # keyBuffer
+                        ctypes.c_uint8,  # keyLen
+                        ctypes.c_int8  # keyNum
+                    ]
+                    self.btrcall.restype = ctypes.c_int16  # Status code
 
-    def _setup_api(self):
-        """Define DLL function signatures"""
-        # Try different function names
-        func_names = ["BTRV", "BtrCall", "BTRVID", "BTRCALL"]
+                    print(f"✅ Loaded Btrieve DLL: {dll_name} from {search_path}")
+                    return
 
-        print(f"🔍 Looking for Btrieve function in DLL...")
+                except Exception as e:
+                    # Silent fail, try next DLL
+                    continue
 
-        # List all exported functions (if possible)
-        try:
-            # Try to list exports
-            if hasattr(self.dll, '_name'):
-                print(f"   DLL name: {self.dll._name}")
-        except:
-            pass
+        raise RuntimeError(
+            "❌ Could not load any Btrieve DLL from any location.\n"
+            "Searched paths:\n" +
+            "\n".join(f"  - {p}" for p in search_paths if p.exists())
+        )
 
-        for func_name in func_names:
-            print(f"   Checking for: {func_name}...", end=" ")
-            if hasattr(self.dll, func_name):
-                print("✅ FOUND")
-                self.btrv_func = getattr(self.dll, func_name)
-                self.btrv_func.argtypes = [
-                    POINTER(c_ushort),  # operation
-                    POINTER(c_char),    # posBlock (128 bytes)
-                    POINTER(c_char),    # dataBuffer
-                    POINTER(c_ushort),  # dataLength
-                    POINTER(c_char),    # keyBuffer
-                    c_ubyte,            # keyLength
-                    c_byte              # keyNumber
-                ]
-                self.btrv_func.restype = c_int
-                print(f"✅ Using Btrieve function: {func_name}")
-                return
-            else:
-                print("❌ Not found")
-
-        raise RuntimeError(f"❌ Could not find Btrieve function in DLL\nTried: {', '.join(func_names)}")
-
-    def call_btrieve(self, operation: int, data_buffer: bytes = b"",
-                     key_buffer: bytes = b"", key_number: int = 0) -> Tuple[int, bytes]:
+    def open_file(self, filename: str, owner_name: str = "", mode: int = -2) -> Tuple[int, bytes]:
         """
-        Low-level Btrieve call
+        Otvor Btrieve súbor
 
         Args:
-            operation: Btrieve operation code
-            data_buffer: Data buffer
-            key_buffer: Key buffer
-            key_number: Index number
+            filename: Cesta k .dat/.BTR súboru
+            owner_name: Owner name (optional)
+            mode: Open mode
+                  0 = Normal
+                 -1 = Accelerated
+                 -2 = Read-only (DEFAULT - safest)
+                 -3 = Exclusive
 
         Returns:
-            Tuple of (status_code, result_data)
+            Tuple[status_code, position_block]
         """
-        # Prepare buffers
-        if self.pos_block is None:
-            self.pos_block = (c_char * 128)()
+        # Position block (128 bytes)
+        pos_block = ctypes.create_string_buffer(128)
 
-        op = c_ushort(operation)
-        data_len = c_ushort(len(data_buffer) if data_buffer else 4096)
+        # Data buffer (filename + null terminator)
+        filename_bytes = filename.encode('ascii') + b'\x00'
+        data_buffer = ctypes.create_string_buffer(filename_bytes)
+        data_len = ctypes.c_uint16(len(filename_bytes))
 
-        if not data_buffer:
-            data_buf = (c_char * data_len.value)()
+        # Key buffer (owner name or empty)
+        if owner_name:
+            key_buffer = ctypes.create_string_buffer(owner_name.encode('ascii') + b'\x00')
         else:
-            data_buf = (c_char * len(data_buffer))(*data_buffer)
+            key_buffer = ctypes.create_string_buffer(1)
 
-        if key_buffer:
-            key_buf = (c_char * len(key_buffer))(*key_buffer)
-            key_len = c_ubyte(len(key_buffer))
-        else:
-            key_buf = (c_char * 255)()
-            key_len = c_ubyte(0)
+        # Call BTRCALL
+        # NOTE: keyNum is used as open mode for B_OPEN operation!
+        status = self.btrcall(
+            self.B_OPEN,
+            pos_block,
+            data_buffer,
+            ctypes.byref(data_len),
+            key_buffer,
+            0,  # keyLen (not used for OPEN)
+            mode  # keyNum = open mode (-2 = read-only)
+        )
 
-        key_num = c_byte(key_number)
+        return status, pos_block.raw
 
-        # Call Btrieve
-        status = self.btrv_func(
-            byref(op),
-            self.pos_block,
-            data_buf,
-            byref(data_len),
-            key_buf,
-            key_len,
+    def close_file(self, pos_block: bytes) -> int:
+        """
+        Zavri Btrieve súbor
+
+        Args:
+            pos_block: Position block z open_file()
+
+        Returns:
+            status_code
+        """
+        pos_block_buf = ctypes.create_string_buffer(pos_block)
+        data_buffer = ctypes.create_string_buffer(1)
+        data_len = ctypes.c_uint16(0)
+        key_buffer = ctypes.create_string_buffer(1)
+
+        status = self.btrcall(
+            self.B_CLOSE,
+            pos_block_buf,
+            data_buffer,
+            ctypes.byref(data_len),
+            key_buffer,
+            0,
+            0
+        )
+
+        return status
+
+    def get_first(self, pos_block: bytes, key_num: int = 0) -> Tuple[int, bytes]:
+        """
+        Načítaj prvý záznam
+
+        Args:
+            pos_block: Position block
+            key_num: Index number (default: 0)
+
+        Returns:
+            Tuple[status_code, data]
+        """
+        pos_block_buf = ctypes.create_string_buffer(pos_block)
+        data_buffer = ctypes.create_string_buffer(4096)  # Max record size
+        data_len = ctypes.c_uint16(4096)
+        key_buffer = ctypes.create_string_buffer(255)
+
+        status = self.btrcall(
+            self.B_GET_FIRST,
+            pos_block_buf,
+            data_buffer,
+            ctypes.byref(data_len),
+            key_buffer,
+            0,
             key_num
         )
 
-        # Return status and data
-        result_data = bytes(data_buf[:data_len.value])
-        return (status, result_data)
+        if status == self.STATUS_SUCCESS:
+            return status, data_buffer.raw[:data_len.value]
+        else:
+            return status, b''
 
-    def open_table(self, table_name: str, owner_name: str = "") -> int:
+    def get_next(self, pos_block: bytes) -> Tuple[int, bytes]:
         """
-        Open Btrieve table by name (uses config)
+        Načítaj ďalší záznam
 
         Args:
-            table_name: Table name (gscat, barcode, pab, tsh, tsi, etc.)
-            owner_name: Owner name (optional)
+            pos_block: Position block
 
         Returns:
-            Status code (0 = success)
+            Tuple[status_code, data]
         """
-        # Get table path from config
-        table_path = self.config.get_table_path(table_name)
-        return self.open_file(table_path)
+        pos_block_buf = ctypes.create_string_buffer(pos_block)
+        data_buffer = ctypes.create_string_buffer(4096)
+        data_len = ctypes.c_uint16(4096)
+        key_buffer = ctypes.create_string_buffer(255)
 
-    def open_file(self, filename: str, owner_name: str = "") -> int:
+        status = self.btrcall(
+            self.B_GET_NEXT,
+            pos_block_buf,
+            data_buffer,
+            ctypes.byref(data_len),
+            key_buffer,
+            0,
+            0
+        )
+
+        if status == self.STATUS_SUCCESS:
+            return status, data_buffer.raw[:data_len.value]
+        else:
+            return status, b''
+
+    def get_status_message(self, status_code: int) -> str:
         """
-        Open Btrieve file by path
+        Konvertuj status code na human-readable správu
 
         Args:
-            filename: Full path to .BTR file
-            owner_name: Owner name (optional)
+            status_code: Btrieve status code
 
         Returns:
-            Status code (0 = success)
+            Status message
         """
-        # Check if file exists
-        if not os.path.exists(filename):
-            print(f"❌ File not found: {filename}")
-            return BtrStatus.FILE_NOT_FOUND
-
-        # Filename as data buffer
-        file_bytes = filename.encode('ascii') + b'\x00'
-        status, _ = self.call_btrieve(BtrOp.OPEN, file_bytes)
-
-        if status == BtrStatus.SUCCESS:
-            print(f"✅ Opened file: {filename}")
-            self.current_table = filename
-        else:
-            print(f"❌ Failed to open {filename}: status={status}")
-
-        return status
-
-    def close_file(self) -> int:
-        """Close currently open file"""
-        status, _ = self.call_btrieve(BtrOp.CLOSE)
-
-        if status == BtrStatus.SUCCESS:
-            print(f"✅ File closed: {self.current_table}")
-            self.pos_block = None
-            self.current_table = None
-        else:
-            print(f"❌ Close failed: status={status}")
-
-        return status
-
-    def get_first(self, key_number: int = 0) -> Tuple[int, bytes]:
-        """Get first record"""
-        return self.call_btrieve(BtrOp.GET_FIRST, key_number=key_number)
-
-    def get_next(self, key_number: int = 0) -> Tuple[int, bytes]:
-        """Get next record"""
-        return self.call_btrieve(BtrOp.GET_NEXT, key_number=key_number)
-
-    def get_last(self, key_number: int = 0) -> Tuple[int, bytes]:
-        """Get last record"""
-        return self.call_btrieve(BtrOp.GET_LAST, key_number=key_number)
-
-    def get_equal(self, key_value: bytes, key_number: int = 0) -> Tuple[int, bytes]:
-        """Get record by key value"""
-        return self.call_btrieve(BtrOp.GET_EQUAL, key_buffer=key_value, key_number=key_number)
-
-    def insert(self, record_data: bytes) -> int:
-        """Insert new record"""
-        status, _ = self.call_btrieve(BtrOp.INSERT, record_data)
-        return status
-
-    def update(self, record_data: bytes) -> int:
-        """Update current record"""
-        status, _ = self.call_btrieve(BtrOp.UPDATE, record_data)
-        return status
-
-    def delete(self) -> int:
-        """Delete current record"""
-        status, _ = self.call_btrieve(BtrOp.DELETE)
-        return status
+        messages = {
+            0: "SUCCESS",
+            1: "INVALID_OPERATION",
+            2: "IO_ERROR",
+            3: "FILE_NOT_OPEN",
+            4: "KEY_NOT_FOUND",
+            5: "DUPLICATE_KEY",
+            6: "INVALID_KEY_NUMBER",
+            7: "DIFFERENT_KEY_NUMBER",
+            8: "INVALID_POSITIONING",
+        }
+        return messages.get(status_code, f"UNKNOWN_ERROR_{status_code}")
 
 
-# =============================================================================
-# USAGE EXAMPLE
-# =============================================================================
+# Convenience functions
+def open_btrieve_file(filename: str, config_path: Optional[str] = None) -> Tuple[BtrieveClient, bytes]:
+    """
+    Helper funkcia na otvorenie Btrieve súboru
 
-if __name__ == "__main__":
-    # Test Btrieve client
-    print("\n🧪 Testing Btrieve Client")
-    print("=" * 60)
+    Args:
+        filename: Cesta k .dat súboru
+        config_path: Cesta ku config súboru
 
-    try:
-        client = BtrieveClient()
+    Returns:
+        Tuple[client, position_block]
+    """
+    client = BtrieveClient(config_path)
+    status, pos_block = client.open_file(filename)
 
-        # Test with GSCAT table
-        print("\n📊 Testing GSCAT table...")
-        status = client.open_table('gscat')
+    if status != BtrieveClient.STATUS_SUCCESS:
+        raise RuntimeError(
+            f"Failed to open {filename}: {client.get_status_message(status)}"
+        )
 
-        if status == BtrStatus.SUCCESS:
-            # Get first record
-            status, data = client.get_first()
-            if status == BtrStatus.SUCCESS:
-                print(f"✅ First record: {len(data)} bytes")
-                print(f"   First 50 bytes: {data[:50]}")
-                print(f"   Hex: {data[:50].hex()}")
-            else:
-                print(f"❌ Failed to read first record: status={status}")
-
-            # Close file
-            client.close_file()
-        else:
-            print(f"❌ Failed to open GSCAT: status={status}")
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
+    return client, pos_block

@@ -1,239 +1,202 @@
+# tests/test_btrieve_file.py
 """
-Test 2: Btrieve File Opening
-Tests opening of actual Btrieve table files
-REQUIRES DATABASE ACCESS
+Level 2: Btrieve File Opening Tests
+
+Tests:
+- Open GSCAT.BTR file
+- Verify position block
+- Close file
 """
 
 import sys
 import os
+from pathlib import Path
 
 # Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.btrieve.btrieve_client import BtrieveClient, BtrStatus
-from src.utils.config import get_config
-
-
-def test_gscat_open():
-    """Test 2.1: Open GSCAT table"""
-    print("\n🧪 TEST 2.1: Open GSCAT Table")
-    print("=" * 60)
-
-    try:
-        config = get_config()
-        gscat_path = config.get_table_path('gscat')
-
-        print(f"📁 GSCAT path: {gscat_path}")
-
-        # Check if file exists
-        if not os.path.exists(gscat_path):
-            print(f"⚠️  File not found: {gscat_path}")
-            return False
-
-        print(f"✅ File exists")
-
-        # Try to open
-        client = BtrieveClient()
-        status = client.open_table('gscat')
-
-        if status == BtrStatus.SUCCESS:
-            print("✅ GSCAT opened successfully!")
-            client.close_file()
-            return True
-        else:
-            print(f"❌ Failed to open GSCAT: status={status}")
-            return False
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
+from src.btrieve.btrieve_client import BtrieveClient
+from src.utils.config import load_config
 
 
-def test_barcode_open():
-    """Test 2.2: Open BARCODE table"""
-    print("\n🧪 TEST 2.2: Open BARCODE Table")
-    print("=" * 60)
-
-    try:
-        config = get_config()
-        barcode_path = config.get_table_path('barcode')
-
-        print(f"📁 BARCODE path: {barcode_path}")
-
-        if not os.path.exists(barcode_path):
-            print(f"⚠️  File not found: {barcode_path}")
-            return False
-
-        print(f"✅ File exists")
-
-        client = BtrieveClient()
-        status = client.open_table('barcode')
-
-        if status == BtrStatus.SUCCESS:
-            print("✅ BARCODE opened successfully!")
-            client.close_file()
-            return True
-        else:
-            print(f"❌ Failed to open BARCODE: status={status}")
-            return False
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-
-def test_pab_open():
-    """Test 2.3: Open PAB table"""
-    print("\n🧪 TEST 2.3: Open PAB Table (DIALS)")
-    print("=" * 60)
-
-    try:
-        config = get_config()
-        pab_path = config.get_table_path('pab')
-
-        print(f"📁 PAB path: {pab_path}")
-
-        if not os.path.exists(pab_path):
-            print(f"⚠️  File not found: {pab_path}")
-            return False
-
-        print(f"✅ File exists")
-
-        client = BtrieveClient()
-        status = client.open_table('pab')
-
-        if status == BtrStatus.SUCCESS:
-            print("✅ PAB opened successfully!")
-            client.close_file()
-            return True
-        else:
-            print(f"❌ Failed to open PAB: status={status}")
-            return False
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-
-def test_tsh_open():
-    """Test 2.4: Open TSH table"""
-    print("\n🧪 TEST 2.4: Open TSH Table (Delivery Notes Header)")
-    print("=" * 60)
-
-    try:
-        config = get_config()
-        tsh_path = config.get_table_path('tsh')
-
-        print(f"📁 TSH path: {tsh_path}")
-        print(f"   Filename: {config.get_tsh_filename()}")
-
-        if not os.path.exists(tsh_path):
-            print(f"⚠️  File not found: {tsh_path}")
-            print(f"   This is OK if no delivery notes exist yet")
-            return True  # Not critical
-
-        print(f"✅ File exists")
-
-        client = BtrieveClient()
-        status = client.open_table('tsh')
-
-        if status == BtrStatus.SUCCESS:
-            print("✅ TSH opened successfully!")
-            client.close_file()
-            return True
-        else:
-            print(f"❌ Failed to open TSH: status={status}")
-            return False
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-
-def test_tsi_open():
-    """Test 2.5: Open TSI table"""
-    print("\n🧪 TEST 2.5: Open TSI Table (Delivery Notes Items)")
-    print("=" * 60)
-
-    try:
-        config = get_config()
-        tsi_path = config.get_table_path('tsi')
-
-        print(f"📁 TSI path: {tsi_path}")
-        print(f"   Filename: {config.get_tsi_filename()}")
-
-        if not os.path.exists(tsi_path):
-            print(f"⚠️  File not found: {tsi_path}")
-            print(f"   This is OK if no delivery notes exist yet")
-            return True  # Not critical
-
-        print(f"✅ File exists")
-
-        client = BtrieveClient()
-        status = client.open_table('tsi')
-
-        if status == BtrStatus.SUCCESS:
-            print("✅ TSI opened successfully!")
-            client.close_file()
-            return True
-        else:
-            print(f"❌ Failed to open TSI: status={status}")
-            return False
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-
-def run_all_tests():
-    """Run all file opening tests"""
+def print_section(title):
     print("\n" + "=" * 60)
-    print("🚀 BTRIEVE FILE OPENING TESTS")
+    print(title)
     print("=" * 60)
 
-    results = {
-        "GSCAT": test_gscat_open(),
-        "BARCODE": test_barcode_open(),
-        "PAB": test_pab_open(),
-        "TSH": test_tsh_open(),
-        "TSI": test_tsi_open()
-    }
+
+def test_file_opening():
+    """Test opening and closing Btrieve files"""
+
+    print_section("🚀 BTRIEVE FILE OPENING TESTS")
+
+    # Load config
+    config_path = Path(__file__).parent.parent / "config" / "database.yaml"
+    config = load_config(str(config_path))
+
+    # DEBUG: Print config structure
+    print("\n🔍 DEBUG: Config structure:")
+    import json
+    print(json.dumps(config, indent=2, default=str))
+
+    # Create client
+    print("\n🔧 Initializing Btrieve client...")
+    client = BtrieveClient(str(config_path))
+    print("✅ Client initialized!")
+
+    # Test 1: Open GSCAT.BTR
+    print_section("🧪 TEST 2.1: Open GSCAT.BTR")
+
+    # Fix: Access config correctly based on its structure
+    if 'database' in config:
+        stores_path = config['database']['stores_path']
+    else:
+        # Fallback: maybe it's flat structure
+        stores_path = config.get('stores_path', config.get('path', 'C:\\NEX\\YEARACT\\STORES'))
+
+    gscat_path = Path(stores_path) / "GSCAT.BTR"
+    print(f"📁 File: {gscat_path}")
+
+    if not gscat_path.exists():
+        print(f"❌ File not found: {gscat_path}")
+        return False
+
+    print(f"✅ File exists ({gscat_path.stat().st_size:,} bytes)")
+
+    # Open file
+    print("\n🔓 Opening file...")
+    try:
+        status, pos_block = client.open_file(str(gscat_path))
+
+        if status == BtrieveClient.STATUS_SUCCESS:
+            print(f"✅ File opened successfully!")
+            print(f"📦 Position block: {len(pos_block)} bytes")
+            print(f"🔑 Status: {client.get_status_message(status)}")
+
+            # Close file
+            print_section("🧪 TEST 2.2: Close GSCAT.BTR")
+            print("🔒 Closing file...")
+            close_status = client.close_file(pos_block)
+
+            if close_status == BtrieveClient.STATUS_SUCCESS:
+                print("✅ File closed successfully!")
+                print(f"🔑 Status: {client.get_status_message(close_status)}")
+                return True
+            else:
+                print(f"❌ Failed to close file!")
+                print(f"🔑 Status: {client.get_status_message(close_status)} ({close_status})")
+                return False
+        else:
+            print(f"❌ Failed to open file!")
+            print(f"🔑 Status: {client.get_status_message(status)} ({status})")
+            return False
+
+    except Exception as e:
+        print(f"❌ Exception: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+
+def test_multiple_files():
+    """Test opening multiple files"""
+
+    print_section("🧪 TEST 2.3: Open Multiple Files")
+
+    # Load config
+    config_path = Path(__file__).parent.parent / "config" / "database.yaml"
+    config = load_config(str(config_path))
+
+    client = BtrieveClient(str(config_path))
+
+    # Fix: Access config correctly
+    if 'database' in config:
+        stores_path = config['database']['stores_path']
+    else:
+        stores_path = config.get('stores_path', 'C:\\NEX\\YEARACT\\STORES')
+
+    # Files to test
+    test_files = [
+        ("GSCAT", Path(stores_path) / "GSCAT.BTR"),
+        ("BARCODE", Path(stores_path) / "BARCODE.BTR"),
+        ("MGLST", Path(stores_path) / "MGLST.BTR"),
+    ]
+
+    results = []
+
+    for name, filepath in test_files:
+        print(f"\n📁 Testing {name}: {filepath}")
+
+        if not filepath.exists():
+            print(f"   ⚠️  File not found, skipping")
+            continue
+
+        try:
+            status, pos_block = client.open_file(str(filepath))
+
+            if status == BtrieveClient.STATUS_SUCCESS:
+                print(f"   ✅ Opened successfully")
+
+                # Close immediately
+                close_status = client.close_file(pos_block)
+                if close_status == BtrieveClient.STATUS_SUCCESS:
+                    print(f"   ✅ Closed successfully")
+                    results.append(True)
+                else:
+                    print(f"   ❌ Failed to close: {client.get_status_message(close_status)}")
+                    results.append(False)
+            else:
+                print(f"   ❌ Failed to open: {client.get_status_message(status)}")
+                results.append(False)
+
+        except Exception as e:
+            print(f"   ❌ Exception: {e}")
+            results.append(False)
+
+    return all(results) if results else False
+
+
+def main():
+    """Run all file opening tests"""
+
+    print_section("🚀 BTRIEVE FILE OPENING TESTS")
+
+    tests = [
+        ("Single File Open/Close", test_file_opening),
+        ("Multiple Files", test_multiple_files),
+    ]
+
+    results = {}
+
+    for name, test_func in tests:
+        try:
+            results[name] = test_func()
+        except Exception as e:
+            print(f"\n❌ Test '{name}' crashed: {e}")
+            import traceback
+            traceback.print_exc()
+            results[name] = False
 
     # Summary
-    print("\n" + "=" * 60)
-    print("📊 TEST SUMMARY")
-    print("=" * 60)
+    print_section("📊 TEST SUMMARY")
 
-    passed = sum(results.values())
+    for name, passed in results.items():
+        status = "✅ PASSED" if passed else "❌ FAILED"
+        print(f"{name}: {status}")
+
     total = len(results)
-
-    for test_name, result in results.items():
-        status = "✅ PASSED" if result else "❌ FAILED"
-        print(f"{test_name}: {status}")
+    passed = sum(1 for r in results.values() if r)
 
     print(f"\nTotal: {passed}/{total} tests passed")
 
     if passed == total:
         print("\n🎉 All file opening tests passed!")
-        return 0
-    elif passed >= 3:
-        print(f"\n⚠️  {total - passed} test(s) failed (but core tables work)")
-        return 0
+        return True
     else:
-        print(f"\n❌ Too many tests failed")
-        return 1
+        print(f"\n⚠️  {total - passed} test(s) failed")
+        return False
 
 
 if __name__ == "__main__":
-    exit_code = run_all_tests()
-    sys.exit(exit_code)
+    success = main()
+    sys.exit(0 if success else 1)

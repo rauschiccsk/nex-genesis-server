@@ -8,10 +8,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### In Progress
-- Task 1.7b - Python Btrieve Setup (70% complete, blocked on DLL issue)
+- Task 1.7 - Python Btrieve Setup (90% complete, database name issue)
 - Task 1.8 - Database schema dokumentácia (planned)
 
-## [0.2.1] - 2025-10-22
+## [0.2.2] - 2025-10-22 (Session 2)
+
+### Fixed - DLL Loading Success! 🎉
+- **DLL loading now works!** - Loading from Pervasive PSQL v11.30 installation
+- Multi-path DLL search implemented (4 search locations)
+- Fixed missing dependencies by loading from Pervasive bin directory
+
+#### DLL Search Paths (Priority Order)
+1. `C:\Program Files (x86)\Pervasive Software\PSQL\bin` ⭐ (Active)
+2. `C:\PVSW\bin` (Legacy fallback)
+3. `external-dlls/` (Local copy)
+4. `C:\Windows\SysWOW64` (System fallback)
+
+### Changed - BtrieveClient Enhancement
+- **Multi-path DLL search** in `_load_dll()` method
+- Updated `open_file()` with proper read-only mode (-2)
+- Better error messages and diagnostics
+
+### Progress
+- Task 1.7: 70% → 90% ✅
+- DLL loading: ✅ WORKING
+- Config loading: ✅ WORKING
+- Path validation: ✅ WORKING
+- File opening: 🔄 IN PROGRESS (Error 11 - database name issue)
+
+### Technical Findings
+- **Pervasive PSQL v11.30** installed successfully
+- **w3btrv7.dll** (32,072 bytes, 2013 version) works when loaded from Pervasive bin
+- **GSCAT.BTR verified**: 226 records, 18 indexes, Btrieve v9.00
+- **Error 11** = "File name invalid" - indicates database name registration needed
+
+### Next Steps (Session 3)
+1. Register NEX database in Pervasive Control Center
+2. Use database name instead of full path
+3. Complete file opening tests
+4. Implement data reading
+5. Task 1.7 → COMPLETE
+
+## [0.2.1] - 2025-10-22 (Session 1)
 
 ### Added - Python Btrieve Client
 - Python Btrieve client wrapper using ctypes for direct DLL access
@@ -64,16 +102,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Split Manifests**: project_file_access_docs.json, _bdf.json, _delphi.json
 
 ### Known Issues
-- **BLOCKED**: wxqlcall.dll in external-dlls/ is not a valid PE file
-- DLL loading fails with "WinError 193: Not a valid Win32 application"
-- Need to source correct Pervasive PSQL v11 DLLs from installation
-- httptools dependency requires Visual C++ Build Tools (deferred)
-
-### Progress
-- Phase 1: 70% complete (7/10 tasks)
-- Task 1.1-1.6: ✅ COMPLETE
-- Task 1.7b: 🔄 IN PROGRESS (70%, blocked on DLL)
-- Task 1.8-1.10: 📋 PLANNED
+- **RESOLVED**: DLL loading from external-dlls/ (now loads from Pervasive bin)
+- **ACTIVE**: Error 11 when opening files (database name registration needed)
 
 ## [0.2.0] - 2025-10-21
 
@@ -120,31 +150,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
+- **v0.2.2** (2025-10-22) - DLL loading fixed, multi-path search
 - **v0.2.1** (2025-10-22) - Python Btrieve client, 32-bit support, comprehensive testing
 - **v0.2.0** (2025-10-21) - Database schema, Delphi references, strategic pivot
 - **v0.1.0** (2025-10-21) - Initial project setup
-
----
-
-## Change Categories
-
-### Added
-New features, files, or functionality
-
-### Changed
-Changes to existing functionality
-
-### Deprecated
-Soon-to-be removed features
-
-### Removed
-Removed features
-
-### Fixed
-Bug fixes
-
-### Security
-Security fixes or improvements
 
 ---
 
