@@ -1,8 +1,8 @@
 # 🚀 NEX-GENESIS-SERVER - INIT CONTEXT
 
 **Quick Start Initialization File**  
-**Version:** 1.1.0  
-**Date:** 2025-10-22  
+**Version:** 1.2.0  
+**Date:** 2025-10-23  
 **Language:** 🇸🇰 SLOVENČINA
 
 ---
@@ -19,8 +19,8 @@
 **Po načítaní INIT_CONTEXT.md + project_file_access.json, AUTOMATICKY načítaj:**
 
 ```
-1. docs/CHANGELOG.md           → Aktuálny stav projektu, progress, blockers
-2. docs/sessions/2025-10-22_session.md → Posledná session (alebo najnovšia)
+1. docs/sessions/ → Nájdi najnovšiu session (YYYY-MM-DD_session.md)
+2. Načítaj najnovšiu session → Aktuálny stav, progress, next steps
 ```
 
 **Potom odpovedz:**
@@ -28,19 +28,19 @@
 ✅ Projekt načítaný. 
 
 📊 Aktuálny stav:
-[Zhrnutie z CHANGELOG.md - verzia, progress, blocker]
+[Zhrnutie z najnovšej session - progress, dokončené tasky]
 
-📋 Posledná session: 
-[Dátum a kľúčové body z session notes]
+📋 Posledná session: [dátum]
+[Kľúčové body z session notes]
 
 🎯 Ďalší krok:
-[Next steps z CHANGELOG.md alebo session]
+[Next steps z session notes]
 
 Čo robíme?
 ```
 
 **DÔLEŽITÉ:** 
-- Načítaj CHANGELOG + latest session **AUTOMATICKY** pri inicializácii
+- Načítaj **latest session** AUTOMATICKY pri inicializácii
 - Nezobrazuj XMLy ani raw content
 - Len čisté zhrnutie v slovenčine
 - Krátko a jasne
@@ -76,11 +76,11 @@ S `project_file_access.json` máš prístup k 47 súborom:
 - **Location:** Komárno, SK
 - **GitHub:** https://github.com/rauschiccsk/nex-genesis-server
 
-### Aktuálny stav → Načítaj z CHANGELOG.md!
+### Aktuálny stav → Načítaj z session notes!
 ```
 ⚠️ NEČÍTAJ TENTO HARDCODED STAV!
-⚠️ VŽDY načítaj aktuálny stav z docs/CHANGELOG.md
-⚠️ A najnovšiu session z docs/sessions/
+⚠️ VŽDY načítaj najnovšiu session z docs/sessions/
+⚠️ Session notes sú single source of truth
 ```
 
 ---
@@ -137,9 +137,8 @@ C:\NEX\YEARACT\
 
 ### VŽDY:
 - ✅ Komunikuj PO SLOVENSKY
-- ✅ Načítaj CHANGELOG.md pri inicializácii
 - ✅ Načítaj latest session pri inicializácii
-- ✅ Buď konkrétny a actionable  
+- ✅ Buď konkrétný a actionable  
 - ✅ Používaj emojis pre clarity
 - ✅ Odkazuj na súbory cez manifest
 - ✅ Validuj všetky zmeny
@@ -150,7 +149,7 @@ C:\NEX\YEARACT\
 - ❌ Nepridávaj zbytočné vysvetlenia
 - ❌ Nenavrhuj zmeny bez schválenia
 - ❌ Nepoužívaj hardcoded stav z INIT_CONTEXT.md
-- ❌ VŽDY čítaj CHANGELOG.md + latest session!
+- ❌ VŽDY čítaj najnovšiu session!
 
 ### Pri každom vytvorení súboru:
 ```
@@ -158,8 +157,7 @@ C:\NEX\YEARACT\
 1. Commitnúť zmeny
 2. Pushnúť na GitHub  
 3. Refreshnúť project manifest ak potrebné
-4. Updatnúť CHANGELOG.md
-5. Updatnúť session notes (end of session)
+4. Updatnúť session notes (end of session)
 ```
 
 ---
@@ -174,8 +172,7 @@ C:\NEX\YEARACT\
 
 ## 🔗 QUICK LINKS
 
-- **Aktuálny stav:** `docs/CHANGELOG.md` ⚠️ VŽDY ČÍTAJ TOTO PRVÉ!
-- **Latest session:** `docs/sessions/` ⚠️ NÁJDI NAJNOVŠIU!
+- **Aktuálny stav:** `docs/sessions/` ⚠️ NAJNOVŠIA SESSION = SINGLE SOURCE OF TRUTH!
 - **Full Context:** `docs/FULL_PROJECT_CONTEXT.md` (načítaj len ak nutné)
 - **DB Structure:** `docs/NEX_DATABASE_STRUCTURE.md`
 - **Testing:** `docs/TESTING_GUIDE.md`
@@ -190,13 +187,12 @@ C:\NEX\YEARACT\
 ```
 ☐ 1. Načítaj INIT_CONTEXT.md (tento súbor)
 ☐ 2. Načítaj project_file_access.json
-☐ 3. Načítaj docs/CHANGELOG.md  ← KRITICKÉ!
-☐ 4. Nájdi najnovšiu session v docs/sessions/
-☐ 5. Načítaj najnovšiu session  ← KRITICKÉ!
-☐ 6. Zhrň aktuálny stav (z CHANGELOG)
-☐ 7. Zhrň poslednú session (kľúčové body)
-☐ 8. Identifikuj ďalší krok (next steps)
-☐ 9. Odpovedz PO SLOVENSKY s prehľadom
+☐ 3. Nájdi najnovšiu session v docs/sessions/
+☐ 4. Načítaj najnovšiu session ← KRITICKÉ!
+☐ 5. Zhrň aktuálny stav (z session)
+☐ 6. Zhrň poslednú session (kľúčové body)
+☐ 7. Identifikuj ďalší krok (next steps)
+☐ 8. Odpovedz PO SLOVENSKY s prehľadom
 ```
 
 **Výstupný formát:**
@@ -204,25 +200,41 @@ C:\NEX\YEARACT\
 ✅ Projekt načítaný. 
 
 📊 Aktuálny stav:
-- Verzia: [z CHANGELOG]
-- Progress: [z CHANGELOG]
-- Blocker: [z CHANGELOG]
+- Progress: [z session]
+- Dokončené tasky: [z session]
+- Aktuálny task: [z session]
 
 📋 Posledná session: [dátum]
 - [kľúčové body z session]
 
 🎯 Ďalší krok:
-- [next steps z CHANGELOG alebo session]
+- [next steps z session]
 
 Čo robíme?
 ```
 
 ---
 
+## 📝 Session Notes Structure
+
+**Každá session obsahuje:**
+- ✅ Dokončené tasky (čo sa urobilo)
+- 📁 Vytvorené/updatnuté súbory
+- 🔧 Technické rozhodnutia
+- 📊 Progress update
+- 🎯 Next steps
+- 💾 Files to commit
+- 🎉 Achievements
+
+**Session naming:** `docs/sessions/YYYY-MM-DD_session.md`
+
+---
+
 **REMEMBER:** 
-- **AUTOMATICKY načítaj CHANGELOG + latest session**
+- **AUTOMATICKY načítaj latest session**
 - **Nekopíruj XML/JSON** - len zhrnutie
 - **Komunikuj PO SLOVENSKY**
-- **Buď konkrétný**
+- **Buď konkrétny**
+- **Session notes = single source of truth**
 
 🎯
