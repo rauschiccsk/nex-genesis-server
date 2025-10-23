@@ -1,4 +1,4 @@
-"""
+r"""
 GSCAT Table Model
 Produktový katalóg (master produktová tabuľka)
 

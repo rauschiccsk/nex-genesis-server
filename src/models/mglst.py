@@ -1,4 +1,4 @@
-"""
+r"""
 MGLST Table Model
 Tovarové skupiny (hierarchická kategorizácia produktov)
 

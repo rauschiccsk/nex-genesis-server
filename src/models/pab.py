@@ -1,4 +1,4 @@
-"""
+r"""
 PAB Table Model
 Katalóg obchodných partnerov (dodávatelia, odberatelia)
 

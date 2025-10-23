@@ -1,4 +1,4 @@
-"""
+r"""
 BARCODE Table Model
 Druhotné identifikačné kódy (čiarové kódy) produktov
 

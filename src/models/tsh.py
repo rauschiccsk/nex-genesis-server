@@ -1,4 +1,4 @@
-"""
+r"""
 TSH Table Model
 Dodacie listy - Header (hlavičky dokladov)
 

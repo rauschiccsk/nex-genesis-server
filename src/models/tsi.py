@@ -1,4 +1,4 @@
-"""
+r"""
 TSI Table Model
 Dodacie listy - Items (položky dokladov)
 
