@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Unified project file access manifest - all categories in one file",
-  "generated_at": "2025-10-23T09:13:43.547972",
+  "generated_at": "2025-10-23T09:50:41.439201",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "categories": [
     "documentation",
@@ -18,9 +18,9 @@
     "python_sources": "Python source code"
   },
   "statistics": {
-    "total_files": 49,
+    "total_files": 54,
     "by_category": {
-      "documentation": 22,
+      "documentation": 27,
       "database_schemas": 6,
       "delphi_sources": 7,
       "configuration": 2,
@@ -165,14 +165,6 @@
       "category": "documentation"
     },
     {
-      "path": "docs/FULL_PROJECT_CONTEXT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/FULL_PROJECT_CONTEXT.md",
-      "size": 20180,
-      "extension": ".md",
-      "name": "FULL_PROJECT_CONTEXT.md",
-      "category": "documentation"
-    },
-    {
       "path": "docs/INIT_CONTEXT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md",
       "size": 6401,
@@ -290,6 +282,54 @@
       "size": 3021,
       "extension": ".md",
       "name": "swig-setup.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/README.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/README.md",
+      "size": 6075,
+      "extension": ".md",
+      "name": "README.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/architecture.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/architecture.md",
+      "size": 10057,
+      "extension": ".md",
+      "name": "architecture.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/btrieve_rules.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/btrieve_rules.md",
+      "size": 14702,
+      "extension": ".md",
+      "name": "btrieve_rules.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/database.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/database.md",
+      "size": 10245,
+      "extension": ".md",
+      "name": "database.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/development.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/development.md",
+      "size": 13252,
+      "extension": ".md",
+      "name": "development.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/context/project_overview.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/project_overview.md",
+      "size": 6035,
+      "extension": ".md",
+      "name": "project_overview.md",
       "category": "documentation"
     },
     {
