@@ -1,4 +1,8 @@
 # src/btrieve/btrieve_client.py
+"""
+Python wrapper pre Pervasive Btrieve API (32-bit)
+FIXED: Correct BTRCALL signature based on Delphi btrapi32.pas
+"""
 import ctypes
 import os
 import struct
@@ -64,7 +68,7 @@ class BtrieveClient:
         self._load_dll()
 
     def _load_dll(self) -> None:
-        """Načítaj Btrieve DLL a nastav BTRCALL funkciu"""
+        """Načítaj Btrieve DLL a nastav BTRCALL funkciu - FIXED SIGNATURE"""
 
         # DLL priority list
         dll_names = [
@@ -112,10 +116,17 @@ class BtrieveClient:
                         except AttributeError:
                             continue
 
-                    # Configure BTRCALL signature
-                    # NOTE: We'll set argtypes dynamically before each call
-                    # because READ needs c_uint16 and WRITE needs c_ulong for data_len
-                    self.btrcall.restype = ctypes.c_int16  # Status code
+                    # Configure BTRCALL signature - FIXED according to btrapi32.pas!
+                    self.btrcall.argtypes = [
+                        ctypes.c_uint16,  # operation (WORD)
+                        ctypes.POINTER(ctypes.c_char),  # posBlock (VAR)
+                        ctypes.POINTER(ctypes.c_char),  # dataBuffer (VAR)
+                        ctypes.POINTER(ctypes.c_uint32),  # dataLen (longInt = 4 bytes!) ← FIXED!
+                        ctypes.POINTER(ctypes.c_char),  # keyBuffer (VAR)
+                        ctypes.c_uint8,  # keyLen (BYTE)
+                        ctypes.c_uint8  # keyNum (BYTE, unsigned!) ← FIXED!
+                    ]
+                    self.btrcall.restype = ctypes.c_int16  # Status code (SMALLINT)
 
                     print(f"✅ Loaded Btrieve DLL: {dll_name} from {search_path}")
                     return
@@ -130,39 +141,20 @@ class BtrieveClient:
             "\n".join(f"  - {p}" for p in search_paths if p.exists())
         )
 
-    def _set_argtypes_for_read(self):
-        """Set argtypes for READ operations (c_uint16 for data_len)"""
-        self.btrcall.argtypes = [
-            ctypes.c_uint16,  # operation
-            ctypes.POINTER(ctypes.c_char),  # posBlock
-            ctypes.POINTER(ctypes.c_char),  # dataBuffer
-            ctypes.POINTER(ctypes.c_uint16),  # dataLen - c_uint16 for READ!
-            ctypes.POINTER(ctypes.c_char),  # keyBuffer
-            ctypes.c_uint8,  # keyLen
-            ctypes.c_int8  # keyNum
-        ]
-
-    def _set_argtypes_for_write(self):
-        """Set argtypes for WRITE operations (c_ulong for data_len)"""
-        self.btrcall.argtypes = [
-            ctypes.c_uint16,  # operation
-            ctypes.POINTER(ctypes.c_char),  # posBlock
-            ctypes.POINTER(ctypes.c_char),  # dataBuffer
-            ctypes.POINTER(ctypes.c_ulong),  # dataLen - c_ulong for WRITE!
-            ctypes.POINTER(ctypes.c_char),  # keyBuffer
-            ctypes.c_uint8,  # keyLen
-            ctypes.c_int8  # keyNum
-        ]
-
     def open_file(self, filename: str, owner_name: str = "", mode: int = -2) -> Tuple[int, bytes]:
         """
-        Otvor Btrieve súbor
+        Otvor Btrieve súbor - FIXED syntax podľa Delphi BtrOpen
+
+        IMPORTANT: Based on Delphi BtrOpen (BtrHand.pas):
+        - Filename goes in KEY_BUFFER (not data_buffer!)
+        - Data_buffer is EMPTY (dataLen = 0!)
+        - keyLen = 255 (max key length)
 
         Args:
             filename: Cesta k .dat/.BTR súboru
-            owner_name: Owner name (optional)
+            owner_name: Owner name (optional, not used)
             mode: Open mode
-                  0 = Normal (Read-Write)
+                  0 = Normal
                  -1 = Accelerated
                  -2 = Read-only (DEFAULT - safest)
                  -3 = Exclusive
@@ -173,30 +165,26 @@ class BtrieveClient:
         # Position block (128 bytes)
         pos_block = ctypes.create_string_buffer(128)
 
-        # Data buffer (filename + null terminator)
+        # Data buffer is EMPTY for OPEN! (according to Delphi BtrOpen)
+        data_buffer = ctypes.create_string_buffer(256)
+        data_len = ctypes.c_uint32(0)  # ZERO! (and longInt = 4 bytes)
+
+        # FILENAME goes into KEY_BUFFER! (not data_buffer!)
         filename_bytes = filename.encode('ascii') + b'\x00'
-        data_buffer = ctypes.create_string_buffer(filename_bytes)
-        data_len = ctypes.c_uint16(len(filename_bytes))  # Use c_uint16 for OPEN
+        key_buffer = ctypes.create_string_buffer(filename_bytes)
 
-        # Key buffer (owner name or empty)
-        if owner_name:
-            key_buffer = ctypes.create_string_buffer(owner_name.encode('ascii') + b'\x00')
-        else:
-            key_buffer = ctypes.create_string_buffer(1)
+        # keyLen = 255 (max key length, as in BTRV wrapper)
+        key_len = 255
 
-        # Set argtypes for READ operation
-        self._set_argtypes_for_read()
-
-        # Call BTRCALL
-        # NOTE: keyNum is used as open mode for B_OPEN operation!
+        # Call BTRCALL with CORRECT parameters
         status = self.btrcall(
             self.B_OPEN,
             pos_block,
-            data_buffer,
-            ctypes.byref(data_len),
-            key_buffer,
-            0,  # keyLen (not used for OPEN)
-            mode  # keyNum = open mode (-2 = read-only, 0 = read-write)
+            data_buffer,  # EMPTY!
+            ctypes.byref(data_len),  # 0!
+            key_buffer,  # FILENAME!
+            key_len,  # 255!
+            mode & 0xFF  # mode as unsigned BYTE
         )
 
         return status, pos_block.raw
@@ -213,11 +201,8 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(1)
-        data_len = ctypes.c_uint16(0)  # Use c_uint16 for CLOSE
+        data_len = ctypes.c_uint32(0)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(1)
-
-        # Set argtypes for READ operation
-        self._set_argtypes_for_read()
 
         status = self.btrcall(
             self.B_CLOSE,
@@ -225,8 +210,8 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
-            0
+            0,  # keyLen
+            0  # keyNum
         )
 
         return status
@@ -244,11 +229,8 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(4096)  # Max record size
-        data_len = ctypes.c_uint16(4096)  # Use c_uint16 for READ operations
+        data_len = ctypes.c_uint32(4096)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(255)
-
-        # Set argtypes for READ operation
-        self._set_argtypes_for_read()
 
         status = self.btrcall(
             self.B_GET_FIRST,
@@ -256,8 +238,8 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
-            key_num
+            255,  # keyLen
+            key_num & 0xFF
         )
 
         if status == self.STATUS_SUCCESS:
@@ -277,11 +259,8 @@ class BtrieveClient:
         """
         pos_block_buf = ctypes.create_string_buffer(pos_block)
         data_buffer = ctypes.create_string_buffer(4096)
-        data_len = ctypes.c_uint16(4096)  # Use c_uint16 for READ operations
+        data_len = ctypes.c_uint32(4096)  # longInt (4 bytes)
         key_buffer = ctypes.create_string_buffer(255)
-
-        # Set argtypes for READ operation
-        self._set_argtypes_for_read()
 
         status = self.btrcall(
             self.B_GET_NEXT,
@@ -289,7 +268,7 @@ class BtrieveClient:
             data_buffer,
             ctypes.byref(data_len),
             key_buffer,
-            0,
+            255,  # keyLen
             0
         )
 
@@ -297,98 +276,6 @@ class BtrieveClient:
             return status, data_buffer.raw[:data_len.value]
         else:
             return status, b''
-
-    def insert(self, pos_block: bytes, data: bytes) -> int:
-        """
-        Vlož nový záznam
-
-        Args:
-            pos_block: Position block
-            data: Data to insert
-
-        Returns:
-            status_code
-        """
-        pos_block_buf = ctypes.create_string_buffer(pos_block)
-        data_buffer = ctypes.create_string_buffer(data)
-        data_len = ctypes.c_ulong(len(data))
-        key_buffer = ctypes.create_string_buffer(255)
-
-        # Set argtypes for WRITE operation
-        self._set_argtypes_for_write()
-
-        status = self.btrcall(
-            self.B_INSERT,
-            pos_block_buf,
-            data_buffer,
-            ctypes.byref(data_len),
-            key_buffer,
-            0,
-            0
-        )
-
-        return status
-
-    def update(self, pos_block: bytes, data: bytes) -> int:
-        """
-        Aktualizuj aktuálny záznam
-
-        Args:
-            pos_block: Position block
-            data: Updated data
-
-        Returns:
-            status_code
-        """
-        pos_block_buf = ctypes.create_string_buffer(pos_block)
-        data_buffer = ctypes.create_string_buffer(data)
-        data_len = ctypes.c_ulong(len(data))
-        key_buffer = ctypes.create_string_buffer(255)
-
-        # Set argtypes for WRITE operation
-        self._set_argtypes_for_write()
-
-        status = self.btrcall(
-            self.B_UPDATE,
-            pos_block_buf,
-            data_buffer,
-            ctypes.byref(data_len),
-            key_buffer,
-            0,
-            0
-        )
-
-        return status
-
-    def delete(self, pos_block: bytes) -> int:
-        """
-        Vymaž aktuálny záznam
-
-        Args:
-            pos_block: Position block
-
-        Returns:
-            status_code
-        """
-        pos_block_buf = ctypes.create_string_buffer(pos_block)
-        data_buffer = ctypes.create_string_buffer(1)
-        data_len = ctypes.c_ulong(0)
-        key_buffer = ctypes.create_string_buffer(255)
-
-        # Set argtypes for WRITE operation
-        self._set_argtypes_for_write()
-
-        status = self.btrcall(
-            self.B_DELETE,
-            pos_block_buf,
-            data_buffer,
-            ctypes.byref(data_len),
-            key_buffer,
-            0,
-            0
-        )
-
-        return status
 
     def get_status_message(self, status_code: int) -> str:
         """
@@ -410,6 +297,8 @@ class BtrieveClient:
             6: "INVALID_KEY_NUMBER",
             7: "DIFFERENT_KEY_NUMBER",
             8: "INVALID_POSITIONING",
+            11: "INVALID_FILENAME",
+            12: "FILE_NOT_OPEN",
         }
         return messages.get(status_code, f"UNKNOWN_ERROR_{status_code}")
 
@@ -420,7 +309,7 @@ def open_btrieve_file(filename: str, config_path: Optional[str] = None) -> Tuple
     Helper funkcia na otvorenie Btrieve súboru
 
     Args:
-        filename: Cesta k .dat súboru
+        filename: Cesta k .BTR súboru
         config_path: Cesta ku config súboru
 
     Returns:
