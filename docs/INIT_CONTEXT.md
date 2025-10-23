@@ -1,7 +1,7 @@
 # NEX-GENESIS-SERVER - INIT CONTEXT
 
 **Quick Start Initialization File**  
-**Version:** 1.3.0  
+**Version:** 1.4.0  
 **Date:** 2025-10-23  
 **Language:** SLOVENČINA
 
@@ -14,43 +14,34 @@
 - Slovenčina je primárny jazyk projektu
 - Technické termíny môžu byť anglicky
 
-### 2. Communication Rules
-**Efektívna komunikácia = šetrenie tokenov:**
+### 2. FILE LOADING - CRITICAL RULE 🛑
 
-- **Jedna alternatíva ONLY**
-  - Dávaj len najlepšie riešenie (best practice)
-  - BEZ výberu možností A/B/C
-  - Alternatívy len keď používateľ explicitne požiada
+**Ak nemôžeš načítať súbor z project_file_access.json:**
 
-- **Token usage reporting**
-  - Po KAŽDEJ odpovedi zobraz token usage
-  - Formát: `Token usage: X / 190,000 tokens used (Y%) | Z remaining`
-  - Používateľ potrebuje vedieť kedy je čas na nový chat
-
-- **Git commit messages**
-  - Dávaj LEN čistý text commit message
-  - BEZ git príkazov (bez `git commit -m`)
-  - Používateľ kopíruje text do PyCharm Git UI
-  - Slovenské commit messages sú OK
-
-**Príklad:**
 ```
-ZLÝM spôsob:
-Môžeme to urobiť 3 spôsobmi: A) dataclasses B) namedtuples C) custom classes
-Ktorý preferuješ?
+🛑 STOP - FILE LOADING FAILED
 
-SPRÁVNY spôsob:
-Urobíme to cez dataclasses - najlepší balance medzi jednoduchosťou a funkčnosťou.
+Súbor: [názov súboru]
+URL: [raw_url z manifestu]
+Problém: [popis - napr. GitHub cache, permissions, etc]
 
-COMMIT MESSAGE (čistý text):
-Updated btrieve_client.py - pridaný error handling
+AKCIA POTREBNÁ:
+1. User musí regenerovať manifest: python scripts/generate_project_access.py
+2. User musí commitnúť a pushnúť zmeny
+3. User musí restartovať chat s novým cache version
 
-- Ošetrenie chýb pri otváraní súborov
-- Retry logika pre locked files
-- Lepšie error messages
-
-Token usage: 65,000 / 190,000 tokens used (34%) | 125,000 remaining
+NEPOKRAČUJEM bez prístupu k aktuálnym súborom!
 ```
+
+**NIKDY:**
+- ❌ Nevymýšľaj workaroundy (cache busting, alternative URLs)
+- ❌ Nepokračuj s prácou na základe starých/cached dát
+- ❌ Neproš používateľa o manuálne URLs
+
+**VŽDY:**
+- ✅ STOP immediately ak file loading fails
+- ✅ Informuj používateľa o presnom probléme
+- ✅ Poskytni konkrétne kroky na fix
 
 ### 3. Automatic Initialization Sequence
 
@@ -59,6 +50,7 @@ Token usage: 65,000 / 190,000 tokens used (34%) | 125,000 remaining
 ```
 1. docs/sessions/ → Nájdi najnovšiu session (YYYY-MM-DD_session.md)
 2. Načítaj najnovšiu session → Aktuálny stav, progress, next steps
+3. AK ZLYHÁ NAČÍTANIE → STOP podľa pravidla #2
 ```
 
 **Potom odpovedz:**
@@ -79,22 +71,35 @@ Posledná session: [dátum]
 
 **DÔLEŽITÉ:** 
 - Načítaj **latest session** AUTOMATICKY pri inicializácii
+- AK ZLYHÁ → použiť pravidlo 🛑 STOP
 - Nezobrazuj XMLy ani raw content
 - Len čisté zhrnutie v slovenčine
 - Krátko a jasne
 
 ### 4. File Access via Manifest
-S `project_file_access.json` máš prístup k 47 súborom:
-- Documentation (21 súborov)
-- Database schemas (6 .bdf súborov)  
-- Delphi sources (7 súborov)
-- Configuration (2 súbory - database.yaml)
-- Python sources (11 súborov)
+
+S `project_file_access.json` máš prístup k ~73 súborom.
+
+**Každý súbor má:**
+```json
+{
+  "path": "docs/sessions/2025-10-23_session.md",
+  "raw_url": "https://raw.githubusercontent.com/.../file.md?v=TIMESTAMP",
+  "size": 11836,
+  "category": "documentation"
+}
+```
 
 **Keď potrebuješ konkrétny súbor:**
 1. Nájdi ho v `project_file_access.json`
-2. Použiž `raw_url` na načítanie
-3. Nekopíruj celé súbory - referencuj ich
+2. Použiž `raw_url` (s cache version parametrom)
+3. AK ZLYHÁ → 🛑 STOP
+4. Nekopíruj celé súbory - referencuj ich
+
+**Cache Version:**
+- Každá URL obsahuje `?v=TIMESTAMP` parameter
+- Zabezpečuje fresh content z GitHubu
+- User regeneruje manifest po každom push
 
 ### 5. Key Documents (načítaj len podľa potreby)
 - **Kompletný kontext:** `docs/FULL_PROJECT_CONTEXT.md` (34KB)
@@ -119,6 +124,7 @@ S `project_file_access.json` máš prístup k 47 súborom:
 NEČÍTAJ TENTO HARDCODED STAV!
 VŽDY načítaj najnovšiu session z docs/sessions/
 Session notes sú single source of truth
+AK ZLYHÁ NAČÍTANIE → 🛑 STOP
 ```
 
 ---
@@ -176,13 +182,11 @@ C:\NEX\YEARACT\
 ### VŽDY:
 - Komunikuj PO SLOVENSKY
 - Načítaj latest session pri inicializácii
-- Buď konkrétný a actionable  
+- **AK ZLYHÁ FILE LOADING → 🛑 STOP**
+- Buď konkrétny a actionable  
 - Používaj emojis pre clarity (v odpovediach, NIE v INIT_CONTEXT.md)
 - Odkazuj na súbory cez manifest
 - Validuj všetky zmeny
-- Jedna alternatíva (best practice only)
-- Token usage po každej odpovedi
-- Git commit messages - len čistý text (bez príkazov)
 
 ### NIKDY:
 - Nekopíruj celé súbory do odpovede
@@ -190,16 +194,15 @@ C:\NEX\YEARACT\
 - Nepridávaj zbytočné vysvetlenia
 - Nenavrhuj zmeny bez schválenia
 - Nepoužívaj hardcoded stav z INIT_CONTEXT.md
-- VŽDY čítaj najnovšiu session!
-- Nedávaj viacero alternatív bez požiadavky
-- Nedávaj git príkazy (git commit -m, git push, atď.)
+- **NEPOKRAČUJ ak nemôžeš načítať súbory**
+- **NEVYMÝŠĽAJ workaroundy pre file loading issues**
 
 ### Pri každom vytvorení súboru:
 ```
 Nezabudni:
 1. Commitnúť zmeny
 2. Pushnúť na GitHub  
-3. Refreshnúť project manifest ak potrebné
+3. Regenerovať manifest: python scripts/generate_project_access.py
 4. Updatnúť session notes (end of session)
 ```
 
@@ -232,6 +235,7 @@ Nezabudni:
 2. Načítaj project_file_access.json
 3. Nájdi najnovšiu session v docs/sessions/
 4. Načítaj najnovšiu session <- KRITICKÉ!
+   → AK ZLYHÁ: 🛑 STOP a informuj usera
 5. Zhrň aktuálny stav (z session)
 6. Zhrň poslednú session (kľúčové body)
 7. Identifikuj ďalší krok (next steps)
@@ -273,12 +277,38 @@ Posledná session: [dátum]
 
 ---
 
+## TROUBLESHOOTING
+
+### Problem: Nemôžem načítať súbor z manifestu
+
+**Symptómy:**
+- web_fetch vracia starý cached obsah
+- Súbor bol updatnutý na GitHube ale vidím starú verziu
+- Error pri načítaní súboru
+
+**Riešenie:**
+```bash
+# User musí:
+1. cd C:\Development\nex-genesis-server
+2. python scripts/generate_project_access.py
+3. git add docs/project_file_access.json
+4. git commit -m "Regenerated manifest with fresh cache version"
+5. git push
+6. Reštartovať Claude chat s novými URLs
+```
+
+**Claude:**
+- 🛑 STOP immediately
+- Informuj usera o presnom probléme
+- Poskytni kroky vyššie
+- NEPOKRAČUJ s prácou
+
+---
+
 **REMEMBER:** 
 - **AUTOMATICKY načítaj latest session**
+- **AK ZLYHÁ FILE LOADING → 🛑 STOP**
 - **Nekopíruj XML/JSON** - len zhrnutie
 - **Komunikuj PO SLOVENSKY**
 - **Buď konkrétny**
-- **Jedna alternatíva (best practice)**
-- **Token usage po každej odpovedi**
-- **Git commit messages - len čistý text**
 - **Session notes = single source of truth**

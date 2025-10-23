@@ -1,6 +1,7 @@
 """
 Generate unified project_file_access.json manifest
 Combines docs, database schemas, and Delphi sources into ONE file
+WITH CACHE BUSTING for fresh GitHub content
 """
 import os
 import json
@@ -67,7 +68,7 @@ def should_skip(path):
             return True
     return False
 
-def scan_category(category_name, config, base_path):
+def scan_category(category_name, config, base_path, version_param):
     """Scan files for a specific category"""
     files = []
 
@@ -89,10 +90,11 @@ def scan_category(category_name, config, base_path):
                 # Check extension
                 if file_path.suffix in config["extensions"]:
                     relative_path = file_path.relative_to(base_path)
+                    clean_path = str(relative_path).replace(os.sep, '/')
 
                     files.append({
-                        "path": str(relative_path).replace("\\", "/"),
-                        "raw_url": f"{BASE_URL}/{str(relative_path).replace(os.sep, '/')}",
+                        "path": clean_path,
+                        "raw_url": f"{BASE_URL}/{clean_path}?v={version_param}",
                         "size": file_path.stat().st_size,
                         "extension": file_path.suffix,
                         "name": file_path.name,
@@ -111,7 +113,12 @@ def generate_manifest():
     script_dir = Path(__file__).parent
     project_root = script_dir.parent
 
+    # Generate version parameter for cache busting
+    now = datetime.now()
+    version_param = now.strftime("%Y%m%d-%H%M%S")
+
     print(f"\n📁 Project root: {project_root}")
+    print(f"🔄 Cache version: {version_param}")
 
     # Collect all files by category
     all_files = []
@@ -123,7 +130,7 @@ def generate_manifest():
         print(f"   Directories: {', '.join(category_config['directories'])}")
         print(f"   Extensions: {', '.join(category_config['extensions'])}")
 
-        files = scan_category(category_name, category_config, project_root)
+        files = scan_category(category_name, category_config, project_root, version_param)
         all_files.extend(files)
         category_stats[category_name] = len(files)
 
@@ -136,7 +143,8 @@ def generate_manifest():
     manifest = {
         "project_name": PROJECT_NAME,
         "description": "Unified project file access manifest - all categories in one file",
-        "generated_at": datetime.now().isoformat(),
+        "generated_at": now.isoformat(),
+        "cache_version": version_param,
         "base_url": BASE_URL,
         "categories": list(CATEGORIES.keys()),
         "category_descriptions": {
@@ -162,6 +170,7 @@ def generate_manifest():
     print("=" * 60)
     print(f"\n📄 Output: {output_path}")
     print(f"📊 Total files: {len(all_files)}")
+    print(f"🔄 Cache version: {version_param}")
     print(f"\n📈 By category:")
     for category, count in category_stats.items():
         print(f"   • {category}: {count} files")
@@ -172,8 +181,9 @@ def generate_manifest():
     print("\n💡 Usage:")
     print("   1. Commit and push to GitHub")
     print("   2. Use this ONE URL in new Claude chats:")
-    print(f"      {BASE_URL}/docs/project_file_access.json")
-    print("   3. Claude will have access to ALL project files!")
+    print(f"      {BASE_URL}/docs/project_file_access.json?v={version_param}")
+    print("   3. Claude will have FRESH access to ALL project files!")
+    print("\n⚠️  IMPORTANT: After pushing changes, REGENERATE manifest to update cache version!")
 
     return manifest
 
