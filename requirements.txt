@@ -24,6 +24,7 @@ lxml>=4.9.3
 
 # Data validation and serialization
 pydantic>=2.4.2
+pydantic-settings>=2.1.0
 
 # HTTP requests (for external APIs)
 requests>=2.31.0
@@ -36,17 +37,20 @@ requests>=2.31.0
 # No additional dependencies needed for Btrieve DLL access
 
 # ===================================
-# Web Framework (Future)
+# Web Framework (REST API)
 # ===================================
 
 # FastAPI web framework
 fastapi>=0.104.1
 
-# ASGI server
-uvicorn[standard]>=0.24.0
+# ASGI server (bez [standard] - httptools vyžaduje C++ compiler)
+uvicorn>=0.24.0
 
 # HTTP client for FastAPI
 httpx>=0.25.0
+
+# File upload support (multipart forms)
+python-multipart>=0.0.6
 
 # ===================================
 # Development Tools
@@ -99,6 +103,9 @@ python-dateutil>=2.8.2
 # Logging
 loguru>=0.7.2
 
+# Structured JSON logging (for production)
+python-json-logger>=2.0.7
+
 # ===================================
 # Documentation (Optional)
 # ===================================
@@ -118,7 +125,7 @@ loguru>=0.7.2
 # ===================================
 #
 # CRITICAL: Python must be 32-bit for Btrieve DLL compatibility!
-#   NEX Genesis uses 32-bit Pervasive PSQL v11 (wxqlcall.dll)
+#   NEX Genesis uses 32-bit Pervasive PSQL v11 (wbtrv32.dll)
 #   64-bit Python cannot load 32-bit DLLs
 #
 #   Verify Python version:
@@ -129,9 +136,29 @@ loguru>=0.7.2
 #
 # - ctypes is used for Btrieve DLL access (built-in, no install needed)
 # - Pervasive PSQL v11 SDK/DLLs must be installed separately
-# - external-dlls/ directory contains required Btrieve DLLs:
-#   - wxqlcall.dll (primary - Pervasive PSQL v11)
-#   - wdbnames.dll, wdbnm32.dll, wssql32.dll (helpers)
-# - FastAPI/uvicorn needed for future HTTP API endpoints
+# - DLL paths configured in config/database.yaml:
+#   - C:\Program Files (x86)\Pervasive Software\PSQL\bin
+#   - C:\PVSW\bin
+#   - external-dlls/ directory (fallback)
+# - FastAPI/uvicorn for REST API endpoints (NEX Genesis Btrieve Bridge)
+# - python-multipart required for file uploads in FastAPI
+# - pydantic-settings for configuration management
 # - Testing dependencies optional but recommended
+#
+# ===================================
+# FastAPI Server Usage
+# ===================================
+#
+# Start development server:
+#   python run_api.py --reload
+#
+# Start production server:
+#   python run_api.py
+#
+# API Documentation:
+#   http://localhost:8001/docs (Swagger UI)
+#   http://localhost:8001/redoc (ReDoc)
+#
+# Health Check:
+#   http://localhost:8001/health
 #

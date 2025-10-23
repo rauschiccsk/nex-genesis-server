@@ -17,7 +17,7 @@ Usage:
 
 from typing import Generic, TypeVar, Optional, List, Callable
 from abc import ABC, abstractmethod
-from src.btrieve.btrieve_client import BtrieveClient, BtrStatus
+from src.btrieve.btrieve_client import BtrieveClient
 import logging
 
 logger = logging.getLogger(__name__)
@@ -36,9 +36,9 @@ class BaseRepository(Generic[T], ABC):
     - to_bytes(record: T) -> bytes
     """
 
-    def __init__(self):
+    def __init__(self, btrieve_client: BtrieveClient):
         """Initialize repository with Btrieve client"""
-        self.client = BtrieveClient()
+        self.client = btrieve_client
         self._is_open = False
 
     @property

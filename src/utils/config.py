@@ -1,100 +1,132 @@
-# src/utils/config.py
 """
-Configuration Management
+NEX Genesis Btrieve Bridge API - Dependencies
 
-YAML-based configuration loader for NEX Genesis Server
+Dependency injection pre FastAPI endpoints.
+Poskytuje singleton instances pre Btrieve client, repositories, config, etc.
 """
 
+import logging
 import yaml
 from pathlib import Path
-from typing import Dict, Any, Optional
+from functools import lru_cache
+from typing import Annotated
 
-def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
+from fastapi import Depends
+
+from ..btrieve.btrieve_client import BtrieveClient
+from ..repositories import (
+    GSCATRepository,
+    PABRepository,
+    BarcodeRepository
+)
+from ..utils.isdoc_mapper import ISDOCToNEXMapper
+
+logger = logging.getLogger(__name__)
+
+# Singleton instances
+_btrieve_client = None
+_config = None
+
+
+@lru_cache()
+def get_config() -> dict:
     """
-    Load configuration from YAML file
-
-    Args:
-        config_path: Path to config file (default: config/database.yaml)
+    Získa Config singleton.
 
     Returns:
-        Configuration dictionary
+        dict with config data
     """
-    if config_path is None:
-        # Default to config/database.yaml
-        config_path = Path(__file__).parent.parent.parent / "config" / "database.yaml"
-    else:
-        config_path = Path(config_path)
-
-    if not config_path.exists():
-        raise FileNotFoundError(f"Config file not found: {config_path}")
-
-    with open(config_path, 'r', encoding='utf-8') as f:
-        config = yaml.safe_load(f)
-
-    return config
+    global _config
+    if _config is None:
+        config_path = Path("config/database.yaml")
+        with open(config_path, 'r', encoding='utf-8') as f:
+            _config = yaml.safe_load(f)
+        logger.info("✅ Config loaded")
+    return _config
 
 
-def get_database_path(config: Dict[str, Any], table_name: str) -> Path:
+def get_btrieve_client(
+        config: Annotated[dict, Depends(get_config)]
+) -> BtrieveClient:
     """
-    Get full path to a database table file
+    Získa BtrieveClient singleton.
 
     Args:
-        config: Configuration dictionary
-        table_name: Table name (e.g., 'GSCAT', 'PAB', 'TSH')
+        config: Config dict (injected)
 
     Returns:
-        Full path to table file
+        BtrieveClient instance
+
+    Note:
+        BtrieveClient je singleton - vytvorí sa len raz pri prvom použití.
     """
-    db_config = config.get('database', {})
-
-    # Determine which directory (STORES or DIALS)
-    if table_name in ['GSCAT', 'BARCODE', 'MGLST', 'TSH', 'TSI']:
-        base_path = Path(db_config['stores_path'])
-    elif table_name == 'PAB':
-        base_path = Path(db_config['dials_path'])
-    else:
-        raise ValueError(f"Unknown table: {table_name}")
-
-    # Determine filename
-    if table_name in ['GSCAT', 'BARCODE', 'MGLST']:
-        filename = f"{table_name}.BTR"
-    elif table_name == 'PAB':
-        filename = "PAB00000.BTR"
-    elif table_name == 'TSH':
-        book = db_config.get('book_number', '001')
-        book_type = db_config.get('book_type', 'A')
-        filename = f"TSH{book_type}-{book}.BTR"
-    elif table_name == 'TSI':
-        book = db_config.get('book_number', '001')
-        book_type = db_config.get('book_type', 'A')
-        filename = f"TSI{book_type}-{book}.BTR"
-
-    return base_path / filename
+    global _btrieve_client
+    if _btrieve_client is None:
+        _btrieve_client = BtrieveClient(config)
+        logger.info("✅ BtrieveClient initialized")
+    return _btrieve_client
 
 
-def validate_paths(config: Dict[str, Any]) -> bool:
+def get_gscat_repository(
+        btrieve_client: Annotated[BtrieveClient, Depends(get_btrieve_client)]
+) -> GSCATRepository:
     """
-    Validate that all configured paths exist
+    Získa GSCATRepository (produktový katalóg).
 
     Args:
-        config: Configuration dictionary
+        btrieve_client: BtrieveClient instance (injected)
 
     Returns:
-        True if all paths valid
+        GSCATRepository instance
     """
-    db_config = config.get('database', {})
+    return GSCATRepository(btrieve_client)
 
-    # Check root path
-    root_path = Path(db_config['path'])
-    if not root_path.exists():
-        print(f"❌ Root path not found: {root_path}")
-        return False
 
-    # Check STORES path
-    stores_path = Path(db_config['stores_path'])
-    if not stores_path.exists():
-        print(f"❌ STORES path not found: {stores_path}")
-        return False
+def get_pab_repository(
+        btrieve_client: Annotated[BtrieveClient, Depends(get_btrieve_client)]
+) -> PABRepository:
+    """
+    Získa PABRepository (obchodní partneri).
 
-    # Check DIALS path
-    dials_path = Path(db_config['dials_path'])
+    Args:
+        btrieve_client: BtrieveClient instance (injected)
+
+    Returns:
+        PABRepository instance
+    """
+    return PABRepository(btrieve_client)
+
+
+def get_barcode_repository(
+        btrieve_client: Annotated[BtrieveClient, Depends(get_btrieve_client)]
+) -> BarcodeRepository:
+    """
+    Získa BarcodeRepository (čiarové kódy).
+
+    Args:
+        btrieve_client: BtrieveClient instance (injected)
+
+    Returns:
+        BarcodeRepository instance
+    """
+    return BarcodeRepository(btrieve_client)
+
+
+@lru_cache()
+def get_isdoc_mapper() -> ISDOCToNEXMapper:
+    """
+    Získa ISDOCToNEXMapper singleton.
+
+    Returns:
+        ISDOCToNEXMapper instance
+    """
+    return ISDOCToNEXMapper()
+
+
+# Type aliases pre jednoduchšie použitie v endpoints
+ConfigDep = Annotated[dict, Depends(get_config)]
+BtrieveClientDep = Annotated[BtrieveClient, Depends(get_btrieve_client)]
+GSCATRepositoryDep = Annotated[GSCATRepository, Depends(get_gscat_repository)]
+PABRepositoryDep = Annotated[PABRepository, Depends(get_pab_repository)]
+BarcodeRepositoryDep = Annotated[BarcodeRepository, Depends(get_barcode_repository)]
+ISDOCMapperDep = Annotated[ISDOCToNEXMapper, Depends(get_isdoc_mapper)]

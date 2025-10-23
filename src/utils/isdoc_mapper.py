@@ -476,35 +476,36 @@ class ISDOCToNEXMapper:
     # Complete Mapping (all-in-one)
     # ========================================================================
 
-    def map_invoice_complete(self, invoice_data: InvoiceData) -> Dict[str, Any]:
-        """
-        Kompletný mapping celej faktúry na všetky NEX štruktúry
 
-        Args:
-            invoice_data: InvoiceData objekt
-
-        Returns:
-            Dict so všetkými namapovanými dátami:
-            {
-                'supplier': NEXPABData,
-                'customer': NEXPABData,
-                'products': List[NEXGSCATData],
-                'barcodes': List[NEXBARCODEData],
-                'delivery_header': NEXTSHData,
-                'delivery_items': List[NEXTSIData]
-            }
-        """
-        self.logger.info(f"Complete mapping for invoice: {invoice_data.invoice_number}")
-
-        return {
-            'supplier': self.map_supplier_to_pab(invoice_data),
-            'customer': self.map_customer_to_pab(invoice_data),
-            'products': self.map_items_to_gscat(invoice_data.items),
-            'barcodes': self.map_items_to_barcode(invoice_data.items),
-            'delivery_header': self.map_to_tsh(invoice_data),
-            'delivery_items': self.map_items_to_tsi(invoice_data.items)
+def map_invoice_complete(self, invoice_data: dict) -> Dict[str, Any]:
+    """
+    Kompletný mapping celej faktúry na všetky NEX štruktúry
+    Args:
+        invoice_data: Dict s ISDOC dátami (z API request)
+    Returns:
+        Dict so všetkými namapovanými dátami:
+        {
+            'supplier': NEXPABData,
+            'customer': NEXPABData,
+            'products': List[NEXGSCATData],
+            'barcodes': List[NEXBARCODEData],
+            'delivery_header': NEXTSHData,
+            'delivery_items': List[NEXTSIData]
         }
+    """
+    invoice_number = invoice_data.get('invoice_number', 'N/A')
+    self.logger.info(f"Complete mapping for invoice: {invoice_number}")
 
+    items = invoice_data.get('items', [])
+
+    return {
+        'supplier': self.map_supplier_to_pab(invoice_data),
+        'customer': self.map_customer_to_pab(invoice_data),
+        'products': self.map_items_to_gscat(items),
+        'barcodes': self.map_items_to_barcode(items),
+        'delivery_header': self.map_to_tsh(invoice_data),
+        'delivery_items': self.map_items_to_tsi(items)
+    }
 
 # ============================================================================
 # Convenience Functions

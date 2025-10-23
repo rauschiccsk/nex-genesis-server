@@ -45,27 +45,44 @@ class BtrieveClient:
     STATUS_DIFFERENT_KEY_NUMBER = 7
     STATUS_INVALID_POSITIONING = 8
 
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self, config_or_path=None):
         """
         Inicializácia Btrieve klienta
 
         Args:
-            config_path: Cesta ku config súboru (YAML)
+            config_or_path: Dict s config dátami ALEBO string s cestou ku config súboru (YAML)
         """
         self.dll = None
         self.btrcall = None
         self.database_path = None
         self.config = None
 
-        # Load config if provided
-        if config_path:
-            from ..utils.config import load_config
-            self.config = load_config(config_path)
-            if 'nex_genesis' in self.config and 'database' in self.config['nex_genesis']:
-                self.database_path = self.config['nex_genesis']['database'].get('stores_path')
+        # Load config
+        if config_or_path:
+            if isinstance(config_or_path, dict):
+                # Config už je dict (z FastAPI dependencies)
+                self.config = config_or_path
+            elif isinstance(config_or_path, str):
+                # Config je cesta k súboru
+                import yaml
+                from pathlib import Path
+                config_path = Path(config_or_path)
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    self.config = yaml.safe_load(f)
+            else:
+                raise TypeError("config_or_path must be dict or str")
+        else:
+            # Load default config
+            import yaml
+            from pathlib import Path
+            config_path = Path("config/database.yaml")
+            with open(config_path, 'r', encoding='utf-8') as f:
+                self.config = yaml.safe_load(f)
 
-        # Inicializuj DLL
+        # Initialize DLL
         self._load_dll()
+
+
 
     def _load_dll(self) -> None:
         """Načítaj Btrieve DLL a nastav BTRCALL funkciu - FIXED SIGNATURE"""
