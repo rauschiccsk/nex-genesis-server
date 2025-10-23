@@ -13,6 +13,10 @@
 - **VŽDY komunikuj PO SLOVENSKY**
 - Slovenčina je primárny jazyk projektu
 - Technické termíny môžu byť anglicky
+- **Token info na konci KAŽDEJ odpovede:**
+```
+  Token usage: X / 190,000 tokens used (Y.Y%) | Z remaining
+```
 
 ### 2. FILE LOADING - CRITICAL RULE 🛑
 
