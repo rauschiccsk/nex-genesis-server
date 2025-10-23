@@ -1,7 +1,7 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Unified project file access manifest - all categories in one file",
-  "generated_at": "2025-10-23T09:50:41.439201",
+  "generated_at": "2025-10-23T15:56:25.221556",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "categories": [
     "documentation",
@@ -18,13 +18,13 @@
     "python_sources": "Python source code"
   },
   "statistics": {
-    "total_files": 54,
+    "total_files": 73,
     "by_category": {
-      "documentation": 27,
+      "documentation": 29,
       "database_schemas": 6,
       "delphi_sources": 7,
       "configuration": 2,
-      "python_sources": 12
+      "python_sources": 29
     }
   },
   "files": [
@@ -167,7 +167,7 @@
     {
       "path": "docs/INIT_CONTEXT.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md",
-      "size": 6401,
+      "size": 7725,
       "extension": ".md",
       "name": "INIT_CONTEXT.md",
       "category": "documentation"
@@ -186,6 +186,14 @@
       "size": 4912,
       "extension": ".md",
       "name": "MASTER_CONTEXT.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/MODELS_README.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MODELS_README.md",
+      "size": 14731,
+      "extension": ".md",
+      "name": "MODELS_README.md",
       "category": "documentation"
     },
     {
@@ -242,6 +250,14 @@
       "size": 2616,
       "extension": ".md",
       "name": "README_32BIT_PYTHON.md",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/REPOSITORIES_README.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/REPOSITORIES_README.md",
+      "size": 18180,
+      "extension": ".md",
+      "name": "REPOSITORIES_README.md",
       "category": "documentation"
     },
     {
@@ -351,7 +367,7 @@
     {
       "path": "docs/sessions/2025-10-23_session.md",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-23_session.md",
-      "size": 6364,
+      "size": 11836,
       "extension": ".md",
       "name": "2025-10-23_session.md",
       "category": "documentation"
@@ -363,6 +379,22 @@
       "extension": ".md",
       "name": "README.md",
       "category": "documentation"
+    },
+    {
+      "path": "scripts/analyze_bdf.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_bdf.py",
+      "size": 7655,
+      "extension": ".py",
+      "name": "analyze_bdf.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "scripts/analyze_gscat_hex.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_gscat_hex.py",
+      "size": 6743,
+      "extension": ".py",
+      "name": "analyze_gscat_hex.py",
+      "category": "python_sources"
     },
     {
       "path": "scripts/check_python_version.py",
@@ -389,6 +421,14 @@
       "category": "python_sources"
     },
     {
+      "path": "scripts/debug_gscat_import.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/debug_gscat_import.py",
+      "size": 4397,
+      "extension": ".py",
+      "name": "debug_gscat_import.py",
+      "category": "python_sources"
+    },
+    {
       "path": "scripts/generate_project_access.py",
       "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/generate_project_access.py",
       "size": 5973,
@@ -410,6 +450,102 @@
       "size": 10358,
       "extension": ".py",
       "name": "btrieve_client.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/__init__.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/__init__.py",
+      "size": 851,
+      "extension": ".py",
+      "name": "__init__.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/barcode.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/barcode.py",
+      "size": 7179,
+      "extension": ".py",
+      "name": "barcode.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/gscat.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/gscat.py",
+      "size": 11664,
+      "extension": ".py",
+      "name": "gscat.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/mglst.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/mglst.py",
+      "size": 8290,
+      "extension": ".py",
+      "name": "mglst.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/pab.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/pab.py",
+      "size": 9588,
+      "extension": ".py",
+      "name": "pab.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/tsh.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsh.py",
+      "size": 10548,
+      "extension": ".py",
+      "name": "tsh.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/models/tsi.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsi.py",
+      "size": 9807,
+      "extension": ".py",
+      "name": "tsi.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/repositories/__init__.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/__init__.py",
+      "size": 954,
+      "extension": ".py",
+      "name": "__init__.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/repositories/barcode_repository.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/barcode_repository.py",
+      "size": 6168,
+      "extension": ".py",
+      "name": "barcode_repository.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/repositories/base_repository.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/base_repository.py",
+      "size": 11702,
+      "extension": ".py",
+      "name": "base_repository.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/repositories/gscat_repository.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/gscat_repository.py",
+      "size": 10516,
+      "extension": ".py",
+      "name": "gscat_repository.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "src/repositories/pab_repository.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/pab_repository.py",
+      "size": 9860,
+      "extension": ".py",
+      "name": "pab_repository.py",
       "category": "python_sources"
     },
     {
@@ -458,6 +594,22 @@
       "size": 9064,
       "extension": ".py",
       "name": "test_file_opening_variants.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "tests/test_gscat_parsing.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_gscat_parsing.py",
+      "size": 8511,
+      "extension": ".py",
+      "name": "test_gscat_parsing.py",
+      "category": "python_sources"
+    },
+    {
+      "path": "tests/test_repositories.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_repositories.py",
+      "size": 11821,
+      "extension": ".py",
+      "name": "test_repositories.py",
       "category": "python_sources"
     }
   ]
