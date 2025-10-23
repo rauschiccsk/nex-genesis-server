@@ -1,20 +1,58 @@
-# 🚀 NEX-GENESIS-SERVER - INIT CONTEXT
+# NEX-GENESIS-SERVER - INIT CONTEXT
 
 **Quick Start Initialization File**  
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Date:** 2025-10-23  
-**Language:** 🇸🇰 SLOVENČINA
+**Language:** SLOVENČINA
 
 ---
 
-## 🤖 CRITICAL INSTRUCTIONS FOR CLAUDE
+## CRITICAL INSTRUCTIONS FOR CLAUDE
 
 ### 1. Language & Communication
-- **VŽDY komunikuj PO SLOVENSKY** ✅
+- **VŽDY komunikuj PO SLOVENSKY**
 - Slovenčina je primárny jazyk projektu
 - Technické termíny môžu byť anglicky
 
-### 2. Automatic Initialization Sequence
+### 2. Communication Rules
+**Efektívna komunikácia = šetrenie tokenov:**
+
+- **Jedna alternatíva ONLY**
+  - Dávaj len najlepšie riešenie (best practice)
+  - BEZ výberu možností A/B/C
+  - Alternatívy len keď používateľ explicitne požiada
+
+- **Token usage reporting**
+  - Po KAŽDEJ odpovedi zobraz token usage
+  - Formát: `Token usage: X / 190,000 tokens used (Y%) | Z remaining`
+  - Používateľ potrebuje vedieť kedy je čas na nový chat
+
+- **Git commit messages**
+  - Dávaj LEN čistý text commit message
+  - BEZ git príkazov (bez `git commit -m`)
+  - Používateľ kopíruje text do PyCharm Git UI
+  - Slovenské commit messages sú OK
+
+**Príklad:**
+```
+ZLÝM spôsob:
+Môžeme to urobiť 3 spôsobmi: A) dataclasses B) namedtuples C) custom classes
+Ktorý preferuješ?
+
+SPRÁVNY spôsob:
+Urobíme to cez dataclasses - najlepší balance medzi jednoduchosťou a funkčnosťou.
+
+COMMIT MESSAGE (čistý text):
+Updated btrieve_client.py - pridaný error handling
+
+- Ošetrenie chýb pri otváraní súborov
+- Retry logika pre locked files
+- Lepšie error messages
+
+Token usage: 65,000 / 190,000 tokens used (34%) | 125,000 remaining
+```
+
+### 3. Automatic Initialization Sequence
 
 **Po načítaní INIT_CONTEXT.md + project_file_access.json, AUTOMATICKY načítaj:**
 
@@ -25,15 +63,15 @@
 
 **Potom odpovedz:**
 ```
-✅ Projekt načítaný. 
+Projekt načítaný. 
 
-📊 Aktuálny stav:
+Aktuálny stav:
 [Zhrnutie z najnovšej session - progress, dokončené tasky]
 
-📋 Posledná session: [dátum]
+Posledná session: [dátum]
 [Kľúčové body z session notes]
 
-🎯 Ďalší krok:
+Ďalší krok:
 [Next steps z session notes]
 
 Čo robíme?
@@ -45,20 +83,20 @@
 - Len čisté zhrnutie v slovenčine
 - Krátko a jasne
 
-### 3. File Access via Manifest
+### 4. File Access via Manifest
 S `project_file_access.json` máš prístup k 47 súborom:
-- ✅ Documentation (21 súborov)
-- ✅ Database schemas (6 .bdf súborov)  
-- ✅ Delphi sources (7 súborov)
-- ✅ Configuration (2 súbory - database.yaml)
-- ✅ Python sources (11 súborov)
+- Documentation (21 súborov)
+- Database schemas (6 .bdf súborov)  
+- Delphi sources (7 súborov)
+- Configuration (2 súbory - database.yaml)
+- Python sources (11 súborov)
 
 **Keď potrebuješ konkrétny súbor:**
 1. Nájdi ho v `project_file_access.json`
 2. Použiž `raw_url` na načítanie
 3. Nekopíruj celé súbory - referencuj ich
 
-### 4. Key Documents (načítaj len podľa potreby)
+### 5. Key Documents (načítaj len podľa potreby)
 - **Kompletný kontext:** `docs/FULL_PROJECT_CONTEXT.md` (34KB)
 - **Database štruktúra:** `docs/NEX_DATABASE_STRUCTURE.md`
 - **Btrieve patterns:** `docs/architecture/database-access-pattern.md`
@@ -66,7 +104,7 @@ S `project_file_access.json` máš prístup k 47 súborom:
 
 ---
 
-## 📊 PROJEKT INFO
+## PROJEKT INFO
 
 ### Základné údaje
 - **Názov:** NEX Genesis Server
@@ -76,16 +114,16 @@ S `project_file_access.json` máš prístup k 47 súborom:
 - **Location:** Komárno, SK
 - **GitHub:** https://github.com/rauschiccsk/nex-genesis-server
 
-### Aktuálny stav → Načítaj z session notes!
+### Aktuálny stav -> Načítaj z session notes!
 ```
-⚠️ NEČÍTAJ TENTO HARDCODED STAV!
-⚠️ VŽDY načítaj najnovšiu session z docs/sessions/
-⚠️ Session notes sú single source of truth
+NEČÍTAJ TENTO HARDCODED STAV!
+VŽDY načítaj najnovšiu session z docs/sessions/
+Session notes sú single source of truth
 ```
 
 ---
 
-## 🗄️ DATABASE STRUCTURE
+## DATABASE STRUCTURE
 
 ### NEX Genesis Database
 ```
@@ -108,7 +146,7 @@ C:\NEX\YEARACT\
 
 ---
 
-## 🔧 TECH STACK
+## TECH STACK
 
 ### Core Technologies
 - **Python:** 3.8+ (32-bit required!)
@@ -125,7 +163,7 @@ C:\NEX\YEARACT\
 
 ### Pervasive DLL Paths (Priority Order)
 ```
-1. C:\Program Files (x86)\Pervasive Software\PSQL\bin  ← ACTIVE
+1. C:\Program Files (x86)\Pervasive Software\PSQL\bin  <- ACTIVE
 2. C:\PVSW\bin
 3. external-dlls/
 4. C:\Windows\SysWOW64
@@ -133,27 +171,32 @@ C:\NEX\YEARACT\
 
 ---
 
-## 📋 CRITICAL REMINDERS
+## CRITICAL REMINDERS
 
 ### VŽDY:
-- ✅ Komunikuj PO SLOVENSKY
-- ✅ Načítaj latest session pri inicializácii
-- ✅ Buď konkrétný a actionable  
-- ✅ Používaj emojis pre clarity
-- ✅ Odkazuj na súbory cez manifest
-- ✅ Validuj všetky zmeny
+- Komunikuj PO SLOVENSKY
+- Načítaj latest session pri inicializácii
+- Buď konkrétný a actionable  
+- Používaj emojis pre clarity (v odpovediach, NIE v INIT_CONTEXT.md)
+- Odkazuj na súbory cez manifest
+- Validuj všetky zmeny
+- Jedna alternatíva (best practice only)
+- Token usage po každej odpovedi
+- Git commit messages - len čistý text (bez príkazov)
 
 ### NIKDY:
-- ❌ Nekopíruj celé súbory do odpovede
-- ❌ Nemení jazyk na angličtinu
-- ❌ Nepridávaj zbytočné vysvetlenia
-- ❌ Nenavrhuj zmeny bez schválenia
-- ❌ Nepoužívaj hardcoded stav z INIT_CONTEXT.md
-- ❌ VŽDY čítaj najnovšiu session!
+- Nekopíruj celé súbory do odpovede
+- Nemení jazyk na angličtinu
+- Nepridávaj zbytočné vysvetlenia
+- Nenavrhuj zmeny bez schválenia
+- Nepoužívaj hardcoded stav z INIT_CONTEXT.md
+- VŽDY čítaj najnovšiu session!
+- Nedávaj viacero alternatív bez požiadavky
+- Nedávaj git príkazy (git commit -m, git push, atď.)
 
 ### Pri každom vytvorení súboru:
 ```
-⚠️ Nezabudni:
+Nezabudni:
 1. Commitnúť zmeny
 2. Pushnúť na GitHub  
 3. Refreshnúť project manifest ak potrebné
@@ -162,7 +205,7 @@ C:\NEX\YEARACT\
 
 ---
 
-## 📞 KONTAKT
+## KONTAKT
 
 - **Developer:** ICC (rausch@icc.sk)
 - **GitHub:** https://github.com/rauschiccsk/nex-genesis-server
@@ -170,9 +213,9 @@ C:\NEX\YEARACT\
 
 ---
 
-## 🔗 QUICK LINKS
+## QUICK LINKS
 
-- **Aktuálny stav:** `docs/sessions/` ⚠️ NAJNOVŠIA SESSION = SINGLE SOURCE OF TRUTH!
+- **Aktuálny stav:** `docs/sessions/` NAJNOVŠIA SESSION = SINGLE SOURCE OF TRUTH!
 - **Full Context:** `docs/FULL_PROJECT_CONTEXT.md` (načítaj len ak nutné)
 - **DB Structure:** `docs/NEX_DATABASE_STRUCTURE.md`
 - **Testing:** `docs/TESTING_GUIDE.md`
@@ -180,34 +223,34 @@ C:\NEX\YEARACT\
 
 ---
 
-## 🚀 INITIALIZATION CHECKLIST
+## INITIALIZATION CHECKLIST
 
 **Claude musí urobiť pri každom novom chate:**
 
 ```
-☐ 1. Načítaj INIT_CONTEXT.md (tento súbor)
-☐ 2. Načítaj project_file_access.json
-☐ 3. Nájdi najnovšiu session v docs/sessions/
-☐ 4. Načítaj najnovšiu session ← KRITICKÉ!
-☐ 5. Zhrň aktuálny stav (z session)
-☐ 6. Zhrň poslednú session (kľúčové body)
-☐ 7. Identifikuj ďalší krok (next steps)
-☐ 8. Odpovedz PO SLOVENSKY s prehľadom
+1. Načítaj INIT_CONTEXT.md (tento súbor)
+2. Načítaj project_file_access.json
+3. Nájdi najnovšiu session v docs/sessions/
+4. Načítaj najnovšiu session <- KRITICKÉ!
+5. Zhrň aktuálny stav (z session)
+6. Zhrň poslednú session (kľúčové body)
+7. Identifikuj ďalší krok (next steps)
+8. Odpovedz PO SLOVENSKY s prehľadom
 ```
 
 **Výstupný formát:**
 ```
-✅ Projekt načítaný. 
+Projekt načítaný. 
 
-📊 Aktuálny stav:
+Aktuálny stav:
 - Progress: [z session]
 - Dokončené tasky: [z session]
 - Aktuálny task: [z session]
 
-📋 Posledná session: [dátum]
+Posledná session: [dátum]
 - [kľúčové body z session]
 
-🎯 Ďalší krok:
+Ďalší krok:
 - [next steps z session]
 
 Čo robíme?
@@ -215,16 +258,16 @@ C:\NEX\YEARACT\
 
 ---
 
-## 📝 Session Notes Structure
+## Session Notes Structure
 
 **Každá session obsahuje:**
-- ✅ Dokončené tasky (čo sa urobilo)
-- 📁 Vytvorené/updatnuté súbory
-- 🔧 Technické rozhodnutia
-- 📊 Progress update
-- 🎯 Next steps
-- 💾 Files to commit
-- 🎉 Achievements
+- Dokončené tasky (čo sa urobilo)
+- Vytvorené/updatnuté súbory
+- Technické rozhodnutia
+- Progress update
+- Next steps
+- Files to commit
+- Achievements
 
 **Session naming:** `docs/sessions/YYYY-MM-DD_session.md`
 
@@ -235,6 +278,7 @@ C:\NEX\YEARACT\
 - **Nekopíruj XML/JSON** - len zhrnutie
 - **Komunikuj PO SLOVENSKY**
 - **Buď konkrétny**
+- **Jedna alternatíva (best practice)**
+- **Token usage po každej odpovedi**
+- **Git commit messages - len čistý text**
 - **Session notes = single source of truth**
-
-🎯
