@@ -1,8 +1,14 @@
-# Python
+# Python Cache Files
+# ===================
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
 *.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -16,69 +22,53 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual Environment
-venv/
-env/
-ENV/
+# PyInstaller
+*.manifest
+*.spec
 
-# PyCharm
-.idea/
-
-# VS Code
-.vscode/
-
-# Btrieve SDK (large binaries)
-btrieve-sdk/win64/*.dll
-btrieve-sdk/win32/*.dll
-
-# External DLLs (Pervasive - tracked in repo)
-# external-dlls/*.dll are tracked intentionally
-
-# SWIG Generated Files
-python/*_wrap.cxx
-python/*_wrap.c
-python/*.pyd
-python/*.so
-
-# Build artifacts
-*.lib
-*.obj
-*.o
-
-# Test outputs
-.pytest_cache/
+# Unit test / coverage reports
 htmlcov/
+.tox/
+.nox/
 .coverage
+.coverage.*
+.cache
+nosetests.xml
 coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
 
-# Logs
-*.log
-logs/
+# Virtual Environments
+venv/
+venv32/
+venv64/
+ENV/
+env/
+.venv
 
-# Config (local overrides)
-config/nex_genesis.local.ini
-
-# NEX Genesis Database (if testing locally)
-*.btr
-*.dat
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Backup files
-*~
-*.bak
-*.swp
-*.tmp
-
-# Documentation builds
-docs/_build/
-
 # Project specific
-project_file_access_delphi.json
+*.log
+*.bak
+*.tmp
+temp/
