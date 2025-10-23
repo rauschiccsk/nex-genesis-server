@@ -1,8 +1,8 @@
 {
   "project_name": "nex-genesis-server",
   "description": "Unified project file access manifest - all categories in one file",
-  "generated_at": "2025-10-23T19:44:28.771621",
-  "cache_version": "20251023-194428",
+  "generated_at": "2025-10-23T20:12:59.033297",
+  "cache_version": "20251023-201259",
   "base_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main",
   "categories": [
     "documentation",
@@ -19,19 +19,19 @@
     "python_sources": "Python source code"
   },
   "statistics": {
-    "total_files": 77,
+    "total_files": 80,
     "by_category": {
-      "documentation": 30,
+      "documentation": 31,
       "database_schemas": 6,
       "delphi_sources": 7,
       "configuration": 2,
-      "python_sources": 32
+      "python_sources": 34
     }
   },
   "files": [
     {
       "path": "config/config_template.yaml",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/config/config_template.yaml?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/config/config_template.yaml?v=20251023-201259",
       "size": 4985,
       "extension": ".yaml",
       "name": "config_template.yaml",
@@ -39,7 +39,7 @@
     },
     {
       "path": "config/database.yaml",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/config/database.yaml?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/config/database.yaml?v=20251023-201259",
       "size": 2532,
       "extension": ".yaml",
       "name": "database.yaml",
@@ -47,7 +47,7 @@
     },
     {
       "path": "database-schema/barcode.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/barcode.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/barcode.bdf?v=20251023-201259",
       "size": 532,
       "extension": ".bdf",
       "name": "barcode.bdf",
@@ -55,7 +55,7 @@
     },
     {
       "path": "database-schema/gscat.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/gscat.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/gscat.bdf?v=20251023-201259",
       "size": 5068,
       "extension": ".bdf",
       "name": "gscat.bdf",
@@ -63,7 +63,7 @@
     },
     {
       "path": "database-schema/mglst.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/mglst.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/mglst.bdf?v=20251023-201259",
       "size": 1783,
       "extension": ".bdf",
       "name": "mglst.bdf",
@@ -71,7 +71,7 @@
     },
     {
       "path": "database-schema/pab.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/pab.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/pab.bdf?v=20251023-201259",
       "size": 6644,
       "extension": ".bdf",
       "name": "pab.bdf",
@@ -79,7 +79,7 @@
     },
     {
       "path": "database-schema/tsh.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsh.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsh.bdf?v=20251023-201259",
       "size": 9303,
       "extension": ".bdf",
       "name": "tsh.bdf",
@@ -87,7 +87,7 @@
     },
     {
       "path": "database-schema/tsi.bdf",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsi.bdf?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/database-schema/tsi.bdf?v=20251023-201259",
       "size": 4394,
       "extension": ".bdf",
       "name": "tsi.bdf",
@@ -95,7 +95,7 @@
     },
     {
       "path": "delphi-sources/BtrConst.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrConst.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrConst.pas?v=20251023-201259",
       "size": 19799,
       "extension": ".pas",
       "name": "BtrConst.pas",
@@ -103,7 +103,7 @@
     },
     {
       "path": "delphi-sources/BtrHand.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrHand.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrHand.pas?v=20251023-201259",
       "size": 23145,
       "extension": ".pas",
       "name": "BtrHand.pas",
@@ -111,7 +111,7 @@
     },
     {
       "path": "delphi-sources/BtrStruct.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrStruct.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrStruct.pas?v=20251023-201259",
       "size": 2390,
       "extension": ".pas",
       "name": "BtrStruct.pas",
@@ -119,7 +119,7 @@
     },
     {
       "path": "delphi-sources/BtrTable.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrTable.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrTable.pas?v=20251023-201259",
       "size": 122093,
       "extension": ".pas",
       "name": "BtrTable.pas",
@@ -127,7 +127,7 @@
     },
     {
       "path": "delphi-sources/BtrTools.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrTools.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/BtrTools.pas?v=20251023-201259",
       "size": 23378,
       "extension": ".pas",
       "name": "BtrTools.pas",
@@ -135,7 +135,7 @@
     },
     {
       "path": "delphi-sources/SqlApi32.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/SqlApi32.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/SqlApi32.pas?v=20251023-201259",
       "size": 34306,
       "extension": ".pas",
       "name": "SqlApi32.pas",
@@ -143,7 +143,7 @@
     },
     {
       "path": "delphi-sources/btrapi32.pas",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/btrapi32.pas?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/delphi-sources/btrapi32.pas?v=20251023-201259",
       "size": 8950,
       "extension": ".pas",
       "name": "btrapi32.pas",
@@ -151,7 +151,7 @@
     },
     {
       "path": "docs/BTRIEVE_BRIDGE_SERVICE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/BTRIEVE_BRIDGE_SERVICE.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/BTRIEVE_BRIDGE_SERVICE.md?v=20251023-201259",
       "size": 12571,
       "extension": ".md",
       "name": "BTRIEVE_BRIDGE_SERVICE.md",
@@ -159,7 +159,7 @@
     },
     {
       "path": "docs/CLEANUP_CACHE_README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/CLEANUP_CACHE_README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/CLEANUP_CACHE_README.md?v=20251023-201259",
       "size": 4331,
       "extension": ".md",
       "name": "CLEANUP_CACHE_README.md",
@@ -167,7 +167,7 @@
     },
     {
       "path": "docs/COMMIT_AND_PUSH.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/COMMIT_AND_PUSH.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/COMMIT_AND_PUSH.md?v=20251023-201259",
       "size": 5397,
       "extension": ".md",
       "name": "COMMIT_AND_PUSH.md",
@@ -175,7 +175,7 @@
     },
     {
       "path": "docs/INIT_CONTEXT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INIT_CONTEXT.md?v=20251023-201259",
       "size": 8294,
       "extension": ".md",
       "name": "INIT_CONTEXT.md",
@@ -183,15 +183,23 @@
     },
     {
       "path": "docs/INSTALL_32BIT_PYTHON.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INSTALL_32BIT_PYTHON.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/INSTALL_32BIT_PYTHON.md?v=20251023-201259",
       "size": 6664,
       "extension": ".md",
       "name": "INSTALL_32BIT_PYTHON.md",
       "category": "documentation"
     },
     {
+      "path": "docs/ISDOC_MAPPING.md",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/ISDOC_MAPPING.md?v=20251023-201259",
+      "size": 14015,
+      "extension": ".md",
+      "name": "ISDOC_MAPPING.md",
+      "category": "documentation"
+    },
+    {
       "path": "docs/MASTER_CONTEXT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MASTER_CONTEXT.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MASTER_CONTEXT.md?v=20251023-201259",
       "size": 4912,
       "extension": ".md",
       "name": "MASTER_CONTEXT.md",
@@ -199,7 +207,7 @@
     },
     {
       "path": "docs/MODELS_README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MODELS_README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/MODELS_README.md?v=20251023-201259",
       "size": 14731,
       "extension": ".md",
       "name": "MODELS_README.md",
@@ -207,7 +215,7 @@
     },
     {
       "path": "docs/NEX_DATABASE_STRUCTURE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/NEX_DATABASE_STRUCTURE.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/NEX_DATABASE_STRUCTURE.md?v=20251023-201259",
       "size": 6960,
       "extension": ".md",
       "name": "NEX_DATABASE_STRUCTURE.md",
@@ -215,7 +223,7 @@
     },
     {
       "path": "docs/PERVASIVE_DLL_INFO.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PERVASIVE_DLL_INFO.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PERVASIVE_DLL_INFO.md?v=20251023-201259",
       "size": 5165,
       "extension": ".md",
       "name": "PERVASIVE_DLL_INFO.md",
@@ -223,7 +231,7 @@
     },
     {
       "path": "docs/PROJECT_MANIFESTS_README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PROJECT_MANIFESTS_README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PROJECT_MANIFESTS_README.md?v=20251023-201259",
       "size": 10258,
       "extension": ".md",
       "name": "PROJECT_MANIFESTS_README.md",
@@ -231,7 +239,7 @@
     },
     {
       "path": "docs/PYTHON_VERSION_REQUIREMENTS.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PYTHON_VERSION_REQUIREMENTS.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/PYTHON_VERSION_REQUIREMENTS.md?v=20251023-201259",
       "size": 4312,
       "extension": ".md",
       "name": "PYTHON_VERSION_REQUIREMENTS.md",
@@ -239,7 +247,7 @@
     },
     {
       "path": "docs/QUICK_START.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/QUICK_START.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/QUICK_START.md?v=20251023-201259",
       "size": 4810,
       "extension": ".md",
       "name": "QUICK_START.md",
@@ -247,7 +255,7 @@
     },
     {
       "path": "docs/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/README.md?v=20251023-201259",
       "size": 5707,
       "extension": ".md",
       "name": "README.md",
@@ -255,7 +263,7 @@
     },
     {
       "path": "docs/README_32BIT_PYTHON.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/README_32BIT_PYTHON.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/README_32BIT_PYTHON.md?v=20251023-201259",
       "size": 2616,
       "extension": ".md",
       "name": "README_32BIT_PYTHON.md",
@@ -263,7 +271,7 @@
     },
     {
       "path": "docs/REPOSITORIES_README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/REPOSITORIES_README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/REPOSITORIES_README.md?v=20251023-201259",
       "size": 18180,
       "extension": ".md",
       "name": "REPOSITORIES_README.md",
@@ -271,7 +279,7 @@
     },
     {
       "path": "docs/SYSTEM_PROMPT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT.md?v=20251023-201259",
       "size": 7116,
       "extension": ".md",
       "name": "SYSTEM_PROMPT.md",
@@ -279,7 +287,7 @@
     },
     {
       "path": "docs/SYSTEM_PROMPT_DATABASE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT_DATABASE.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/SYSTEM_PROMPT_DATABASE.md?v=20251023-201259",
       "size": 7447,
       "extension": ".md",
       "name": "SYSTEM_PROMPT_DATABASE.md",
@@ -287,7 +295,7 @@
     },
     {
       "path": "docs/TESTING_GUIDE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/TESTING_GUIDE.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/TESTING_GUIDE.md?v=20251023-201259",
       "size": 8200,
       "extension": ".md",
       "name": "TESTING_GUIDE.md",
@@ -295,7 +303,7 @@
     },
     {
       "path": "docs/architecture/database-access-pattern.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/architecture/database-access-pattern.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/architecture/database-access-pattern.md?v=20251023-201259",
       "size": 19475,
       "extension": ".md",
       "name": "database-access-pattern.md",
@@ -303,7 +311,7 @@
     },
     {
       "path": "docs/architecture/swig-setup.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/architecture/swig-setup.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/architecture/swig-setup.md?v=20251023-201259",
       "size": 3021,
       "extension": ".md",
       "name": "swig-setup.md",
@@ -311,7 +319,7 @@
     },
     {
       "path": "docs/context/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/README.md?v=20251023-201259",
       "size": 6075,
       "extension": ".md",
       "name": "README.md",
@@ -319,7 +327,7 @@
     },
     {
       "path": "docs/context/architecture.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/architecture.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/architecture.md?v=20251023-201259",
       "size": 10057,
       "extension": ".md",
       "name": "architecture.md",
@@ -327,7 +335,7 @@
     },
     {
       "path": "docs/context/btrieve_rules.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/btrieve_rules.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/btrieve_rules.md?v=20251023-201259",
       "size": 14702,
       "extension": ".md",
       "name": "btrieve_rules.md",
@@ -335,7 +343,7 @@
     },
     {
       "path": "docs/context/database.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/database.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/database.md?v=20251023-201259",
       "size": 10245,
       "extension": ".md",
       "name": "database.md",
@@ -343,7 +351,7 @@
     },
     {
       "path": "docs/context/development.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/development.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/development.md?v=20251023-201259",
       "size": 13252,
       "extension": ".md",
       "name": "development.md",
@@ -351,7 +359,7 @@
     },
     {
       "path": "docs/context/project_overview.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/project_overview.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/context/project_overview.md?v=20251023-201259",
       "size": 6035,
       "extension": ".md",
       "name": "project_overview.md",
@@ -359,7 +367,7 @@
     },
     {
       "path": "docs/sessions/2025-10-21_session.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-21_session.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-21_session.md?v=20251023-201259",
       "size": 11855,
       "extension": ".md",
       "name": "2025-10-21_session.md",
@@ -367,7 +375,7 @@
     },
     {
       "path": "docs/sessions/2025-10-22_session.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-22_session.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-22_session.md?v=20251023-201259",
       "size": 10222,
       "extension": ".md",
       "name": "2025-10-22_session.md",
@@ -375,7 +383,7 @@
     },
     {
       "path": "docs/sessions/2025-10-23_session.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-23_session.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/2025-10-23_session.md?v=20251023-201259",
       "size": 11819,
       "extension": ".md",
       "name": "2025-10-23_session.md",
@@ -383,7 +391,7 @@
     },
     {
       "path": "docs/sessions/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/README.md?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/docs/sessions/README.md?v=20251023-201259",
       "size": 1403,
       "extension": ".md",
       "name": "README.md",
@@ -391,7 +399,7 @@
     },
     {
       "path": "scripts/analyze_bdf.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_bdf.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_bdf.py?v=20251023-201259",
       "size": 7655,
       "extension": ".py",
       "name": "analyze_bdf.py",
@@ -399,7 +407,7 @@
     },
     {
       "path": "scripts/analyze_gscat_hex.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_gscat_hex.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/analyze_gscat_hex.py?v=20251023-201259",
       "size": 6743,
       "extension": ".py",
       "name": "analyze_gscat_hex.py",
@@ -407,7 +415,7 @@
     },
     {
       "path": "scripts/backup_dev_db.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/backup_dev_db.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/backup_dev_db.py?v=20251023-201259",
       "size": 1595,
       "extension": ".py",
       "name": "backup_dev_db.py",
@@ -415,7 +423,7 @@
     },
     {
       "path": "scripts/check_python_version.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/check_python_version.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/check_python_version.py?v=20251023-201259",
       "size": 1598,
       "extension": ".py",
       "name": "check_python_version.py",
@@ -423,7 +431,7 @@
     },
     {
       "path": "scripts/cleanup_pycache.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/cleanup_pycache.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/cleanup_pycache.py?v=20251023-201259",
       "size": 6626,
       "extension": ".py",
       "name": "cleanup_pycache.py",
@@ -431,7 +439,7 @@
     },
     {
       "path": "scripts/create_directory_structure.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/create_directory_structure.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/create_directory_structure.py?v=20251023-201259",
       "size": 5677,
       "extension": ".py",
       "name": "create_directory_structure.py",
@@ -439,7 +447,7 @@
     },
     {
       "path": "scripts/debug_dll_loading.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/debug_dll_loading.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/debug_dll_loading.py?v=20251023-201259",
       "size": 5654,
       "extension": ".py",
       "name": "debug_dll_loading.py",
@@ -447,7 +455,7 @@
     },
     {
       "path": "scripts/debug_gscat_import.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/debug_gscat_import.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/debug_gscat_import.py?v=20251023-201259",
       "size": 4397,
       "extension": ".py",
       "name": "debug_gscat_import.py",
@@ -455,7 +463,7 @@
     },
     {
       "path": "scripts/generate_project_access.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/generate_project_access.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/scripts/generate_project_access.py?v=20251023-201259",
       "size": 6474,
       "extension": ".py",
       "name": "generate_project_access.py",
@@ -463,7 +471,7 @@
     },
     {
       "path": "src/btrieve/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/btrieve/__init__.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/btrieve/__init__.py?v=20251023-201259",
       "size": 262,
       "extension": ".py",
       "name": "__init__.py",
@@ -471,7 +479,7 @@
     },
     {
       "path": "src/btrieve/btrieve_client.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/btrieve/btrieve_client.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/btrieve/btrieve_client.py?v=20251023-201259",
       "size": 10358,
       "extension": ".py",
       "name": "btrieve_client.py",
@@ -479,7 +487,7 @@
     },
     {
       "path": "src/models/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/__init__.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/__init__.py?v=20251023-201259",
       "size": 851,
       "extension": ".py",
       "name": "__init__.py",
@@ -487,7 +495,7 @@
     },
     {
       "path": "src/models/barcode.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/barcode.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/barcode.py?v=20251023-201259",
       "size": 7180,
       "extension": ".py",
       "name": "barcode.py",
@@ -495,7 +503,7 @@
     },
     {
       "path": "src/models/gscat.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/gscat.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/gscat.py?v=20251023-201259",
       "size": 11665,
       "extension": ".py",
       "name": "gscat.py",
@@ -503,7 +511,7 @@
     },
     {
       "path": "src/models/mglst.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/mglst.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/mglst.py?v=20251023-201259",
       "size": 8291,
       "extension": ".py",
       "name": "mglst.py",
@@ -511,7 +519,7 @@
     },
     {
       "path": "src/models/pab.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/pab.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/pab.py?v=20251023-201259",
       "size": 9589,
       "extension": ".py",
       "name": "pab.py",
@@ -519,7 +527,7 @@
     },
     {
       "path": "src/models/tsh.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsh.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsh.py?v=20251023-201259",
       "size": 10549,
       "extension": ".py",
       "name": "tsh.py",
@@ -527,7 +535,7 @@
     },
     {
       "path": "src/models/tsi.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsi.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/models/tsi.py?v=20251023-201259",
       "size": 9808,
       "extension": ".py",
       "name": "tsi.py",
@@ -535,7 +543,7 @@
     },
     {
       "path": "src/repositories/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/__init__.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/__init__.py?v=20251023-201259",
       "size": 954,
       "extension": ".py",
       "name": "__init__.py",
@@ -543,7 +551,7 @@
     },
     {
       "path": "src/repositories/barcode_repository.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/barcode_repository.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/barcode_repository.py?v=20251023-201259",
       "size": 6168,
       "extension": ".py",
       "name": "barcode_repository.py",
@@ -551,7 +559,7 @@
     },
     {
       "path": "src/repositories/base_repository.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/base_repository.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/base_repository.py?v=20251023-201259",
       "size": 11702,
       "extension": ".py",
       "name": "base_repository.py",
@@ -559,7 +567,7 @@
     },
     {
       "path": "src/repositories/gscat_repository.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/gscat_repository.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/gscat_repository.py?v=20251023-201259",
       "size": 10516,
       "extension": ".py",
       "name": "gscat_repository.py",
@@ -567,7 +575,7 @@
     },
     {
       "path": "src/repositories/pab_repository.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/pab_repository.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/repositories/pab_repository.py?v=20251023-201259",
       "size": 9860,
       "extension": ".py",
       "name": "pab_repository.py",
@@ -575,7 +583,7 @@
     },
     {
       "path": "src/utils/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/utils/__init__.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/utils/__init__.py?v=20251023-201259",
       "size": 283,
       "extension": ".py",
       "name": "__init__.py",
@@ -583,15 +591,23 @@
     },
     {
       "path": "src/utils/config.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/utils/config.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/utils/config.py?v=20251023-201259",
       "size": 2877,
       "extension": ".py",
       "name": "config.py",
       "category": "python_sources"
     },
     {
+      "path": "src/utils/isdoc_mapper.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/src/utils/isdoc_mapper.py?v=20251023-201259",
+      "size": 17284,
+      "extension": ".py",
+      "name": "isdoc_mapper.py",
+      "category": "python_sources"
+    },
+    {
       "path": "tests/test_btrieve_basic.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_basic.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_basic.py?v=20251023-201259",
       "size": 3794,
       "extension": ".py",
       "name": "test_btrieve_basic.py",
@@ -599,7 +615,7 @@
     },
     {
       "path": "tests/test_btrieve_file.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_file.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_file.py?v=20251023-201259",
       "size": 6103,
       "extension": ".py",
       "name": "test_btrieve_file.py",
@@ -607,7 +623,7 @@
     },
     {
       "path": "tests/test_btrieve_read.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_read.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_read.py?v=20251023-201259",
       "size": 9066,
       "extension": ".py",
       "name": "test_btrieve_read.py",
@@ -615,7 +631,7 @@
     },
     {
       "path": "tests/test_btrieve_write.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_write.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_btrieve_write.py?v=20251023-201259",
       "size": 10974,
       "extension": ".py",
       "name": "test_btrieve_write.py",
@@ -623,7 +639,7 @@
     },
     {
       "path": "tests/test_file_opening_variants.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_file_opening_variants.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_file_opening_variants.py?v=20251023-201259",
       "size": 9064,
       "extension": ".py",
       "name": "test_file_opening_variants.py",
@@ -631,15 +647,23 @@
     },
     {
       "path": "tests/test_gscat_parsing.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_gscat_parsing.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_gscat_parsing.py?v=20251023-201259",
       "size": 8511,
       "extension": ".py",
       "name": "test_gscat_parsing.py",
       "category": "python_sources"
     },
     {
+      "path": "tests/test_isdoc_mapper.py",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_isdoc_mapper.py?v=20251023-201259",
+      "size": 16283,
+      "extension": ".py",
+      "name": "test_isdoc_mapper.py",
+      "category": "python_sources"
+    },
+    {
       "path": "tests/test_repositories.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_repositories.py?v=20251023-194428",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/nex-genesis-server/main/tests/test_repositories.py?v=20251023-201259",
       "size": 11821,
       "extension": ".py",
       "name": "test_repositories.py",
